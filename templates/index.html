@@ -3,128 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yusky521 | Personal Site</title>
+    <title>Yusky521 | Personal Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <div class="background-stack" aria-hidden="true">
-      <video
-        class="background-video"
-        src="{{ url_for('static', filename='assets/bg.webm') }}"
-        autoplay
-        muted
-        loop
-        playsinline
-      ></video>
-      <div class="overlay"></div>
-      <div class="grain"></div>
-    </div>
-
-    <header class="topbar">
-      <div class="topbar__brand">Personal Archive</div>
-      <div class="clock-card">
-        <span class="clock-card__label">Live Time</span>
-        <span id="clock" class="clock-card__time">00:00:00</span>
+    <div class="page-shell">
+      <div class="background-stack" aria-hidden="true">
+        <img
+          class="background-image"
+          src="{{ url_for('static', filename='assets/background.png') }}"
+          alt=""
+        />
+        <div class="overlay"></div>
       </div>
-    </header>
 
-    <main class="layout">
-      <section class="hero card">
-        <div class="hero__avatar-wrap">
-          <img
-            class="hero__avatar"
-            src="{{ url_for('static', filename='assets/avatar.png') }}"
-            alt="Yusky521 avatar"
-          />
-        </div>
-        <div class="hero__content">
-          <p class="eyebrow">Yusky521</p>
-          <h1>Yusky521</h1>
-          <p class="hero__cn">我们相遇在错误的时间</p>
-          <p class="hero__en">We met at wrong time.</p>
-          <p class="hero__intro">
-            保留一点静谧氛围，也保留一点探索欲。这里记录我正在学习、正在构建、正在热爱的内容。
-          </p>
-        </div>
-      </section>
-
-      <section class="grid">
-        <article class="card">
-          <p class="section-tag">About</p>
-          <h2>个人简介</h2>
-          <p>目前主要在学习 Python、C++、Qt 与计算机视觉相关内容，也会继续补充更多项目和想法。</p>
-        </article>
-
-        <article class="card">
-          <p class="section-tag">Skills</p>
-          <h2>技能方向</h2>
-          <ul class="chip-list">
-            <li>Python</li>
-            <li>C++</li>
-            <li>Qt</li>
-            <li>OpenCV</li>
-            <li>PyTorch</li>
-            <li>YOLOv8</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <p class="section-tag">Hobbies</p>
-          <h2>爱好</h2>
-          <ul class="chip-list">
-            <li>听音乐</li>
-            <li>玩游戏</li>
-            <li>运动</li>
-            <li>健身</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <p class="section-tag">Links</p>
-          <h2>站外入口</h2>
-          <div class="link-list">
-            <a href="https://github.com/Yusky520" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="mailto:3294850673@qq.com">QQ Mail</a>
+      <header class="topbar glass">
+        <div class="brand-lockup">
+          <span class="brand-dot"></span>
+          <div>
+            <strong>Personal Archive</strong>
+            <span>Portfolio Prototype</span>
           </div>
-        </article>
-      </section>
-
-      <section class="contact card">
-        <div class="contact__head">
-          <p class="section-tag">Contact</p>
-          <h2>给我留言</h2>
-          <p>如果你想交流一些想法，可以在这里留下内容。</p>
         </div>
+        <div class="topbar-side">
+          <div class="live-clock glass-lite" id="live-clock">
+            <span class="clock-label">LIVE TIME</span>
+            <div class="clock-stage">
+              <strong class="clock-line current" id="clock-current">--:--:--</strong>
+              <strong class="clock-line next" id="clock-next">--:--:--</strong>
+            </div>
+            <span class="clock-date" id="live-date">----/--/--</span>
+          </div>
+          <nav class="nav-links">
+            <a href="#about">关于</a>
+            <a href="#works">作品</a>
+            <a href="#journey">历程</a>
+            <a href="#contact">联系</a>
+          </nav>
+        </div>
+      </header>
 
-        <form id="contact-form" class="contact-form">
-          <label>
-            <span>你的名字</span>
-            <input type="text" name="name" placeholder="请输入你的名字" required />
-          </label>
-          <label>
-            <span>你的邮箱</span>
-            <input type="email" name="email" placeholder="请输入你的邮箱" required />
-          </label>
-          <label>
-            <span>想说的话</span>
-            <textarea
-              name="message"
-              rows="6"
-              placeholder="留下你的内容。"
-              required
-            ></textarea>
-          </label>
-          <button type="submit">发送留言</button>
-          <p id="form-status" class="form-status" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
+      <main class="layout">
+        <section class="hero glass">
+          <div class="hero-copy">
+            <p class="eyebrow" id="subtitle">PERSONAL WEBSITE</p>
+            <h1 id="nickname">Yusky521</h1>
+            <h2 id="title">Creative Developer / AI Explorer</h2>
+            <p class="tagline" id="tagline"></p>
+            <div class="hero-actions">
+              <a class="primary-btn" href="#works">查看作品</a>
+              <a class="ghost-btn" href="#contact">联系我</a>
+            </div>
+            <div class="hero-stats" id="hero-stats"></div>
+          </div>
+
+          <aside class="spotlight-card glass-lite">
+            <div class="spotlight-frame">
+              <img class="avatar" src="{{ url_for('static', filename='assets/avatar.png') }}" alt="Yusky521 avatar" />
+            </div>
+            <div class="identity-copy">
+              <strong>Yusky521</strong>
+              <span class="identity-cn">我们相遇在错误的时间</span>
+              <span class="identity-en">We met at wrong time.</span>
+            </div>
+          </aside>
+        </section>
+
+        <section id="about" class="about-grid">
+          <article class="panel large-panel glass">
+            <p class="section-label">ABOUT ME</p>
+            <h3>一个正在长成作品集的个人主页</h3>
+            <p id="about-text"></p>
+            <div class="note-list" id="quick-notes"></div>
+          </article>
+
+          <div class="aside-stack">
+            <article class="panel glass">
+              <p class="section-label">SKILL STACK</p>
+              <h3>当前技能</h3>
+              <div class="chip-list" id="skills"></div>
+            </article>
+            <article class="panel glass">
+              <p class="section-label">HOBBIES</p>
+              <h3>兴趣爱好</h3>
+              <div class="chip-list" id="hobbies"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="focus-grid" id="focus-grid"></section>
+
+        <section id="works" class="panel glass">
+          <div class="section-head">
+            <div>
+              <p class="section-label">FEATURED WORKS</p>
+              <h3>功能与内容大致展示</h3>
+            </div>
+            <span>后续可以继续替换成你的真实作品</span>
+          </div>
+          <div class="project-list" id="projects-list"></div>
+        </section>
+
+        <section id="journey" class="journey-grid">
+          <article class="panel glass">
+            <p class="section-label">JOURNEY</p>
+            <h3>当前阶段</h3>
+            <div class="timeline" id="timeline"></div>
+          </article>
+
+          <article class="panel glass">
+            <p class="section-label">LINKS</p>
+            <h3>站外入口</h3>
+            <div class="links" id="links"></div>
+          </article>
+        </section>
+
+        <section id="contact" class="panel glass contact-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">CONTACT</p>
+              <h3>把想补充的内容留给我</h3>
+            </div>
+            <span>后续你想到什么，我都可以继续往里加。</span>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-copy">
+              <p>这里先放一个可用的联系表单，方便后续继续扩展成邮件通知、后台管理或作品投稿入口。</p>
+            </div>
+            <form id="contact-form" class="contact-form">
+              <input type="text" name="name" placeholder="你的名字" required />
+              <input type="email" name="email" placeholder="邮箱地址" required />
+              <textarea name="message" rows="5" placeholder="想补充的内容、风格方向或功能想法" required></textarea>
+              <button type="submit" class="primary-btn">发送留言</button>
+              <p id="form-status" class="form-status"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
 
     <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
