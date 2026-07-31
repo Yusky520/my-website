@@ -95,35 +95,36 @@
         </article>
       </section>
 
-      <section class="contact card">
-        <div class="contact__head">
-          <p class="section-tag">Contact</p>
-          <h2>留言会真实发送到邮箱</h2>
-          <p>收件邮箱：3294850673@qq.com</p>
-        </div>
+<section class="contact card">
+  <div class="contact__head">
+    <p class="section-tag">Contact</p>
+    <h2>留言会真实发送到邮箱</h2>
+    <p>收件邮箱：3294850673@qq.com</p>
+  </div>
 
-        <form id="contact-form" class="contact-form">
-          <label>
-            <span>你的名字</span>
-            <input type="text" name="name" placeholder="请输入你的名字" required />
-          </label>
-          <label>
-            <span>你的邮箱</span>
-            <input type="email" name="email" placeholder="请输入你的邮箱" required />
-          </label>
-          <label>
-            <span>想说的话</span>
-            <textarea
-              name="message"
-              rows="6"
-              placeholder="留下你的内容，它会通过后端真实发送到邮箱。"
-              required
-            ></textarea>
-          </label>
-          <button type="submit">发送留言</button>
-          <p id="form-status" class="form-status" aria-live="polite"></p>
-        </form>
-      </section>
+  <form id="contact-form" class="contact-form">
+    <label>
+      <span>你的名字</span>
+      <input type="text" name="name" placeholder="请输入你的名字" required />
+    </label>
+    <label>
+      <span>你的邮箱</span>
+      <input type="email" name="email" placeholder="请输入你的邮箱" required />
+    </label>
+    <label>
+      <span>想说的话</span>
+      <textarea
+        name="message"
+        rows="6"
+        placeholder="留下你的内容，它会通过后端真实发送到邮箱。"
+        required
+      ></textarea>
+    </label>
+    <button type="submit">发送留言</button>
+  </form>
+</section>
+
+<div id="toast" class="toast" aria-live="polite"></div>
     </main>
 
     <script src="{{ url_for('static', filename='app.js') }}"></script>
