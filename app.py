@@ -2,6 +2,7 @@ import os
 import smtplib
 from datetime import datetime
 from email.message import EmailMessage
+from typing import Optional
 
 from flask import Flask, jsonify, render_template, request
 
@@ -13,7 +14,7 @@ def _env_flag(name: str, default: str = "true") -> bool:
     return value in {"1", "true", "yes", "on"}
 
 
-def _smtp_config():
+def _smtp_config() -> dict:
     return {
         "host": os.getenv("SMTP_HOST", "").strip(),
         "port": int(os.getenv("SMTP_PORT", "587").strip() or "587"),
@@ -25,7 +26,7 @@ def _smtp_config():
     }
 
 
-def _validate_smtp_config(config: dict) -> str | None:
+def _validate_smtp_config(config: dict) -> Optional[str]:
     required = {
         "SMTP_HOST": config["host"],
         "SMTP_PORT": str(config["port"]),
@@ -37,7 +38,6 @@ def _validate_smtp_config(config: dict) -> str | None:
     missing = [key for key, value in required.items() if not value]
     if missing:
         return "邮箱服务未配置完整：" + ", ".join(missing)
-
     return None
 
 
@@ -88,4 +88,25 @@ def index():
 def contact():
     data = request.get_json(silent=True) or {}
 
-    name = str(data.get("name", "")).
+    name = str(data.get("name", "")).strip()
+    email = str(data.get("email", "")).strip()
+    message = str(data.get("message", "")).strip()
+
+    if not name or not email or not message:
+        return jsonify({"ok": False, "message": "请完整填写姓名、邮箱和留言内容。"}), 400
+
+    if "@" not in email or "." not in email:
+        return jsonify({"ok": False, "message": "请输入有效的邮箱地址。"}), 400
+
+    try:
+        send_contact_email(name=name, email=email, message=message)
+    except RuntimeError as exc:
+        return jsonify({"ok": False, "message": str(exc)}), 500
+    except Exception:
+        return jsonify({"ok": False, "message": "邮件发送失败，请稍后再试。"}), 500
+
+    return jsonify({"ok": True, "message": "留言已收到，我会尽快查看。"})
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
