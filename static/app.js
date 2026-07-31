@@ -31,7 +31,9 @@ updateClock();
 window.setInterval(updateClock, 1000);
 
 function showToast(message, type = "success", autoHideMs = 3000) {
-  if (!toast) return;
+  if (!toast) {
+    return;
+  }
 
   window.clearTimeout(toastTimer);
   toast.textContent = message;
@@ -58,9 +60,9 @@ if (form) {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
