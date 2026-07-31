@@ -263,4 +263,95 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(6, 10, 18, 0.18);
   border-radius: 18px;
-  padding: 
+  padding: 14px 16px;
+  outline: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(228, 232, 245, 0.45);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(201, 217, 255, 0.48);
+  box-shadow: 0 0 0 3px rgba(201, 217, 255, 0.12);
+}
+
+.contact-form button {
+  justify-self: start;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text);
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.contact-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.form-status {
+  min-height: 24px;
+  margin: 2px 0 0;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.form-status.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-status.is-success {
+  color: var(--accent);
+}
+
+.form-status.is-error {
+  color: #ffe6e6;
+}
+
+@media (max-width: 840px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar,
+  .layout {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .hero,
+  .grid .card,
+  .contact {
+    padding: 18px;
+  }
+
+  .clock-card__time {
+    min-width: 0;
+    font-size: 32px;
+  }
+}
