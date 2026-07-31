@@ -1,7 +1,7 @@
 const clock = document.getElementById("clock");
 const form = document.getElementById("contact-form");
-const toast = document.getElementById("toast");
-let toastTimer = null;
+const statusText = document.getElementById("form-status");
+let statusTimer = null;
 
 function pad(num) {
   return String(num).padStart(2, "0");
@@ -30,16 +30,25 @@ function updateClock() {
 updateClock();
 window.setInterval(updateClock, 1000);
 
-function showToast(message, type = "success", autoHideMs = 3000) {
-  if (!toast) return;
+function showStatus(message, type = "success", autoHideMs = 3000) {
+  if (!statusText) {
+    return;
+  }
 
-  window.clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.className = `toast is-visible ${type === "error" ? "is-error" : "is-success"}`;
+  window.clearTimeout(statusTimer);
+  statusText.textContent = message;
+  statusText.classList.remove("is-visible", "is-success", "is-error");
+
+  if (!message) {
+    return;
+  }
+
+  statusText.classList.add("is-visible", type === "error" ? "is-error" : "is-success");
 
   if (autoHideMs > 0) {
-    toastTimer = window.setTimeout(() => {
-      toast.classList.remove("is-visible");
+    statusTimer = window.setTimeout(() => {
+      statusText.classList.remove("is-visible", "is-success", "is-error");
+      statusText.textContent = "";
     }, autoHideMs);
   }
 }
@@ -52,27 +61,28 @@ if (form) {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
+    showStatus("正在发送...", "success", 0);
     submitButton.disabled = true;
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
 
       if (response.ok && result.ok) {
-        showToast("留言已收到，我会尽快查看。", "success", 3000);
+        showStatus("留言已收到，我会尽快查看。", "success", 3000);
         form.reset();
       } else {
-        showToast(result.message || "发送失败，请稍后再试。", "error", 3600);
+        showStatus(result.message || "发送失败，请稍后再试。", "error", 3600);
       }
     } catch (error) {
-      showToast("网络异常，暂时无法发送邮件。", "error", 3600);
+      showStatus("网络异常，暂时无法发送邮件。", "error", 3600);
     } finally {
       submitButton.disabled = false;
     }
