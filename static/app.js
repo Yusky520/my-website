@@ -31,9 +31,7 @@ updateClock();
 window.setInterval(updateClock, 1000);
 
 function showToast(message, type = "success", autoHideMs = 3000) {
-  if (!toast) {
-    return;
-  }
+  if (!toast) return;
 
   window.clearTimeout(toastTimer);
   toast.textContent = message;
