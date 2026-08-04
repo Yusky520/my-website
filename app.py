@@ -10,21 +10,21 @@ app = Flask(__name__)
 PROFILE = {
     "nickname": "Yusky521",
     "subtitle": "PERSONAL WEBSITE",
-    "title": "Creative Developer / AI Explorer",
-    "tagline": "在视觉、代码和表达之间，做一个有记忆点的个人空间。",
-    "about": (
-        "我在学习 Python、计算机视觉和网页创作，也喜欢把页面做得更有氛围。"
-        "这个站点会持续记录我的项目、兴趣方向和最近在尝试的新东西。"
-    ),
+    "title": "个人作品集 / 前端小站 / 工具合集 / 技术笔记",
+    "tagline": "在安静的界面里，放进一点技术和一点生活感。",
+    "about": [
+        "我主要在学习 Python、C++、Qt 和计算机视觉，也在持续整理个人项目、技术笔记和作品展示。",
+        "这个站点会以作品集的方式不断更新，保持干净、安静、可读，并让重点内容一眼可见。",
+    ],
     "hero_stats": [
         {"value": "03", "label": "精选项目"},
-        {"value": "09", "label": "常用技能"},
-        {"value": "04", "label": "兴趣爱好"},
+        {"value": "06", "label": "常用技能"},
+        {"value": "04", "label": "兴趣方向"},
     ],
     "quick_notes": [
-        "偏好氛围感页面与动态背景",
-        "在做视觉基础与目标检测练习",
-        "后续会继续补充真实作品与经历",
+        "偏好克制的视觉语言和清晰的信息层级。",
+        "正在持续练习视觉基础、目标检测和界面设计。",
+        "后续会继续补充真实作品、笔记和小工具。",
     ],
     "skills": [
         "Python",
@@ -36,62 +36,70 @@ PROFILE = {
         "Flask",
         "HTML",
         "CSS",
+        "JavaScript",
     ],
     "hobbies": ["听音乐", "玩游戏", "运动", "健身"],
     "focus": [
         {
-            "title": "网页设计感",
-            "description": "做更完整的首屏视觉、动效节奏和内容编排。",
+            "title": "作品集更新",
+            "description": "先完善首页视觉和信息层级，再逐步增加真实项目与内容。",
         },
         {
             "title": "视觉学习",
-            "description": "从基础图像处理到轻量模型练习，持续积累计算机视觉经验。",
+            "description": "从图像处理到目标检测，持续积累计算机视觉方向的实践经验。",
         },
         {
-            "title": "个人表达",
-            "description": "把兴趣、技能和项目整理成一个更像作品而不是简历的页面。",
+            "title": "工具整理",
+            "description": "把时间戳、密码生成等轻量工具整理成更顺手的站内功能。",
         },
     ],
     "projects": [
         {
-            "name": "Vision Starter",
+            "name": "个人作品集网站",
+            "type": "Portfolio",
+            "description": "以玻璃质感和克制配色构建的个人主页，适合展示成长记录、项目和联系入口。",
+            "tags": ["Flask", "HTML", "CSS", "JavaScript"],
+            "demo_url": "#home",
+            "source_url": "https://github.com/Yusky520/my-website",
+        },
+        {
+            "name": "视觉学习笔记",
             "type": "Computer Vision",
-            "description": "面向初学阶段的视觉实验页，用于整理图像处理、推理测试和训练记录。",
-            "tags": ["OpenCV", "PyTorch"],
+            "description": "围绕 OpenCV、PyTorch 和 YOLOv8 整理的练习与实验，后续可扩展为 Markdown 博客。",
+            "tags": ["OpenCV", "PyTorch", "YOLOv8"],
+            "demo_url": "#tools",
+            "source_url": "https://github.com/Yusky520/my-website",
         },
         {
-            "name": "YOLO Practice",
-            "type": "Detection Demo",
-            "description": "一个可继续扩展的目标检测展示区，后续会接入更多真实结果图和视频。",
-            "tags": ["YOLOv8", "Flask"],
-        },
-        {
-            "name": "Personal Landing",
-            "type": "Web Experience",
-            "description": "以视频背景、玻璃拟态和卡片布局构成的个人主页模板。",
-            "tags": ["HTML", "CSS", "Qt"],
+            "name": "轻量工具合集",
+            "type": "Utilities",
+            "description": "把时间戳、密码生成这类小工具集中放在一起，方便日常使用，也更像一个完整站点。",
+            "tags": ["Utilities", "UX", "Fast"],
+            "demo_url": "#tools",
+            "source_url": "https://github.com/Yusky520/my-website",
         },
     ],
     "timeline": [
         {
             "period": "现在",
             "title": "搭建个人网站",
-            "description": "先完成风格化首页，再逐步添加真实内容、项目细节和更多交互。",
+            "description": "先完成风格统一、响应式和内容分区，再逐步增加更真实的作品与交互。",
         },
         {
             "period": "近期",
             "title": "学习视觉基础",
-            "description": "继续练习 OpenCV、PyTorch 与 YOLOv8，把基础知识串成可展示的小项目。",
+            "description": "继续练习 OpenCV、PyTorch 与 YOLOv8，把知识整理成可展示的小项目。",
         },
         {
             "period": "后续",
             "title": "沉淀作品集",
-            "description": "把网页作品、视觉实验和学习路线整理为更完整的个人档案。",
+            "description": "把网页作品、视觉实验和学习路线整理成更完整的个人档案。",
         },
     ],
     "links": [
-        {"name": "GitHub", "url": "#", "hint": "代码仓库"},
-        {"name": "Email", "url": "mailto:yusky521@example.com", "hint": "联系邮箱"},
+        {"name": "GitHub", "url": "https://github.com/Yusky520", "hint": "源码仓库"},
+        {"name": "Email", "url": "mailto:3294850673@qq.com", "hint": "联系邮箱"},
+        {"name": "Render", "url": "https://render.com", "hint": "部署平台"},
     ],
 }
 
@@ -100,7 +108,7 @@ MESSAGES: list[dict[str, str]] = []
 
 @app.get("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", profile=PROFILE)
 
 
 @app.get("/api/profile")
@@ -116,7 +124,10 @@ def contact():
     message = str(data.get("message", "")).strip()
 
     if not name or not email or not message:
-        return jsonify({"ok": False, "error": "请完整填写表单。"}), 400
+        return jsonify({"ok": False, "error": "请完整填写姓名、邮箱和留言内容。"}), 400
+
+    if "@" not in email or "." not in email:
+        return jsonify({"ok": False, "error": "请输入有效的邮箱地址。"}), 400
 
     MESSAGES.append(
         {
