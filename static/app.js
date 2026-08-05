@@ -9,14 +9,17 @@ const clockNext = document.getElementById("clock-next");
 const liveDate = document.getElementById("live-date");
 const form = document.getElementById("contact-form");
 const statusText = document.getElementById("form-status");
-const timestampText = document.getElementById("timestamp-text");
-const timestampIso = document.getElementById("timestamp-iso");
-const timestampCopy = document.getElementById("timestamp-copy");
+const jsonInput = document.getElementById("json-input");
+const jsonOutput = document.getElementById("json-output");
+const jsonFormat = document.getElementById("json-format");
+const jsonMinify = document.getElementById("json-minify");
 const passwordLength = document.getElementById("password-length");
 const passwordLengthValue = document.getElementById("password-length-value");
 const passwordOutput = document.getElementById("password-output");
 const passwordGenerate = document.getElementById("password-generate");
 const passwordCopy = document.getElementById("password-copy");
+const emailToggle = document.getElementById("email-toggle");
+const emailValue = document.getElementById("email-value");
 
 let statusTimer = null;
 let clockValue = "";
@@ -36,10 +39,6 @@ function formatDate(date) {
     day: "2-digit",
     weekday: "short",
   }).format(date);
-}
-
-function formatTimestamp(date) {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${formatClock(date)}`;
 }
 
 function showStatus(message, type = "success", autoHideMs = 3000) {
@@ -192,14 +191,32 @@ function updatePassword() {
   passwordOutput.textContent = randomPassword(Number(passwordLength.value));
 }
 
-function updateTimestamp() {
-  if (!timestampText || !timestampIso) {
+function renderJson(value) {
+  if (!jsonOutput) {
     return;
   }
 
-  const now = new Date();
-  timestampText.textContent = String(Math.floor(now.getTime() / 1000));
-  timestampIso.textContent = formatTimestamp(now);
+  jsonOutput.textContent = value;
+}
+
+function formatJson(minify = false) {
+  if (!jsonInput || !jsonOutput) {
+    return;
+  }
+
+  const raw = jsonInput.value.trim();
+  if (!raw) {
+    renderJson("请先输入 JSON 内容");
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    const nextValue = minify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 2);
+    renderJson(nextValue);
+  } catch (error) {
+    renderJson("JSON 格式不正确，请检查逗号、引号和括号。");
+  }
 }
 
 async function copyText(text, successMessage) {
@@ -259,9 +276,15 @@ if (form) {
   });
 }
 
-if (timestampCopy && timestampText) {
-  timestampCopy.addEventListener("click", () => {
-    copyText(timestampText.textContent, "时间戳已复制");
+if (jsonFormat) {
+  jsonFormat.addEventListener("click", () => {
+    formatJson(false);
+  });
+}
+
+if (jsonMinify) {
+  jsonMinify.addEventListener("click", () => {
+    formatJson(true);
   });
 }
 
@@ -279,11 +302,25 @@ if (passwordCopy && passwordOutput) {
   });
 }
 
+if (emailToggle && emailValue) {
+  emailToggle.addEventListener("click", () => {
+    const isHidden = emailValue.hasAttribute("hidden");
+    if (isHidden) {
+      emailValue.removeAttribute("hidden");
+      emailToggle.textContent = "点击收起";
+      emailToggle.setAttribute("aria-expanded", "true");
+    } else {
+      emailValue.setAttribute("hidden", "hidden");
+      emailToggle.textContent = "点击查看";
+      emailToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 setupReveal();
 setupNav();
 setupBackToTop();
 updatePassword();
-updateTimestamp();
 updateClock(true);
 scheduleClock();
-window.setInterval(updateTimestamp, 1000);
+renderJson("格式化后的内容会显示在这里");

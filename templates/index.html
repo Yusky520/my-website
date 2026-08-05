@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
@@ -165,7 +165,26 @@
         <div class="project-list">
           {% for project in profile.projects %}
             <article class="project-card glass">
-              <div class="project-card__shot project-card__shot--{{ loop.index }}"></div>
+              <div class="project-card__shot project-card__shot--{{ loop.index }}">
+                <div class="project-preview project-preview--{{ loop.index }}">
+                  <div class="project-preview__bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="project-preview__body">
+                    <div class="project-preview__rail"></div>
+                    <div class="project-preview__canvas">
+                      <div class="project-preview__hero"></div>
+                      <div class="project-preview__grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="project-card__body">
                 <span class="project-type">{{ project.type }}</span>
                 <h4>{{ project.name }}</h4>
@@ -195,14 +214,18 @@
 
         <div class="tools-grid">
           <article class="panel glass">
-            <p class="section-label">TIME TOOL</p>
-            <h3>时间戳转换</h3>
-            <div class="tool-box">
-              <strong id="timestamp-text">--</strong>
-              <span id="timestamp-iso">--</span>
-            </div>
+            <p class="section-label">JSON TOOL</p>
+            <h3>JSON 格式化</h3>
+            <textarea
+              id="json-input"
+              class="tool-textarea"
+              rows="8"
+              placeholder='{"name":"Yusky521","stack":["Python","Qt"]}'
+            ></textarea>
+            <div class="tool-box tool-box--json" id="json-output">格式化后的内容会显示在这里</div>
             <div class="tool-actions">
-              <button type="button" class="tool-btn" id="timestamp-copy">复制时间戳</button>
+              <button type="button" class="tool-btn" id="json-format">格式化 JSON</button>
+              <button type="button" class="tool-btn tool-btn--ghost" id="json-minify">压缩 JSON</button>
             </div>
           </article>
 
@@ -272,7 +295,10 @@
             <p>这里保留一个可用的联系表单，方便后续继续扩展成留言通知、后台管理或作品投稿入口。</p>
             <div class="contact-card">
               <span>QQ 邮箱</span>
-              <strong>3294850673@qq.com</strong>
+              <button type="button" class="email-toggle" id="email-toggle" aria-expanded="false">
+                点击查看
+              </button>
+              <strong id="email-value" class="email-value" hidden>3294850673@qq.com</strong>
             </div>
           </div>
 
