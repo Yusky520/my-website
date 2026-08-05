@@ -5,11 +5,9 @@
   --soft: rgba(195, 203, 219, 0.54);
   --accent: #9dd6ff;
   --accent-2: #7de0c3;
-  --panel: rgba(11, 17, 28, 0.34);
-  --panel-strong: rgba(8, 13, 22, 0.58);
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
   --radius-lg: 30px;
   --radius-md: 20px;
 }
@@ -29,7 +27,7 @@ body {
   font-family: "Noto Sans SC", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top, rgba(40, 58, 90, 0.34), transparent 42%),
+    radial-gradient(circle at top, rgba(40, 58, 90, 0.24), transparent 42%),
     linear-gradient(180deg, #050912 0%, #04070d 100%);
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -53,40 +51,6 @@ textarea {
   font: inherit;
 }
 
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: center;
-  gap: 14px;
-  background: linear-gradient(180deg, rgba(5, 9, 18, 0.96), rgba(5, 9, 18, 0.9));
-  backdrop-filter: blur(20px);
-  transition: opacity 320ms ease, visibility 320ms ease;
-}
-
-.loading-screen.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loading-screen__orb {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 2px solid rgba(157, 214, 255, 0.18);
-  border-top-color: var(--accent);
-  animation: spin 0.9s linear infinite;
-}
-
-.loading-screen p {
-  margin: 0;
-  color: var(--soft);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
 .background-stack {
   position: fixed;
   inset: 0;
@@ -106,22 +70,22 @@ textarea {
 
 .background-video {
   object-fit: cover;
-  opacity: 0.72;
+  opacity: 0.8;
   transform: scale(1.04);
 }
 
 .overlay {
   background:
-    radial-gradient(circle at 15% 20%, rgba(124, 173, 255, 0.14), transparent 28%),
-    radial-gradient(circle at 85% 80%, rgba(125, 224, 195, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(2, 4, 10, 0.12), rgba(4, 8, 16, 0.42));
+    radial-gradient(circle at 15% 20%, rgba(124, 173, 255, 0.1), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(125, 224, 195, 0.05), transparent 22%),
+    linear-gradient(180deg, rgba(2, 4, 10, 0.06), rgba(4, 8, 16, 0.24));
 }
 
 .grain {
-  opacity: 0.06;
+  opacity: 0.04;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 5px 5px;
   mix-blend-mode: screen;
 }
@@ -130,17 +94,17 @@ textarea {
 .glass-lite {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
 }
 
 .glass {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.006));
+  backdrop-filter: blur(8px);
 }
 
 .glass-lite {
-  background: rgba(255, 255, 255, 0.014);
-  border-color: rgba(255, 255, 255, 0.018);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.008);
+  border-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
 }
 
 .site-header,
@@ -160,7 +124,7 @@ textarea {
   margin-top: 16px;
   padding: 16px 18px;
   border-radius: 999px;
-  background: rgba(9, 14, 24, 0.28);
+  background: rgba(9, 14, 24, 0.16);
 }
 
 .brand {
@@ -176,7 +140,7 @@ textarea {
   height: 11px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 0 6px rgba(157, 214, 255, 0.1);
+  box-shadow: 0 0 0 6px rgba(157, 214, 255, 0.08);
 }
 
 .brand__text {
@@ -199,7 +163,7 @@ textarea {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 10%, rgba(255, 255, 255, 0.12) 50%, transparent 90%);
+  background: linear-gradient(120deg, transparent 10%, rgba(255, 255, 255, 0.08) 50%, transparent 90%);
   transform: translateX(-130%);
   opacity: 0;
 }
@@ -228,7 +192,7 @@ textarea {
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
-  text-shadow: 0 0 12px rgba(149, 237, 255, 0.12);
+  text-shadow: 0 0 8px rgba(149, 237, 255, 0.08);
 }
 
 .clock-line.current {
@@ -262,7 +226,7 @@ textarea {
   margin-left: auto;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   align-items: center;
   justify-content: center;
   gap: 5px;
@@ -294,13 +258,13 @@ textarea {
 
 .site-nav a:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-1px);
 }
 
 .page {
   display: grid;
-  gap: 30px;
+  gap: 28px;
   padding: 4.8rem 0 3.4rem;
 }
 
@@ -404,7 +368,7 @@ textarea {
 .ghost-btn,
 .tool-btn,
 .back-to-top {
-  background: rgba(255, 255, 255, 0.014);
+  background: rgba(255, 255, 255, 0.01);
   border-color: var(--border);
   color: var(--text);
 }
@@ -414,7 +378,7 @@ textarea {
 .tool-btn:hover,
 .back-to-top:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
 .hero-stats {
@@ -427,8 +391,8 @@ textarea {
 .hero-stat {
   padding: 0.92rem 0.95rem;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.008);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.004);
+  border: 1px solid var(--border-soft);
 }
 
 .hero-stat strong,
@@ -456,7 +420,7 @@ textarea {
   border-radius: 18px;
   overflow: hidden;
   aspect-ratio: 0.92 / 1;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
 }
 
 .avatar {
@@ -479,9 +443,7 @@ textarea {
 .panel p,
 .form-status,
 .contact-copy p,
-.section-head span,
 .timeline-item p,
-.focus-card p,
 .project-card p,
 .link-card p {
   color: var(--muted);
@@ -514,8 +476,8 @@ textarea {
 .project-card__links a {
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.006);
+  border: 1px solid var(--border-soft);
 }
 
 .section-head {
@@ -535,7 +497,6 @@ textarea {
 .about-grid,
 .journey-grid,
 .contact-grid,
-.focus-grid,
 .tools-grid {
   margin-top: 1.35rem;
   display: grid;
@@ -554,10 +515,6 @@ textarea {
 .journey-grid,
 .contact-grid {
   grid-template-columns: 1fr 1fr;
-}
-
-.focus-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .tools-grid {
@@ -584,13 +541,12 @@ textarea {
 }
 
 .note-item,
-.focus-card,
 .project-card,
 .link-card,
 .timeline-item,
 .contact-card {
-  background: rgba(255, 255, 255, 0.008);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.004);
+  border: 1px solid var(--border-soft);
 }
 
 .note-item {
@@ -617,23 +573,9 @@ textarea {
 .chip {
   padding: 0.62rem 0.92rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.010);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.006);
+  border: 1px solid var(--border-soft);
   font-size: 0.86rem;
-}
-
-.focus-card,
-.project-card,
-.link-card,
-.timeline-item {
-  padding: 1.05rem;
-}
-
-.focus-card h4,
-.project-card h4,
-.timeline-item h4,
-.link-card strong {
-  margin: 0 0 0.52rem;
 }
 
 .project-list,
@@ -654,26 +596,26 @@ textarea {
 
 .project-card__shot {
   min-height: 190px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border-bottom: 1px solid var(--border-soft);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
 }
 
 .project-card__shot--1 {
   background:
-    radial-gradient(circle at 20% 20%, rgba(157, 214, 255, 0.22), transparent 34%),
-    linear-gradient(135deg, rgba(34, 55, 92, 0.9), rgba(6, 10, 18, 0.12));
+    radial-gradient(circle at 20% 20%, rgba(157, 214, 255, 0.18), transparent 34%),
+    linear-gradient(135deg, rgba(34, 55, 92, 0.74), rgba(6, 10, 18, 0.08));
 }
 
 .project-card__shot--2 {
   background:
-    radial-gradient(circle at 72% 24%, rgba(125, 224, 195, 0.2), transparent 34%),
-    linear-gradient(135deg, rgba(18, 31, 48, 0.9), rgba(6, 10, 18, 0.12));
+    radial-gradient(circle at 72% 24%, rgba(125, 224, 195, 0.15), transparent 34%),
+    linear-gradient(135deg, rgba(18, 31, 48, 0.74), rgba(6, 10, 18, 0.08));
 }
 
 .project-card__shot--3 {
   background:
-    radial-gradient(circle at 45% 24%, rgba(244, 164, 255, 0.18), transparent 34%),
-    linear-gradient(135deg, rgba(44, 28, 52, 0.9), rgba(6, 10, 18, 0.12));
+    radial-gradient(circle at 45% 24%, rgba(244, 164, 255, 0.12), transparent 34%),
+    linear-gradient(135deg, rgba(44, 28, 52, 0.74), rgba(6, 10, 18, 0.08));
 }
 
 .project-card__body {
@@ -701,8 +643,8 @@ textarea {
   padding: 0.42rem 0.68rem;
   border-radius: 999px;
   font-size: 0.78rem;
-  background: rgba(255, 255, 255, 0.010);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.006);
+  border: 1px solid var(--border-soft);
 }
 
 .project-card__links {
@@ -716,9 +658,9 @@ textarea {
   gap: 0.5rem;
   padding: 1rem;
   margin: 1rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255, 255, 255, 0.006);
 }
 
 .tool-box strong {
@@ -726,7 +668,7 @@ textarea {
   font-size: 1.7rem;
 }
 
-.tool-box--mono strong {
+.tool-box--mono {
   font-family: "Noto Sans SC", sans-serif;
   font-size: 1.15rem;
   letter-spacing: 0.12em;
@@ -768,7 +710,7 @@ textarea {
   margin-bottom: 0.7rem;
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.014);
+  background: rgba(255, 255, 255, 0.01);
   font-size: 0.78rem;
 }
 
@@ -791,16 +733,16 @@ textarea {
   width: 100%;
   padding: 0.92rem 1rem;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.014);
-  border: 1px solid rgba(255, 255, 255, 0.018);
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-soft);
   border-radius: 16px;
   outline: none;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: rgba(149, 237, 255, 0.32);
-  box-shadow: 0 0 0 2px rgba(149, 237, 255, 0.035);
+  border-color: rgba(149, 237, 255, 0.22);
+  box-shadow: 0 0 0 2px rgba(149, 237, 255, 0.028);
 }
 
 .contact-card {
@@ -858,12 +800,6 @@ textarea {
   color: #ffe6e6;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes sheen {
   0% {
     transform: translateX(-130%);
@@ -909,7 +845,6 @@ textarea {
   .about-grid,
   .journey-grid,
   .contact-grid,
-  .focus-grid,
   .tools-grid,
   .project-list {
     grid-template-columns: 1fr;
@@ -962,7 +897,7 @@ textarea {
 
   .site-nav a {
     padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.03);
   }
 
   .hero__copy,

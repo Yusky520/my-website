@@ -14,7 +14,7 @@ PROFILE = {
     "tagline": "在安静的界面里，放进一点技术和一点生活感。",
     "about": [
         "我主要在学习 Python、C++、Qt 和计算机视觉，也在持续整理个人项目、技术笔记和作品展示。",
-        "这个站点会以作品集的方式不断更新，保持干净、安静、可读，并让重点内容一眼可见。",
+        "这个站点会继续按作品集的方式更新，保持干净、安静、可读，并让重点内容一眼可见。",
     ],
     "hero_stats": [
         {"value": "03", "label": "精选项目"},
@@ -36,23 +36,8 @@ PROFILE = {
         "Flask",
         "HTML",
         "CSS",
-        "JavaScript",
     ],
     "hobbies": ["听音乐", "玩游戏", "运动", "健身"],
-    "focus": [
-        {
-            "title": "作品集更新",
-            "description": "先完善首页视觉和信息层级，再逐步增加真实项目与内容。",
-        },
-        {
-            "title": "视觉学习",
-            "description": "从图像处理到目标检测，持续积累计算机视觉方向的实践经验。",
-        },
-        {
-            "title": "工具整理",
-            "description": "把时间戳、密码生成等轻量工具整理成更顺手的站内功能。",
-        },
-    ],
     "projects": [
         {
             "name": "个人作品集网站",
@@ -65,7 +50,7 @@ PROFILE = {
         {
             "name": "视觉学习笔记",
             "type": "Computer Vision",
-            "description": "围绕 OpenCV、PyTorch 和 YOLOv8 整理的练习与实验，后续可扩展为 Markdown 博客。",
+            "description": "围绕 OpenCV、PyTorch 和 YOLOv8 整理的练习与实验，后续可继续扩展成更完整的笔记区。",
             "tags": ["OpenCV", "PyTorch", "YOLOv8"],
             "demo_url": "#tools",
             "source_url": "https://github.com/Yusky520/my-website",
@@ -73,7 +58,7 @@ PROFILE = {
         {
             "name": "轻量工具合集",
             "type": "Utilities",
-            "description": "把时间戳、密码生成这类小工具集中放在一起，方便日常使用，也更像一个完整站点。",
+            "description": "把时间戳、密码生成这类小工具集中放在一起，方便日常使用，也让网站更完整。",
             "tags": ["Utilities", "UX", "Fast"],
             "demo_url": "#tools",
             "source_url": "https://github.com/Yusky520/my-website",
@@ -99,7 +84,6 @@ PROFILE = {
     "links": [
         {"name": "GitHub", "url": "https://github.com/Yusky520", "hint": "源码仓库"},
         {"name": "Email", "url": "mailto:3294850673@qq.com", "hint": "联系邮箱"},
-        {"name": "Render", "url": "https://render.com", "hint": "部署平台"},
     ],
 }
 

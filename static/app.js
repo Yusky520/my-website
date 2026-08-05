@@ -1,4 +1,3 @@
-const loadingScreen = document.getElementById("loading-screen");
 const siteHeader = document.querySelector(".site-header");
 const navToggle = document.getElementById("nav-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
@@ -103,18 +102,6 @@ function scheduleClock() {
   updateClock();
   const delay = 1000 - new Date().getMilliseconds();
   window.setTimeout(scheduleClock, delay);
-}
-
-function setupLoading() {
-  if (!loadingScreen) {
-    return;
-  }
-
-  const hide = () => loadingScreen.classList.add("is-hidden");
-  window.addEventListener("load", () => {
-    window.setTimeout(hide, 260);
-  });
-  window.setTimeout(hide, 2500);
 }
 
 function setupReveal() {
@@ -292,7 +279,6 @@ if (passwordCopy && passwordOutput) {
   });
 }
 
-setupLoading();
 setupReveal();
 setupNav();
 setupBackToTop();

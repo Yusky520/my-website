@@ -19,11 +19,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <div class="loading-screen" id="loading-screen" aria-hidden="true">
-      <div class="loading-screen__orb"></div>
-      <p>Loading portfolio...</p>
-    </div>
-
     <div class="background-stack" aria-hidden="true">
       <video class="background-video" autoplay muted loop playsinline preload="metadata">
         <source src="{{ url_for('static', filename='assets/bg.webm') }}" type="video/webm" />
@@ -119,13 +114,12 @@
             <p class="section-label">ABOUT ME</p>
             <h3>关于我</h3>
           </div>
-          <span>内容会继续按作品集方式更新</span>
         </div>
 
         <div class="about-grid">
           <article class="panel large-panel glass">
             <p class="section-label">PROFILE</p>
-            <h3>一個正在长成作品集的个人主页</h3>
+            <h3>一个正在长成作品集的个人主页</h3>
             {% for paragraph in profile.about %}
               <p>{{ paragraph }}</p>
             {% endfor %}
@@ -160,33 +154,12 @@
         </div>
       </section>
 
-      <section class="reveal">
-        <div class="section-head">
-          <div>
-            <p class="section-label">FOCUS</p>
-            <h3>最想让人看到的三件事</h3>
-          </div>
-          <span>聚焦、作品、成长</span>
-        </div>
-
-        <div class="focus-grid">
-          {% for item in profile.focus %}
-            <article class="focus-card glass">
-              <p class="section-label">FOCUS</p>
-              <h4>{{ item.title }}</h4>
-              <p>{{ item.description }}</p>
-            </article>
-          {% endfor %}
-        </div>
-      </section>
-
       <section id="projects" class="section reveal">
         <div class="section-head">
           <div>
             <p class="section-label">FEATURED WORKS</p>
             <h3>项目 / 作品卡片</h3>
           </div>
-          <span>后续可以继续替换成你的真实项目</span>
         </div>
 
         <div class="project-list">
@@ -218,7 +191,6 @@
             <p class="section-label">TOOLS</p>
             <h3>轻量工具箱</h3>
           </div>
-          <span>简单但实用</span>
         </div>
 
         <div class="tools-grid">
@@ -257,7 +229,6 @@
             <p class="section-label">JOURNEY</p>
             <h3>当前阶段</h3>
           </div>
-          <span>把学习路线整理得更清晰</span>
         </div>
 
         <div class="journey-grid">
@@ -294,7 +265,6 @@
             <p class="section-label">CONTACT</p>
             <h3>联系我</h3>
           </div>
-          <span>你想补充什么内容，我都能继续帮你加</span>
         </div>
 
         <div class="contact-grid">
