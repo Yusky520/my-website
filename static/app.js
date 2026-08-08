@@ -1,4 +1,4 @@
-﻿const siteHeader = document.querySelector(".site-header");
+const siteHeader = document.querySelector(".site-header");
 const navToggle = document.getElementById("nav-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
 const revealElements = document.querySelectorAll(".reveal");
@@ -17,6 +17,7 @@ const emailCardValue = document.getElementById("email-card-value");
 const projectCards = Array.from(document.querySelectorAll(".project-card"));
 const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
 const hexInput = document.getElementById("hex-input");
+const colorPicker = document.getElementById("color-picker");
 const redInput = document.getElementById("red-input");
 const greenInput = document.getElementById("green-input");
 const blueInput = document.getElementById("blue-input");
@@ -31,6 +32,7 @@ const dateInput = document.getElementById("date-input");
 const timestampToDate = document.getElementById("timestamp-to-date");
 const dateToTimestamp = document.getElementById("date-to-timestamp");
 const timestampOutput = document.getElementById("timestamp-output");
+const timestampClear = document.getElementById("timestamp-clear");
 
 let toastTimer = null;
 let activeSlide = 0;
@@ -277,12 +279,15 @@ function renderColor(hex, red, green, blue) {
   }
 
   colorPreview.style.background = hex;
+  if (colorPicker) {
+    colorPicker.value = hex;
+  }
   colorHexOutput.textContent = hex;
   colorRgbOutput.textContent = `RGB(${red}, ${green}, ${blue})`;
 }
 
 function setupColorTool() {
-  if (!hexInput || !redInput || !greenInput || !blueInput) {
+  if (!hexInput || !colorPicker || !redInput || !greenInput || !blueInput) {
     return;
   }
 
@@ -312,6 +317,16 @@ function setupColorTool() {
     renderColor(hex, red, green, blue);
   };
 
+  colorPicker.addEventListener("input", () => {
+    hexInput.value = colorPicker.value;
+    applyHex();
+  });
+  hexInput.addEventListener("input", () => {
+    if (hexToRgb(hexInput.value)) {
+      applyHex();
+    }
+  });
+  [redInput, greenInput, blueInput].forEach((input) => input.addEventListener("input", applyRgb));
   colorFromHex?.addEventListener("click", applyHex);
   colorFromRgb?.addEventListener("click", applyRgb);
   colorCopy?.addEventListener("click", () => copyText(hexInput.value, "HEX 颜色已复制"));
@@ -358,6 +373,11 @@ function setupTimestampTool() {
 
     const milliseconds = date.getTime();
     timestampOutput.textContent = `秒：${Math.floor(milliseconds / 1000)}\n毫秒：${milliseconds}`;
+  });
+  timestampClear?.addEventListener("click", () => {
+    timestampInput.value = "";
+    dateInput.value = "";
+    timestampOutput.textContent = "转换结果会显示在这里";
   });
 }
 

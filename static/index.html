@@ -365,6 +365,10 @@
           <article class="panel glass">
             <p class="section-label">COLOR TOOL</p>
             <h3>颜色拾取器</h3>
+            <div class="color-picker-field">
+              <label for="color-picker">调色盘</label>
+              <input id="color-picker" class="color-picker" type="color" value="#9DD6FF" />
+            </div>
             <div class="tool-field">
               <label for="hex-input">HEX</label>
               <input id="hex-input" class="tool-input" type="text" value="#9DD6FF" maxlength="7" />
@@ -398,6 +402,7 @@
               <input id="date-input" class="tool-input" type="datetime-local" />
             </div>
             <button type="button" class="tool-btn tool-btn--ghost" id="date-to-timestamp">转换为时间戳</button>
+            <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-clear">清除</button>
             <div class="tool-box tool-box--mono" id="timestamp-output">转换结果会显示在这里</div>
           </article>
         </div>
@@ -450,7 +455,6 @@
       <div>
         <p>© 2026 Yusky521</p>
         <p>Built with HTML · CSS · JavaScript</p>
-        <p><a class="footer-email" href="mailto:3294850673@qq.com">3294850673@qq.com</a></p>
       </div>
       <button class="back-to-top" id="back-to-top" type="button">回到顶部</button>
     </footer>
