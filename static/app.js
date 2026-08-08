@@ -192,11 +192,9 @@ function updatePassword() {
 }
 
 function renderJson(value) {
-  if (!jsonOutput) {
-    return;
+  if (jsonOutput) {
+    jsonOutput.textContent = value;
   }
-
-  jsonOutput.textContent = value;
 }
 
 function formatJson(minify = false) {
@@ -212,8 +210,7 @@ function formatJson(minify = false) {
 
   try {
     const parsed = JSON.parse(raw);
-    const nextValue = minify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 2);
-    renderJson(nextValue);
+    renderJson(minify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 2));
   } catch (error) {
     renderJson("JSON 格式不正确，请检查逗号、引号和括号。");
   }
@@ -242,50 +239,32 @@ async function copyText(text, successMessage) {
 }
 
 if (form) {
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const submitButton = form.querySelector("button[type='submit']");
-    const payload = Object.fromEntries(new FormData(form).entries());
+    const payload = new FormData(form);
+    const name = String(payload.get("name") || "").trim();
+    const email = String(payload.get("email") || "").trim();
+    const message = String(payload.get("message") || "").trim();
 
-    showStatus("正在发送...", "success", 0);
-    submitButton.disabled = true;
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.ok) {
-        showStatus("留言已收到，我会尽快查看。", "success", 3000);
-        form.reset();
-      } else {
-        showStatus(result.error || "发送失败，请稍后再试。", "error", 3600);
-      }
-    } catch (error) {
-      showStatus("网络异常，暂时无法发送留言。", "error", 3600);
-    } finally {
-      submitButton.disabled = false;
+    if (!name || !email || !message) {
+      showStatus("请完整填写姓名、邮箱和留言内容。", "error", 3000);
+      return;
     }
+
+    const subject = encodeURIComponent(`来自 Yusky521 网站的留言 - ${name}`);
+    const body = encodeURIComponent(`姓名：${name}\n邮箱：${email}\n\n留言：\n${message}`);
+    showStatus("正在打开邮件客户端，请点击发送。", "success", 3000);
+    window.location.href = `mailto:3294850673@qq.com?subject=${subject}&body=${body}`;
   });
 }
 
 if (jsonFormat) {
-  jsonFormat.addEventListener("click", () => {
-    formatJson(false);
-  });
+  jsonFormat.addEventListener("click", () => formatJson(false));
 }
 
 if (jsonMinify) {
-  jsonMinify.addEventListener("click", () => {
-    formatJson(true);
-  });
+  jsonMinify.addEventListener("click", () => formatJson(true));
 }
 
 if (passwordGenerate) {
