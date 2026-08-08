@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -42,9 +42,9 @@
       <nav class="site-nav" id="site-nav">
         <a href="#home">首页</a>
         <a href="#about">关于我</a>
-        <a href="#projects">项目</a>
-        <a href="#tools">工具箱</a>
-        <a href="#journey">经历</a>
+        <a href="#projects">作品</a>
+        <a href="blog.html">笔记</a>
+        <a href="contact.html">联系</a>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
           <span class="theme-toggle__dot" aria-hidden="true"></span>
           <span class="theme-toggle__text">浅色</span>
@@ -77,7 +77,7 @@
             <div class="banner-slide__copy">
               <p class="banner-slide__eyebrow">SMALL TOOLS / 03</p>
               <h2>让一个小工具，真正方便一点。</h2>
-              <p>JSON 格式化、密码生成和更多适合日常使用的轻量工具。</p>
+              <p>颜色 HEX/RGB 转换、时间戳转换和更多适合日常使用的轻量工具。</p>
               <a class="ghost-btn" href="#tools">打开工具箱</a>
             </div>
             <div class="banner-slide__visual" aria-hidden="true"></div>
@@ -233,8 +233,14 @@
           </div>
         </div>
 
+        <div class="project-filter" role="group" aria-label="筛选项目">
+          <button class="filter-btn is-active" type="button" data-filter="all">全部</button>
+          <button class="filter-btn" type="button" data-filter="web">前端</button>
+          <button class="filter-btn" type="button" data-filter="vision">视觉</button>
+          <button class="filter-btn" type="button" data-filter="tools">工具</button>
+        </div>
         <div class="project-list">
-          <article class="project-card glass">
+          <article class="project-card glass" data-category="web">
             <div class="project-card__shot project-card__shot--1">
               <div class="project-preview project-preview--1">
                 <div class="project-preview__bar">
@@ -265,13 +271,13 @@
                 <span class="tag">JavaScript</span>
               </div>
               <div class="project-card__links">
-                <a href="#home">在线演示</a>
+                <a href="project-portfolio.html">项目详情</a>
                 <a href="https://github.com/Yusky520/my-website" target="_blank" rel="noreferrer">源码</a>
               </div>
             </div>
           </article>
 
-          <article class="project-card glass">
+          <article class="project-card glass" data-category="vision">
             <div class="project-card__shot project-card__shot--2">
               <div class="project-preview project-preview--2">
                 <div class="project-preview__bar">
@@ -302,13 +308,13 @@
                 <span class="tag">YOLOv8</span>
               </div>
               <div class="project-card__links">
-                <a href="#tools">在线演示</a>
+                <a href="project-vision.html">项目详情</a>
                 <a href="https://github.com/Yusky520/my-website" target="_blank" rel="noreferrer">源码</a>
               </div>
             </div>
           </article>
 
-          <article class="project-card glass">
+          <article class="project-card glass" data-category="tools">
             <div class="project-card__shot project-card__shot--3">
               <div class="project-preview project-preview--3">
                 <div class="project-preview__bar">
@@ -332,14 +338,14 @@
             <div class="project-card__body">
               <span class="project-type">Utilities</span>
               <h4>轻量工具合集</h4>
-              <p>把 JSON 格式化、密码生成这类小工具集中放在一起，方便日常使用，也让网站更完整。</p>
+              <p>把颜色转换、时间戳转换这类小工具集中放在一起，方便日常使用，也让网站更完整。</p>
               <div class="tags">
                 <span class="tag">Utilities</span>
                 <span class="tag">UX</span>
                 <span class="tag">Fast</span>
               </div>
               <div class="project-card__links">
-                <a href="#tools">在线演示</a>
+                <a href="project-tools.html">项目详情</a>
                 <a href="https://github.com/Yusky520/my-website" target="_blank" rel="noreferrer">源码</a>
               </div>
             </div>
@@ -357,29 +363,42 @@
 
         <div class="tools-grid">
           <article class="panel glass">
-            <p class="section-label">JSON TOOL</p>
-            <h3>JSON 格式化</h3>
-            <textarea id="json-input" class="tool-textarea" rows="8" placeholder='{"name":"Yusky521","stack":["Python","Qt"]}'></textarea>
-            <div class="tool-box tool-box--json" id="json-output">格式化后的内容会显示在这里</div>
+            <p class="section-label">COLOR TOOL</p>
+            <h3>颜色拾取器</h3>
+            <div class="tool-field">
+              <label for="hex-input">HEX</label>
+              <input id="hex-input" class="tool-input" type="text" value="#9DD6FF" maxlength="7" />
+            </div>
+            <div class="rgb-fields">
+              <label>R<input id="red-input" class="tool-input" type="number" min="0" max="255" value="157" /></label>
+              <label>G<input id="green-input" class="tool-input" type="number" min="0" max="255" value="214" /></label>
+              <label>B<input id="blue-input" class="tool-input" type="number" min="0" max="255" value="255" /></label>
+            </div>
+            <div class="color-preview" id="color-preview">
+              <strong id="color-hex-output">#9DD6FF</strong>
+              <span id="color-rgb-output">RGB(157, 214, 255)</span>
+            </div>
             <div class="tool-actions">
-              <button type="button" class="tool-btn" id="json-format">格式化 JSON</button>
-              <button type="button" class="tool-btn tool-btn--ghost" id="json-minify">压缩 JSON</button>
+              <button type="button" class="tool-btn" id="color-from-hex">HEX 转 RGB</button>
+              <button type="button" class="tool-btn tool-btn--ghost" id="color-from-rgb">RGB 转 HEX</button>
+              <button type="button" class="tool-btn tool-btn--ghost" id="color-copy">复制 HEX</button>
             </div>
           </article>
 
           <article class="panel glass">
-            <p class="section-label">PASSWORD TOOL</p>
-            <h3>随机密码生成</h3>
-            <label class="range-label">
-              <span>长度</span>
-              <input id="password-length" type="range" min="8" max="24" value="16" />
-              <strong id="password-length-value">16</strong>
-            </label>
-            <div class="tool-box tool-box--mono" id="password-output">Yusky521</div>
-            <div class="tool-actions">
-              <button type="button" class="tool-btn" id="password-generate">生成密码</button>
-              <button type="button" class="tool-btn tool-btn--ghost" id="password-copy">复制密码</button>
+            <p class="section-label">TIME TOOL</p>
+            <h3>时间戳 ↔ 日期</h3>
+            <div class="tool-field">
+              <label for="timestamp-input">时间戳（秒 / 毫秒）</label>
+              <input id="timestamp-input" class="tool-input" type="number" placeholder="例如 1780000000" />
             </div>
+            <button type="button" class="tool-btn" id="timestamp-to-date">转换为日期</button>
+            <div class="tool-field">
+              <label for="date-input">日期时间</label>
+              <input id="date-input" class="tool-input" type="datetime-local" />
+            </div>
+            <button type="button" class="tool-btn tool-btn--ghost" id="date-to-timestamp">转换为时间戳</button>
+            <div class="tool-box tool-box--mono" id="timestamp-output">转换结果会显示在这里</div>
           </article>
         </div>
       </section>
