@@ -1402,3 +1402,54 @@ body.theme-light .site-toast {
     transition: none !important;
   }
 }
+.link-card--email {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.link-card__meta {
+  display: grid;
+  gap: 0.32rem;
+  margin-top: 0.35rem;
+  overflow: hidden;
+}
+
+.link-card__hint,
+.link-card__value {
+  display: block;
+  line-height: 1.45;
+  transition: opacity 260ms ease, transform 260ms ease, max-height 320ms ease;
+}
+
+.link-card__hint {
+  color: var(--muted);
+}
+
+.link-card__value {
+  max-height: 2rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.link-card__value[hidden] {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+}
+
+.link-card--email.is-revealed {
+  border-color: rgba(157, 214, 255, 0.34);
+  box-shadow: 0 0 0 3px rgba(157, 214, 255, 0.07), 0 18px 34px rgba(0, 0, 0, 0.18);
+}
+
+.link-card--email.is-revealed .link-card__hint {
+  opacity: 0.62;
+  transform: translateY(-2px);
+}

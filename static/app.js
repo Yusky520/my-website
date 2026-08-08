@@ -24,6 +24,9 @@ const bannerSlides = Array.from(document.querySelectorAll(".banner-slide"));
 const bannerDots = Array.from(document.querySelectorAll(".banner-dot"));
 const bannerPrev = document.getElementById("banner-prev");
 const bannerNext = document.getElementById("banner-next");
+const emailCard = document.getElementById("email-card");
+const emailCardHint = document.getElementById("email-card-hint");
+const emailCardValue = document.getElementById("email-card-value");
 
 let toastTimer = null;
 let clockValue = "";
@@ -253,6 +256,26 @@ function setupCarousel() {
   restartTimer();
 }
 
+function setupEmailCard() {
+  if (!emailCard || !emailCardHint || !emailCardValue) {
+    return;
+  }
+
+  emailCard.addEventListener("click", () => {
+    const isHidden = emailCardValue.hasAttribute("hidden");
+    if (isHidden) {
+      emailCardValue.removeAttribute("hidden");
+      emailCard.classList.add("is-revealed");
+      emailCardHint.textContent = "点击收起邮箱";
+      emailCard.setAttribute("aria-expanded", "true");
+    } else {
+      emailCardValue.setAttribute("hidden", "hidden");
+      emailCard.classList.remove("is-revealed");
+      emailCardHint.textContent = "联系邮箱";
+      emailCard.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 function randomPassword(length) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
   let result = "";
@@ -347,6 +370,7 @@ if (passwordCopy && passwordOutput) {
 }
 
 setupReveal();
+setupEmailCard();
 setupNav();
 setupBackToTop();
 setupTheme();
