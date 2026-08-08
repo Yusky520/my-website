@@ -7,8 +7,10 @@ const liveClock = document.getElementById("live-clock");
 const clockCurrent = document.getElementById("clock-current");
 const clockNext = document.getElementById("clock-next");
 const liveDate = document.getElementById("live-date");
-const form = document.getElementById("contact-form");
-const statusText = document.getElementById("form-status");
+const toast = document.getElementById("site-toast");
+const loadingScreen = document.getElementById("loading-screen");
+const themeToggle = document.getElementById("theme-toggle");
+const themeText = themeToggle?.querySelector(".theme-toggle__text");
 const jsonInput = document.getElementById("json-input");
 const jsonOutput = document.getElementById("json-output");
 const jsonFormat = document.getElementById("json-format");
@@ -18,11 +20,15 @@ const passwordLengthValue = document.getElementById("password-length-value");
 const passwordOutput = document.getElementById("password-output");
 const passwordGenerate = document.getElementById("password-generate");
 const passwordCopy = document.getElementById("password-copy");
-const emailToggle = document.getElementById("email-toggle");
-const emailValue = document.getElementById("email-value");
+const bannerSlides = Array.from(document.querySelectorAll(".banner-slide"));
+const bannerDots = Array.from(document.querySelectorAll(".banner-dot"));
+const bannerPrev = document.getElementById("banner-prev");
+const bannerNext = document.getElementById("banner-next");
 
-let statusTimer = null;
+let toastTimer = null;
 let clockValue = "";
+let activeSlide = 0;
+let carouselTimer = null;
 
 function pad(num) {
   return String(num).padStart(2, "0");
@@ -41,28 +47,37 @@ function formatDate(date) {
   }).format(date);
 }
 
-function showStatus(message, type = "success", autoHideMs = 3000) {
-  if (!statusText) {
+function showToast(message, type = "success", autoHideMs = 3000) {
+  if (!toast) {
     return;
   }
 
-  window.clearTimeout(statusTimer);
-  statusText.textContent = message;
-  statusText.classList.remove("is-visible", "is-success", "is-error");
+  window.clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.remove("is-visible", "is-success", "is-error");
 
   if (!message) {
     return;
   }
 
-  statusText.classList.add("is-visible", type === "error" ? "is-error" : "is-success");
+  toast.classList.add("is-visible", type === "error" ? "is-error" : "is-success");
 
   if (autoHideMs > 0) {
-    statusTimer = window.setTimeout(() => {
-      statusText.classList.remove("is-visible", "is-success", "is-error");
-      statusText.textContent = "";
+    toastTimer = window.setTimeout(() => {
+      toast.classList.remove("is-visible", "is-success", "is-error");
+      toast.textContent = "";
     }, autoHideMs);
   }
 }
+
+function hideLoading() {
+  if (loadingScreen) {
+    loadingScreen.classList.add("is-hidden");
+  }
+}
+
+window.addEventListener("load", () => window.setTimeout(hideLoading, 220));
+window.setTimeout(hideLoading, 2600);
 
 function updateClock(initial = false) {
   if (!liveClock || !clockCurrent || !clockNext || !liveDate) {
@@ -99,8 +114,7 @@ function updateClock(initial = false) {
 
 function scheduleClock() {
   updateClock();
-  const delay = 1000 - new Date().getMilliseconds();
-  window.setTimeout(scheduleClock, delay);
+  window.setTimeout(scheduleClock, 1000 - new Date().getMilliseconds());
 }
 
 function setupReveal() {
@@ -153,16 +167,90 @@ function setupBackToTop() {
     return;
   }
 
-  const toggle = () => {
-    backToTop.classList.toggle("is-visible", window.scrollY > 520);
-  };
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
+  const toggle = () => backToTop.classList.toggle("is-visible", window.scrollY > 520);
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   window.addEventListener("scroll", toggle, { passive: true });
   toggle();
+}
+
+function setupTheme() {
+  if (!themeToggle) {
+    return;
+  }
+
+  let savedTheme = "dark";
+  try {
+    savedTheme = window.localStorage.getItem("yusky-theme") || "dark";
+  } catch (error) {
+    savedTheme = "dark";
+  }
+
+  const applyTheme = (theme) => {
+    const isLight = theme === "light";
+    document.body.classList.toggle("theme-light", isLight);
+    themeToggle.setAttribute("aria-pressed", String(isLight));
+    if (themeText) {
+      themeText.textContent = isLight ? "深色" : "浅色";
+    }
+  };
+
+  applyTheme(savedTheme);
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("theme-light") ? "dark" : "light";
+    applyTheme(nextTheme);
+    try {
+      window.localStorage.setItem("yusky-theme", nextTheme);
+    } catch (error) {
+      // The theme remains active for the current page if storage is unavailable.
+    }
+  });
+}
+
+function setupCarousel() {
+  if (bannerSlides.length < 2) {
+    return;
+  }
+
+  const showSlide = (index) => {
+    activeSlide = (index + bannerSlides.length) % bannerSlides.length;
+    bannerSlides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === activeSlide));
+    bannerDots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeSlide;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const restartTimer = () => {
+    window.clearInterval(carouselTimer);
+    carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), 6200);
+  };
+
+  bannerPrev?.addEventListener("click", () => {
+    showSlide(activeSlide - 1);
+    restartTimer();
+  });
+
+  bannerNext?.addEventListener("click", () => {
+    showSlide(activeSlide + 1);
+    restartTimer();
+  });
+
+  bannerDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      showSlide(Number(dot.dataset.slide));
+      restartTimer();
+    });
+  });
+
+  const carousel = document.getElementById("banner");
+  carousel?.addEventListener("mouseenter", () => window.clearInterval(carouselTimer));
+  carousel?.addEventListener("mouseleave", restartTimer);
+  carousel?.addEventListener("focusin", () => window.clearInterval(carouselTimer));
+  carousel?.addEventListener("focusout", restartTimer);
+
+  showSlide(0);
+  restartTimer();
 }
 
 function randomPassword(length) {
@@ -232,31 +320,10 @@ async function copyText(text, successMessage) {
       document.body.removeChild(temp);
     }
 
-    showStatus(successMessage, "success", 1800);
+    showToast(successMessage, "success", 1800);
   } catch (error) {
-    showStatus("复制失败，请手动选择文本。", "error", 2200);
+    showToast("复制失败，请手动选择文本。", "error", 2200);
   }
-}
-
-if (form) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const payload = new FormData(form);
-    const name = String(payload.get("name") || "").trim();
-    const email = String(payload.get("email") || "").trim();
-    const message = String(payload.get("message") || "").trim();
-
-    if (!name || !email || !message) {
-      showStatus("请完整填写姓名、邮箱和留言内容。", "error", 3000);
-      return;
-    }
-
-    const subject = encodeURIComponent(`来自 Yusky521 网站的留言 - ${name}`);
-    const body = encodeURIComponent(`姓名：${name}\n邮箱：${email}\n\n留言：\n${message}`);
-    showStatus("正在打开邮件客户端，请点击发送。", "success", 3000);
-    window.location.href = `mailto:3294850673@qq.com?subject=${subject}&body=${body}`;
-  });
 }
 
 if (jsonFormat) {
@@ -276,29 +343,14 @@ if (passwordLength) {
 }
 
 if (passwordCopy && passwordOutput) {
-  passwordCopy.addEventListener("click", () => {
-    copyText(passwordOutput.textContent, "密码已复制");
-  });
-}
-
-if (emailToggle && emailValue) {
-  emailToggle.addEventListener("click", () => {
-    const isHidden = emailValue.hasAttribute("hidden");
-    if (isHidden) {
-      emailValue.removeAttribute("hidden");
-      emailToggle.textContent = "点击收起";
-      emailToggle.setAttribute("aria-expanded", "true");
-    } else {
-      emailValue.setAttribute("hidden", "hidden");
-      emailToggle.textContent = "点击查看";
-      emailToggle.setAttribute("aria-expanded", "false");
-    }
-  });
+  passwordCopy.addEventListener("click", () => copyText(passwordOutput.textContent, "密码已复制"));
 }
 
 setupReveal();
 setupNav();
 setupBackToTop();
+setupTheme();
+setupCarousel();
 updatePassword();
 updateClock(true);
 scheduleClock();

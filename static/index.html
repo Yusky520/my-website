@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="background-stack" aria-hidden="true">
+    <div class="loading-screen" id="loading-screen" aria-live="polite">
+      <div class="loading-screen__orb" aria-hidden="true"></div>
+      <p>LOADING</p>
+    </div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>    <div class="background-stack" aria-hidden="true">
       <video class="background-video" autoplay muted loop playsinline preload="metadata">
         <source src="assets/bg.webm" type="video/webm" />
         <source src="assets/bg.mp4" type="video/mp4" />
@@ -62,12 +66,54 @@
         <a href="#projects">项目</a>
         <a href="#tools">工具箱</a>
         <a href="#journey">经历</a>
-        <a href="#contact">联系</a>
-      </nav>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+          <span class="theme-toggle__dot" aria-hidden="true"></span>
+          <span class="theme-toggle__text">浅色</span>
+        </button>      </nav>
     </header>
 
     <main class="page">
-      <section class="hero reveal" id="home">
+      <section class="banner-carousel glass reveal" id="banner" aria-label="精选内容轮播">
+        <div class="banner-viewport">
+          <article class="banner-slide banner-slide--intro is-active" data-slide="0">
+            <div class="banner-slide__copy">
+              <p class="banner-slide__eyebrow">YUSKY521 / 01</p>
+              <h2>把想法，慢慢做成作品。</h2>
+              <p>这里记录技术学习、视觉实验和正在成形的个人项目。</p>
+              <a class="ghost-btn" href="#projects">浏览作品</a>
+            </div>
+            <div class="banner-slide__visual" aria-hidden="true"></div>
+          </article>
+          <article class="banner-slide banner-slide--vision" data-slide="1">
+            <div class="banner-slide__copy">
+              <p class="banner-slide__eyebrow">COMPUTER VISION / 02</p>
+              <h2>从视觉基础开始，保持持续练习。</h2>
+              <p>OpenCV、PyTorch、YOLOv8，以及每一次小实验的记录。</p>
+              <a class="ghost-btn" href="#about">查看方向</a>
+            </div>
+            <div class="banner-slide__visual" aria-hidden="true"></div>
+          </article>
+          <article class="banner-slide banner-slide--tools" data-slide="2">
+            <div class="banner-slide__copy">
+              <p class="banner-slide__eyebrow">SMALL TOOLS / 03</p>
+              <h2>让一个小工具，真正方便一点。</h2>
+              <p>JSON 格式化、密码生成和更多适合日常使用的轻量工具。</p>
+              <a class="ghost-btn" href="#tools">打开工具箱</a>
+            </div>
+            <div class="banner-slide__visual" aria-hidden="true"></div>
+          </article>
+        </div>
+        <div class="banner-controls">
+          <button class="banner-control" id="banner-prev" type="button" aria-label="上一张">‹</button>
+          <div class="banner-dots" role="tablist" aria-label="选择轮播内容">
+            <button class="banner-dot is-active" type="button" data-slide="0" aria-label="第 1 张" aria-selected="true"></button>
+            <button class="banner-dot" type="button" data-slide="1" aria-label="第 2 张" aria-selected="false"></button>
+            <button class="banner-dot" type="button" data-slide="2" aria-label="第 3 张" aria-selected="false"></button>
+          </div>
+          <button class="banner-control" id="banner-next" type="button" aria-label="下一张">›</button>
+        </div>
+      </section>      <section class="hero reveal" id="home">
         <div class="hero__copy glass">
           <p class="eyebrow">PERSONAL WEBSITE</p>
           <h1>Yusky521</h1>
@@ -372,35 +418,6 @@
         </div>
       </section>
 
-      <section id="contact" class="section reveal contact-panel glass">
-        <div class="section-head">
-          <div>
-            <p class="section-label">CONTACT</p>
-            <h3>联系我</h3>
-          </div>
-        </div>
-
-        <div class="contact-grid">
-          <div class="contact-copy">
-            <p>这里保留一个可用的联系表单，提交后会打开你的默认邮件客户端。</p>
-            <div class="contact-card">
-              <span>QQ 邮箱</span>
-              <button type="button" class="email-toggle" id="email-toggle" aria-expanded="false">
-                点击查看
-              </button>
-              <strong id="email-value" class="email-value" hidden>3294850673@qq.com</strong>
-            </div>
-          </div>
-
-          <form id="contact-form" class="contact-form">
-            <input type="text" name="name" placeholder="你的名字" required />
-            <input type="email" name="email" placeholder="邮箱地址" required />
-            <textarea name="message" rows="5" placeholder="想补充的内容、风格方向或功能想法" required></textarea>
-            <button type="submit" class="primary-btn">发送留言</button>
-            <p id="form-status" class="form-status"></p>
-          </form>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
