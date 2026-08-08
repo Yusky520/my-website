@@ -1,12 +1,8 @@
-const siteHeader = document.querySelector(".site-header");
+﻿const siteHeader = document.querySelector(".site-header");
 const navToggle = document.getElementById("nav-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
 const revealElements = document.querySelectorAll(".reveal");
 const backToTop = document.getElementById("back-to-top");
-const liveClock = document.getElementById("live-clock");
-const clockCurrent = document.getElementById("clock-current");
-const clockNext = document.getElementById("clock-next");
-const liveDate = document.getElementById("live-date");
 const toast = document.getElementById("site-toast");
 const loadingScreen = document.getElementById("loading-screen");
 const themeToggle = document.getElementById("theme-toggle");
@@ -29,26 +25,8 @@ const emailCardHint = document.getElementById("email-card-hint");
 const emailCardValue = document.getElementById("email-card-value");
 
 let toastTimer = null;
-let clockValue = "";
 let activeSlide = 0;
 let carouselTimer = null;
-
-function pad(num) {
-  return String(num).padStart(2, "0");
-}
-
-function formatClock(date) {
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-}
-
-function formatDate(date) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "short",
-  }).format(date);
-}
 
 function showToast(message, type = "success", autoHideMs = 3000) {
   if (!toast) {
@@ -81,44 +59,6 @@ function hideLoading() {
 
 window.addEventListener("load", () => window.setTimeout(hideLoading, 220));
 window.setTimeout(hideLoading, 2600);
-
-function updateClock(initial = false) {
-  if (!liveClock || !clockCurrent || !clockNext || !liveDate) {
-    return;
-  }
-
-  const now = new Date();
-  const nextValue = formatClock(now);
-  liveDate.textContent = formatDate(now);
-
-  if (initial || !clockValue) {
-    clockCurrent.textContent = nextValue;
-    clockNext.textContent = nextValue;
-    clockValue = nextValue;
-    return;
-  }
-
-  if (nextValue === clockValue) {
-    return;
-  }
-
-  clockNext.textContent = nextValue;
-  liveClock.classList.remove("is-ticking");
-  void liveClock.offsetWidth;
-  liveClock.classList.add("is-ticking");
-
-  window.setTimeout(() => {
-    clockCurrent.textContent = nextValue;
-    clockNext.textContent = nextValue;
-    clockValue = nextValue;
-    liveClock.classList.remove("is-ticking");
-  }, 540);
-}
-
-function scheduleClock() {
-  updateClock();
-  window.setTimeout(scheduleClock, 1000 - new Date().getMilliseconds());
-}
 
 function setupReveal() {
   if (!("IntersectionObserver" in window)) {
@@ -271,11 +211,12 @@ function setupEmailCard() {
     } else {
       emailCardValue.setAttribute("hidden", "hidden");
       emailCard.classList.remove("is-revealed");
-      emailCardHint.textContent = "联系邮箱";
+      emailCardHint.textContent = "点击查看邮箱";
       emailCard.setAttribute("aria-expanded", "false");
     }
   });
 }
+
 function randomPassword(length) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
   let result = "";
@@ -376,6 +317,4 @@ setupBackToTop();
 setupTheme();
 setupCarousel();
 updatePassword();
-updateClock(true);
-scheduleClock();
 renderJson("格式化后的内容会显示在这里");
