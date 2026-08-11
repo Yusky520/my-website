@@ -132,6 +132,26 @@ function setupNav() {
     return;
   }
 
+  const siteNav = siteHeader.querySelector(".site-nav");
+  const navTime = document.createElement("div");
+  navTime.className = "site-nav__time";
+  navTime.setAttribute("role", "status");
+  navTime.setAttribute("aria-live", "polite");
+  navTime.innerHTML = "<span class=\"site-nav__time-label\">北京时间</span><strong class=\"site-nav__time-value\">--</strong>";
+
+  const updateNavTime = () => {
+    const timeValue = navTime.querySelector(".site-nav__time-value");
+    if (timeValue && typeof formatBeijingDateTime === "function") {
+      timeValue.textContent = formatBeijingDateTime(new Date());
+    }
+  };
+
+  if (siteNav) {
+    siteNav.appendChild(navTime);
+    updateNavTime();
+    window.setInterval(updateNavTime, 1000);
+  }
+
   const closeNav = () => {
     siteHeader.classList.remove("is-open");
     navToggle.setAttribute("aria-expanded", "false");
