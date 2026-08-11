@@ -35,6 +35,9 @@ const dateToTimestamp = document.getElementById("date-to-timestamp");
 const timestampOutput = document.getElementById("timestamp-output");
 const timestampClear = document.getElementById("timestamp-clear");
 const timestampCopy = document.getElementById("timestamp-copy");
+const beijingClock = document.getElementById("beijing-clock");
+const timestampPreset = document.getElementById("timestamp-preset");
+const timestampNow = document.getElementById("timestamp-now");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxCaption = document.getElementById("lightbox-caption");
@@ -453,14 +456,102 @@ function pad(value) {
   return String(value).padStart(2, "0");
 }
 
-function formatDateTime(date) {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+const BEIJING_TIME_ZONE = "Asia/Shanghai";
+const BEIJING_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+function getBeijingParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: BEIJING_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.filter((part) => part.type !== "literal").map((part) => [part.type, Number(part.value)]));
+  return values;
+}
+
+function formatBeijingDateTime(date) {
+  const parts = getBeijingParts(date);
+  return `${parts.year}-${pad(parts.month)}-${pad(parts.day)} ${pad(parts.hour)}:${pad(parts.minute)}:${pad(parts.second)}`;
+}
+
+function formatBeijingInput(date) {
+  const parts = getBeijingParts(date);
+  return `${parts.year}-${pad(parts.month)}-${pad(parts.day)}T${pad(parts.hour)}:${pad(parts.minute)}`;
+}
+
+function parseBeijingInput(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(value);
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour, minute] = match.map(Number);
+  const timestamp = Date.UTC(year, month - 1, day, hour, minute) - BEIJING_OFFSET_MS;
+  const date = new Date(timestamp);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function createBeijingPresetDate(dayOffset, hour, minute = 0, second = 0) {
+  const now = getBeijingParts();
+  return new Date(Date.UTC(now.year, now.month - 1, now.day + dayOffset, hour, minute, second) - BEIJING_OFFSET_MS);
+}
+
+function getTimestampPreset(value) {
+  const presets = {
+    "today-start": () => createBeijingPresetDate(0, 0),
+    "today-morning": () => createBeijingPresetDate(0, 8),
+    "today-noon": () => createBeijingPresetDate(0, 12),
+    "today-evening": () => createBeijingPresetDate(0, 18),
+    "today-end": () => createBeijingPresetDate(0, 23, 59, 59),
+    "yesterday-start": () => createBeijingPresetDate(-1, 0),
+    "tomorrow-start": () => createBeijingPresetDate(1, 0),
+  };
+  return presets[value]?.() || null;
+}
+
+function setTimestampFromBeijingDate(date) {
+  if (!date || Number.isNaN(date.getTime())) {
+    return;
+  }
+
+  const milliseconds = date.getTime();
+  timestampInput.value = Math.floor(milliseconds / 1000);
+  dateInput.value = formatBeijingInput(date);
+  timestampOutput.textContent = `北京时间：${formatBeijingDateTime(date)}\n秒：${Math.floor(milliseconds / 1000)}\n毫秒：${milliseconds}`;
 }
 
 function setupTimestampTool() {
   if (!timestampInput || !dateInput || !timestampOutput) {
     return;
   }
+
+  const updateBeijingClock = () => {
+    if (beijingClock) {
+      beijingClock.textContent = formatBeijingDateTime(new Date()).slice(11);
+    }
+  };
+
+  updateBeijingClock();
+  window.setInterval(updateBeijingClock, 1000);
+
+  timestampNow?.addEventListener("click", () => {
+    setTimestampFromBeijingDate(new Date());
+    if (timestampPreset) {
+      timestampPreset.value = "";
+    }
+  });
+
+  timestampPreset?.addEventListener("change", () => {
+    const date = getTimestampPreset(timestampPreset.value);
+    if (date) {
+      setTimestampFromBeijingDate(date);
+    }
+  });
 
   timestampToDate?.addEventListener("click", () => {
     const raw = timestampInput.value.trim();
@@ -476,23 +567,26 @@ function setupTimestampTool() {
       return;
     }
 
-    dateInput.value = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-    timestampOutput.textContent = formatDateTime(date);
+    dateInput.value = formatBeijingInput(date);
+    timestampOutput.textContent = `北京时间：${formatBeijingDateTime(date)}\n秒：${Math.floor(date.getTime() / 1000)}\n毫秒：${date.getTime()}`;
   });
 
   dateToTimestamp?.addEventListener("click", () => {
-    const date = new Date(dateInput.value);
-    if (!dateInput.value || Number.isNaN(date.getTime())) {
-      showToast("请选择有效的日期时间。", "error", 2200);
+    const date = parseBeijingInput(dateInput.value);
+    if (!date) {
+      showToast("请选择有效的北京时间。", "error", 2200);
       return;
     }
 
-    const milliseconds = date.getTime();
-    timestampOutput.textContent = `秒：${Math.floor(milliseconds / 1000)}\n毫秒：${milliseconds}`;
+    setTimestampFromBeijingDate(date);
   });
+
   timestampClear?.addEventListener("click", () => {
     timestampInput.value = "";
     dateInput.value = "";
+    if (timestampPreset) {
+      timestampPreset.value = "";
+    }
     timestampOutput.textContent = "转换结果会显示在这里";
   });
 
@@ -505,7 +599,6 @@ function setupTimestampTool() {
     copyText(result, "时间戳结果已复制");
   });
 }
-
 async function copyText(text, successMessage) {
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) {

@@ -1888,3 +1888,70 @@ body.lightbox-open {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+.time-tool-card {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.time-tool__realtime {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.time-tool__clock-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.time-tool__clock {
+  display: block;
+  color: var(--accent);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.time-tool__preset-field {
+  margin-top: 0.1rem;
+}
+
+.tool-btn--compact {
+  min-width: auto;
+  padding: 0.68rem 0.9rem;
+  white-space: nowrap;
+}
+
+.time-tool__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.time-tool__actions .tool-btn {
+  min-width: 0;
+  padding-inline: 0.65rem;
+}
+
+@media (max-width: 560px) {
+  .time-tool__realtime {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tool-btn--compact {
+    width: 100%;
+  }
+
+  .time-tool__actions {
+    grid-template-columns: 1fr;
+  }
+}

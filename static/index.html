@@ -403,21 +403,43 @@
             </div>
           </article>
 
-          <article class="panel glass">
+          <article class="panel glass time-tool-card">
             <p class="section-label">TIME TOOL</p>
             <h3>时间戳 ↔ 日期</h3>
+            <div class="time-tool__realtime">
+              <div>
+                <span class="time-tool__clock-label">实时北京时间</span>
+                <strong class="time-tool__clock" id="beijing-clock" aria-live="polite">--:--:--</strong>
+              </div>
+              <button type="button" class="tool-btn tool-btn--compact" id="timestamp-now">填入现在</button>
+            </div>
+            <div class="tool-field time-tool__preset-field">
+              <label for="timestamp-preset">常用时间段</label>
+              <select id="timestamp-preset" class="tool-input">
+                <option value="">选择后自动填入</option>
+                <option value="today-start">今天 00:00</option>
+                <option value="today-morning">今天 08:00</option>
+                <option value="today-noon">今天 12:00</option>
+                <option value="today-evening">今天 18:00</option>
+                <option value="today-end">今天 23:59</option>
+                <option value="yesterday-start">昨天 00:00</option>
+                <option value="tomorrow-start">明天 00:00</option>
+              </select>
+            </div>
             <div class="tool-field">
               <label for="timestamp-input">时间戳（秒 / 毫秒）</label>
-              <input id="timestamp-input" class="tool-input" type="number" placeholder="例如 1780000000" />
+              <input id="timestamp-input" class="tool-input" type="number" inputmode="numeric" placeholder="例如 1780000000" />
             </div>
-            <button type="button" class="tool-btn" id="timestamp-to-date">转换为日期</button>
+            <button type="button" class="tool-btn" id="timestamp-to-date">转换为北京时间</button>
             <div class="tool-field">
-              <label for="date-input">日期时间</label>
+              <label for="date-input">北京时间日期</label>
               <input id="date-input" class="tool-input" type="datetime-local" />
             </div>
-            <button type="button" class="tool-btn tool-btn--ghost" id="date-to-timestamp">转换为时间戳</button>
-            <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-clear">清除</button>
-            <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-copy">复制结果</button>
+            <div class="time-tool__actions">
+              <button type="button" class="tool-btn tool-btn--ghost" id="date-to-timestamp">转换为时间戳</button>
+              <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-clear">清除</button>
+              <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-copy">复制结果</button>
+            </div>
             <div class="tool-box tool-box--mono" id="timestamp-output" aria-live="polite">转换结果会显示在这里</div>
           </article>
         </div>
