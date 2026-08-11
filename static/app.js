@@ -5,6 +5,7 @@ const revealElements = document.querySelectorAll(".reveal");
 const backToTop = document.getElementById("back-to-top");
 const toast = document.getElementById("site-toast");
 const loadingScreen = document.getElementById("loading-screen");
+const backgroundVideo = document.querySelector(".background-video");
 const themeToggle = document.getElementById("theme-toggle");
 const themeText = themeToggle?.querySelector(".theme-toggle__text");
 const bannerSlides = Array.from(document.querySelectorAll(".banner-slide"));
@@ -33,6 +34,7 @@ const timestampToDate = document.getElementById("timestamp-to-date");
 const dateToTimestamp = document.getElementById("date-to-timestamp");
 const timestampOutput = document.getElementById("timestamp-output");
 const timestampClear = document.getElementById("timestamp-clear");
+const timestampCopy = document.getElementById("timestamp-copy");
 
 let toastTimer = null;
 let activeSlide = 0;
@@ -67,6 +69,34 @@ function hideLoading() {
 
 window.addEventListener("load", () => window.setTimeout(hideLoading, 220));
 window.setTimeout(hideLoading, 2600);
+
+function setupBackgroundVideo() {
+  if (!backgroundVideo) {
+    return;
+  }
+
+  const loadVideo = () => {
+    const sources = Array.from(backgroundVideo.querySelectorAll("source[data-src]"));
+    if (!sources.length) {
+      return;
+    }
+
+    sources.forEach((source) => {
+      source.src = source.dataset.src;
+      source.removeAttribute("data-src");
+    });
+
+    backgroundVideo.load();
+    const playPromise = backgroundVideo.play();
+    playPromise?.catch(() => {});
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(loadVideo, { timeout: 1000 });
+  } else {
+    window.setTimeout(loadVideo, 500);
+  }
+}
 
 function setupReveal() {
   if (!("IntersectionObserver" in window)) {
@@ -379,6 +409,15 @@ function setupTimestampTool() {
     dateInput.value = "";
     timestampOutput.textContent = "转换结果会显示在这里";
   });
+
+  timestampCopy?.addEventListener("click", () => {
+    const result = timestampOutput.textContent.trim();
+    if (!result || result === "转换结果会显示在这里") {
+      showToast("请先生成转换结果。", "error", 2200);
+      return;
+    }
+    copyText(result, "时间戳结果已复制");
+  });
 }
 
 async function copyText(text, successMessage) {
@@ -403,6 +442,7 @@ async function copyText(text, successMessage) {
   }
 }
 
+setupBackgroundVideo();
 setupReveal();
 setupEmailCard();
 setupNav();

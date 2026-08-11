@@ -3,14 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Yusky521 的个人作品集、技术笔记与轻量工具合集，展示前端与计算机视觉学习方向。" />
     <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Yusky521 的个人技术作品集，记录前端交互开发、OpenCV 图像处理、PyTorch、YOLOv8 学习笔记与轻量化网页工具。" />
     <meta name="robots" content="index,follow" />
-    <title>Yusky521 | 个人作品集</title>
+    <link rel="canonical" href="https://yusky521.onrender.com/" />
+    <meta property="og:title" content="Yusky521 | 前端与计算机视觉个人作品集" />
+    <meta property="og:description" content="Yusky521 的个人技术作品集，记录前端交互开发、OpenCV 图像处理、PyTorch、YOLOv8 学习笔记与轻量化网页工具。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yusky521.onrender.com/" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/avatar.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yusky521 | 前端与计算机视觉个人作品集" />
+    <meta name="twitter:description" content="Yusky521 的个人技术作品集，记录前端交互开发、OpenCV 图像处理、PyTorch、YOLOv8 学习笔记与轻量化网页工具。" />
+    <title>Yusky521 | 前端与计算机视觉个人作品集</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" /></noscript>
     <link rel="stylesheet" href="style.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Yusky521",
+      "url": "https://yusky521.onrender.com/",
+      "sameAs": ["https://github.com/Yusky520"],
+      "knowsAbout": ["Python", "C++", "Qt", "OpenCV", "PyTorch", "YOLOv8", "Frontend Development"]
+    }
+    </script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -19,9 +39,9 @@
     </div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
     <div class="background-stack" aria-hidden="true">
-      <video class="background-video" autoplay muted loop playsinline preload="metadata">
-        <source src="assets/bg.webm" type="video/webm" />
-        <source src="assets/bg.mp4" type="video/mp4" />
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
       </video>
       <div class="overlay"></div>
       <div class="grain"></div>
@@ -122,7 +142,7 @@
 
         <aside class="spotlight-card glass-lite">
           <div class="spotlight-frame">
-            <img class="avatar" src="assets/avatar.png" alt="Yusky521 头像" />
+            <img class="avatar" src="assets/avatar.png" alt="Yusky521 二次元头像" width="495" height="495" decoding="async" />
           </div>
           <div class="identity-copy">
             <strong>Yusky521</strong>
@@ -403,7 +423,8 @@
             </div>
             <button type="button" class="tool-btn tool-btn--ghost" id="date-to-timestamp">转换为时间戳</button>
             <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-clear">清除</button>
-            <div class="tool-box tool-box--mono" id="timestamp-output">转换结果会显示在这里</div>
+            <button type="button" class="tool-btn tool-btn--ghost" id="timestamp-copy">复制结果</button>
+            <div class="tool-box tool-box--mono" id="timestamp-output" aria-live="polite">转换结果会显示在这里</div>
           </article>
         </div>
       </section>
@@ -459,6 +480,6 @@
       <button class="back-to-top" id="back-to-top" type="button">回到顶部</button>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

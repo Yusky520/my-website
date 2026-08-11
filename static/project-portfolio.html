@@ -4,16 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#060b16" />
-    <title>Yusky521 | 个人作品集网站</title>
+    <meta name="description" content="Yusky521 个人作品集网站项目，展示响应式布局、玻璃拟态界面、动态背景和原生前端交互实现。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-portfolio.html" />
+    <meta property="og:title" content="Yusky521 | 个人作品集网站项目" />
+    <meta property="og:description" content="Yusky521 个人作品集网站项目，展示响应式布局、玻璃拟态界面、动态背景和原生前端交互实现。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-portfolio.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/avatar.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yusky521 | 个人作品集网站项目" />
+    <meta name="twitter:description" content="Yusky521 个人作品集网站项目，展示响应式布局、玻璃拟态界面、动态背景和原生前端交互实现。" />
+    <title>Yusky521 | 个人作品集网站项目</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" /></noscript>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="page-body">
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
-    <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="metadata"><source src="assets/bg.webm" type="video/webm" /><source src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
+    <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
     <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
     <main class="page subpage">
       <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / PORTFOLIO</p><h1>把个人主页做成一个可以持续更新的作品集。</h1><p>这个项目围绕玻璃质感、动态背景、响应式布局和轻量交互展开，目标是让内容保持安静，但重点足够清晰。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
@@ -27,6 +39,6 @@
       </section>
     </main>
     <footer class="site-footer"><div><p>© 2026 Yusky521</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>
