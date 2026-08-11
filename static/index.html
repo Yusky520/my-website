@@ -262,7 +262,7 @@
         <div class="project-list">
           <article class="project-card glass" data-category="web">
             <div class="project-card__shot project-card__shot--1">
-              <div class="project-preview project-preview--image">
+              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/project-portfolio-preview.webp" data-lightbox-alt="个人作品集网站首页预览图" aria-label="查看个人作品集网站预览图">
                 <img
                   class="project-preview__image"
                   src="assets/project-portfolio-preview.webp"
@@ -272,7 +272,7 @@
                   loading="lazy"
                   decoding="async"
                 />
-              </div>
+              </button>
             </div>
             <div class="project-card__body">
               <span class="project-type">Portfolio</span>
@@ -285,6 +285,7 @@
               </div>
               <div class="project-card__links">
                 <a href="project-portfolio.html">项目详情</a>
+                <a href="https://yusky521.onrender.com/" target="_blank" rel="noreferrer">在线预览</a>
                 <a href="https://github.com/Yusky520/my-website" target="_blank" rel="noreferrer">源码</a>
               </div>
             </div>
@@ -465,6 +466,13 @@
       </section>
     </main>
 
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure">
+        <img id="lightbox-image" src="" alt="" />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+    </div>
     <footer class="site-footer">
       <div>
         <p>© 2026 Yusky521</p>

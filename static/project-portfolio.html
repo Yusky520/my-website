@@ -30,6 +30,13 @@
     <main class="page subpage">
       <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / PORTFOLIO</p><h1>把个人主页做成一个可以持续更新的作品集。</h1><p>这个项目围绕玻璃质感、动态背景、响应式布局和轻量交互展开，目标是让内容保持安静，但重点足够清晰。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
       <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PREVIEW</p>
+          <h2>实际页面预览</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/project-portfolio-preview.webp" data-lightbox-alt="个人作品集网站首页预览图" aria-label="查看个人作品集网站大图">
+            <img class="project-preview__image" src="assets/project-portfolio-preview.webp" alt="个人作品集网站首页预览图" width="1280" height="720" loading="lazy" decoding="async" />
+          </button>
+        </article>
         <article class="panel glass detail-card reveal"><p class="section-label">OVERVIEW</p><h2>项目概览</h2><p>页面使用原生 HTML、CSS 和 JavaScript 构建，不依赖后端数据库，适合部署到 GitHub Pages 或 Render 静态站点。</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></article>
         <article class="panel glass detail-card reveal"><p class="section-label">PROCESS</p><h2>实现思路</h2><p>先确定信息层级，再完成结构和响应式布局，最后补充动效、交互和细节校验。每一个模块都尽量保持独立，方便之后继续维护。</p><pre class="code-block">1. 明确页面目标
 2. 拆分结构与组件
@@ -38,6 +45,13 @@
         <article class="panel glass detail-card reveal"><p class="section-label">NEXT</p><h2>下一步</h2><p>继续补充真实截图、运行记录和更完整的项目数据，让这张卡片从展示页逐步变成真正的案例页。</p></article>
       </section>
     </main>
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure">
+        <img id="lightbox-image" src="" alt="" />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+    </div>
     <footer class="site-footer"><div><p>© 2026 Yusky521</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
     <script src="app.js" defer></script>
   </body>

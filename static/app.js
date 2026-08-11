@@ -35,6 +35,11 @@ const dateToTimestamp = document.getElementById("date-to-timestamp");
 const timestampOutput = document.getElementById("timestamp-output");
 const timestampClear = document.getElementById("timestamp-clear");
 const timestampCopy = document.getElementById("timestamp-copy");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const lightboxCaption = document.getElementById("lightbox-caption");
+const lightboxClose = document.getElementById("lightbox-close");
+const lightboxTriggers = Array.from(document.querySelectorAll(".lightbox-trigger"));
 
 let toastTimer = null;
 let activeSlide = 0;
@@ -154,6 +159,87 @@ function setupBackToTop() {
   toggle();
 }
 
+function setupPageReturn() {
+  if (!document.body.classList.contains("page-body")) {
+    return;
+  }
+
+  const pageReturn = document.createElement("button");
+  pageReturn.className = "page-return";
+  pageReturn.type = "button";
+  pageReturn.setAttribute("aria-label", "返回上一页");
+  pageReturn.innerHTML = "<span aria-hidden=\"true\">←</span><span>返回上一页</span>";
+
+  pageReturn.addEventListener("click", () => {
+    let sameSiteReferrer = false;
+    try {
+      sameSiteReferrer = Boolean(document.referrer) && new URL(document.referrer).origin === window.location.origin;
+    } catch (error) {
+      sameSiteReferrer = false;
+    }
+
+    if (sameSiteReferrer && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+
+    window.location.href = "index.html#home";
+  });
+
+  document.body.appendChild(pageReturn);
+}
+
+function setupLightbox() {
+  if (!lightbox || !lightboxImage || !lightboxClose || !lightboxTriggers.length) {
+    return;
+  }
+
+  let lastTrigger = null;
+
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.classList.remove("lightbox-open");
+    lightboxImage.removeAttribute("src");
+    lightboxImage.alt = "";
+    if (lightboxCaption) {
+      lightboxCaption.textContent = "";
+    }
+    lastTrigger?.focus();
+  };
+
+  const openLightbox = (trigger) => {
+    const source = trigger.dataset.lightboxSrc;
+    if (!source) {
+      return;
+    }
+
+    lastTrigger = trigger;
+    lightboxImage.src = source;
+    lightboxImage.alt = trigger.dataset.lightboxAlt || "";
+    if (lightboxCaption) {
+      lightboxCaption.textContent = trigger.dataset.lightboxAlt || "";
+    }
+    lightbox.hidden = false;
+    document.body.classList.add("lightbox-open");
+    lightboxClose.focus();
+  };
+
+  lightboxTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => openLightbox(trigger));
+  });
+
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  });
+}
 function setupTheme() {
   if (!themeToggle) {
     return;
@@ -447,6 +533,8 @@ setupReveal();
 setupEmailCard();
 setupNav();
 setupBackToTop();
+setupPageReturn();
+setupLightbox();
 setupTheme();
 setupCarousel();
 setupProjectFilter();
