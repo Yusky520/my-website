@@ -36,7 +36,7 @@ const timestampOutput = document.getElementById("timestamp-output");
 const timestampClear = document.getElementById("timestamp-clear");
 const timestampCopy = document.getElementById("timestamp-copy");
 const beijingClock = document.getElementById("beijing-clock");
-const timestampPreset = document.getElementById("timestamp-preset");
+const beijingDate = document.getElementById("beijing-date");
 const timestampNow = document.getElementById("timestamp-now");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
@@ -516,24 +516,6 @@ function parseBeijingInput(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function createBeijingPresetDate(dayOffset, hour, minute = 0, second = 0) {
-  const now = getBeijingParts();
-  return new Date(Date.UTC(now.year, now.month - 1, now.day + dayOffset, hour, minute, second) - BEIJING_OFFSET_MS);
-}
-
-function getTimestampPreset(value) {
-  const presets = {
-    "today-start": () => createBeijingPresetDate(0, 0),
-    "today-morning": () => createBeijingPresetDate(0, 8),
-    "today-noon": () => createBeijingPresetDate(0, 12),
-    "today-evening": () => createBeijingPresetDate(0, 18),
-    "today-end": () => createBeijingPresetDate(0, 23, 59, 59),
-    "yesterday-start": () => createBeijingPresetDate(-1, 0),
-    "tomorrow-start": () => createBeijingPresetDate(1, 0),
-  };
-  return presets[value]?.() || null;
-}
-
 function setTimestampFromBeijingDate(date) {
   if (!date || Number.isNaN(date.getTime())) {
     return;
@@ -552,7 +534,11 @@ function setupTimestampTool() {
 
   const updateBeijingClock = () => {
     if (beijingClock) {
-      beijingClock.textContent = formatBeijingDateTime(new Date()).slice(11);
+      const current = formatBeijingDateTime(new Date());
+      beijingClock.textContent = current.slice(11);
+      if (beijingDate) {
+        beijingDate.textContent = current.slice(0, 10);
+      }
     }
   };
 
@@ -561,17 +547,8 @@ function setupTimestampTool() {
 
   timestampNow?.addEventListener("click", () => {
     setTimestampFromBeijingDate(new Date());
-    if (timestampPreset) {
-      timestampPreset.value = "";
-    }
   });
 
-  timestampPreset?.addEventListener("change", () => {
-    const date = getTimestampPreset(timestampPreset.value);
-    if (date) {
-      setTimestampFromBeijingDate(date);
-    }
-  });
 
   timestampToDate?.addEventListener("click", () => {
     const raw = timestampInput.value.trim();
@@ -604,9 +581,6 @@ function setupTimestampTool() {
   timestampClear?.addEventListener("click", () => {
     timestampInput.value = "";
     dateInput.value = "";
-    if (timestampPreset) {
-      timestampPreset.value = "";
-    }
     timestampOutput.textContent = "转换结果会显示在这里";
   });
 

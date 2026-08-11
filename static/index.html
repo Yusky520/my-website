@@ -407,27 +407,16 @@
             <p class="section-label">TIME TOOL</p>
             <h3>时间戳 ↔ 日期</h3>
             <div class="time-tool__realtime">
-              <div>
+              <div class="time-tool__now-copy">
                 <span class="time-tool__clock-label">实时北京时间</span>
                 <strong class="time-tool__clock" id="beijing-clock" aria-live="polite">--:--:--</strong>
+                <small class="time-tool__date" id="beijing-date">----/--/--</small>
               </div>
-              <button type="button" class="tool-btn tool-btn--compact" id="timestamp-now">填入现在</button>
+              <button type="button" class="tool-btn tool-btn--compact" id="timestamp-now">填入当前北京时间</button>
             </div>
-            <div class="tool-field time-tool__preset-field">
-              <label for="timestamp-preset">常用时间段</label>
-              <select id="timestamp-preset" class="tool-input">
-                <option value="">选择后自动填入</option>
-                <option value="today-start">今天 00:00</option>
-                <option value="today-morning">今天 08:00</option>
-                <option value="today-noon">今天 12:00</option>
-                <option value="today-evening">今天 18:00</option>
-                <option value="today-end">今天 23:59</option>
-                <option value="yesterday-start">昨天 00:00</option>
-                <option value="tomorrow-start">明天 00:00</option>
-              </select>
-            </div>
+            <p class="time-tool__hint">支持 Unix 秒级和毫秒级时间戳，日期输入统一按北京时间计算。</p>
             <div class="tool-field">
-              <label for="timestamp-input">时间戳（秒 / 毫秒）</label>
+              <label for="timestamp-input">Unix 时间戳（秒 / 毫秒）</label>
               <input id="timestamp-input" class="tool-input" type="number" inputmode="numeric" placeholder="例如 1780000000" />
             </div>
             <button type="button" class="tool-btn" id="timestamp-to-date">转换为北京时间</button>

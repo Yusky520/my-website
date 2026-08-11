@@ -1920,9 +1920,6 @@ body.lightbox-open {
   letter-spacing: 0.08em;
 }
 
-.time-tool__preset-field {
-  margin-top: 0.1rem;
-}
 
 .tool-btn--compact {
   min-width: auto;
@@ -2023,4 +2020,26 @@ body.lightbox-open {
   .site-nav__time-value {
     animation: none !important;
   }
+}
+.time-tool__now-copy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.time-tool__date {
+  color: var(--soft);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.time-tool__hint {
+  margin: -0.15rem 0 0.1rem;
+  color: var(--soft);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.time-tool-card > #timestamp-to-date {
+  width: 100%;
 }
