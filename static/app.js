@@ -17,6 +17,10 @@ const emailCardHint = document.getElementById("email-card-hint");
 const emailCardValue = document.getElementById("email-card-value");
 const projectCards = Array.from(document.querySelectorAll(".project-card"));
 const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+const projectViewport = document.getElementById("project-viewport");
+const projectPrev = document.getElementById("projects-prev");
+const projectNext = document.getElementById("projects-next");
+const projectProgress = document.getElementById("project-progress");
 const hexInput = document.getElementById("hex-input");
 const colorPicker = document.getElementById("color-picker");
 const redInput = document.getElementById("red-input");
@@ -369,6 +373,44 @@ function setupProjectFilter() {
     return;
   }
 
+  const getVisibleCards = () => projectCards.filter((card) => !card.classList.contains("is-filtered-out"));
+
+  const updateProjectRail = () => {
+    if (!projectViewport) {
+      return;
+    }
+
+    const maxScroll = Math.max(projectViewport.scrollWidth - projectViewport.clientWidth, 0);
+    const progressValue = maxScroll === 0 ? 1 : projectViewport.scrollLeft / maxScroll;
+    const visibleCards = getVisibleCards();
+
+    if (projectPrev) {
+      projectPrev.disabled = projectViewport.scrollLeft <= 8 || visibleCards.length <= 1;
+    }
+
+    if (projectNext) {
+      projectNext.disabled = projectViewport.scrollLeft >= maxScroll - 8 || visibleCards.length <= 1;
+    }
+
+    if (projectProgress) {
+      const viewportRatio = projectViewport.scrollWidth > 0 ? projectViewport.clientWidth / projectViewport.scrollWidth : 1;
+      const width = Math.min(Math.max(viewportRatio * 100, 18), 100);
+      projectProgress.style.width = `${width}%`;
+      projectProgress.style.transform = `translateX(${(100 - width) * progressValue}%)`;
+    }
+
+    projectViewport.classList.toggle("is-compact", visibleCards.length <= 2);
+  };
+
+  const scrollProjectsByPage = (direction) => {
+    if (!projectViewport) {
+      return;
+    }
+
+    const amount = Math.max(projectViewport.clientWidth * 0.82, 280) * direction;
+    projectViewport.scrollBy({ left: amount, behavior: "smooth" });
+  };
+
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const filter = button.dataset.filter || "all";
@@ -377,8 +419,19 @@ function setupProjectFilter() {
         const visible = filter === "all" || card.dataset.category === filter;
         card.classList.toggle("is-filtered-out", !visible);
       });
+
+      if (projectViewport) {
+        projectViewport.scrollTo({ left: 0, behavior: "smooth" });
+      }
+      window.setTimeout(updateProjectRail, 180);
     });
   });
+
+  projectPrev?.addEventListener("click", () => scrollProjectsByPage(-1));
+  projectNext?.addEventListener("click", () => scrollProjectsByPage(1));
+  projectViewport?.addEventListener("scroll", updateProjectRail, { passive: true });
+  window.addEventListener("resize", updateProjectRail);
+  updateProjectRail();
 }
 
 function normalizeHex(value) {

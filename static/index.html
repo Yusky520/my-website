@@ -258,9 +258,22 @@
           <button class="filter-btn" type="button" data-filter="web">前端</button>
           <button class="filter-btn" type="button" data-filter="vision">视觉</button>
           <button class="filter-btn" type="button" data-filter="tools">工具</button>
-<button class="filter-btn" type="button" data-filter="qt">Qt / C++</button>
+          <button class="filter-btn" type="button" data-filter="qt">Qt / C++</button>
         </div>
-        <div class="project-list">
+        <div class="project-carousel">
+          <div class="project-carousel__top">
+            <p class="project-carousel__hint">Slide to explore projects</p>
+            <div class="project-carousel__controls" aria-label="Project slider controls">
+              <button class="project-carousel__button" type="button" id="projects-prev" aria-label="Previous project">
+                <span aria-hidden="true">&#8249;</span>
+              </button>
+              <button class="project-carousel__button" type="button" id="projects-next" aria-label="Next project">
+                <span aria-hidden="true">&#8250;</span>
+              </button>
+            </div>
+          </div>
+          <div class="project-carousel__viewport" id="project-viewport" tabindex="0" aria-label="Project slider list">
+            <div class="project-list">
           <article class="project-card glass" data-category="web">
             <div class="project-card__shot project-card__shot--1">
               <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/project-portfolio-preview.webp" data-lightbox-alt="个人作品集网站首页预览图" aria-label="查看个人作品集网站预览图">
@@ -393,7 +406,13 @@
                 <a href="project-gobang.html">项目详情</a>
               </div>
             </div>
-          </article></div>
+          </article>
+            </div>
+          </div>
+          <div class="project-carousel__progress" aria-hidden="true">
+            <span class="project-carousel__progress-bar" id="project-progress"></span>
+          </div>
+        </div>
       </section>
 
       <section id="tools" class="section reveal">
