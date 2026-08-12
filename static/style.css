@@ -2043,3 +2043,8 @@ body.lightbox-open {
 .time-tool-card > #timestamp-to-date {
   width: 100%;
 }
+.project-card__shot--4 {
+  background:
+    radial-gradient(circle at 24% 22%, rgba(125, 224, 195, 0.18), transparent 34%),
+    linear-gradient(135deg, rgba(22, 54, 51, 0.74), rgba(6, 10, 18, 0.08));
+}
