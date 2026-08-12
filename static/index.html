@@ -172,12 +172,23 @@
         <div class="about-grid">
           <article class="panel large-panel glass">
             <p class="section-label">PROFILE</p>
-            <h3>一个正在长成作品集的个人主页</h3>
-            <p>我主要在学习 Python、C++、Qt 和计算机视觉，也在持续整理个人项目、技术笔记和作品展示。</p>
-            <p>这个站点会继续按作品集的方式更新，保持干净、安静、可读，并让重点内容一眼可见。</p>
+            <h3>把学习、练习和项目慢慢整理成自己的内容。</h3>
+            <p>我主要在学习 Python、C++、Qt、FastAPI 和计算机视觉，也在持续整理个人项目、技术笔记和作品展示。</p>
+            <p>Python 方向主要跟着小甲鱼学习零基础、高阶模块、二维码、OpenCV、上传代码和爬虫；C++ 与 FastAPI 结合黑马程序员课程继续补完整体开发思路。</p>
+            <div class="about-summary">
+              <div class="about-summary__item">
+                <strong>学习重点</strong>
+                <span>Python 基础、接口开发、计算机视觉、C++ 工程练习</span>
+              </div>
+              <div class="about-summary__item">
+                <strong>资料来源</strong>
+                <span>B 站课程、本地 C++ 课件作业和自己的代码练习</span>
+              </div>
+            </div>
             <div class="note-list">
               <div class="note-item">偏好克制的视觉语言和清晰的信息层级。</div>
-              <div class="note-item">正在持续练习视觉基础、目标检测和界面设计。</div>
+              <div class="note-item">正在持续练习视觉基础、目标检测、接口开发和桌面程序整理。</div>
+              <div class="note-item">希望把每次学习都慢慢沉淀成能回看的项目和笔记。</div>
             </div>
           </article>
 
@@ -185,36 +196,22 @@
             <article class="panel glass">
               <p class="section-label">SKILL STACK</p>
               <h3>当前技能</h3>
-              <div class="skill-grid">
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--python">Py</span>
-                  <strong>Python</strong>
-                  <span>脚本 / 自动化</span>
+              <div class="skill-lanes">
+                <div class="skill-lane">
+                  <div class="skill-lane__head"><span class="skill-lane__dot skill-lane__dot--python"></span><strong>Python</strong></div>
+                  <div class="skill-lane__chips"><span>基础语法</span><span>高阶模块</span><span>二维码</span><span>爬虫</span></div>
                 </div>
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--cpp">C+</span>
-                  <strong>C++</strong>
-                  <span>基础语法 / 逻辑</span>
+                <div class="skill-lane">
+                  <div class="skill-lane__head"><span class="skill-lane__dot skill-lane__dot--backend"></span><strong>FastAPI</strong></div>
+                  <div class="skill-lane__chips"><span>路由</span><span>依赖注入</span><span>Pydantic</span><span>异步</span><span>ORM</span></div>
                 </div>
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--qt">Qt</span>
-                  <strong>Qt</strong>
-                  <span>桌面界面</span>
+                <div class="skill-lane">
+                  <div class="skill-lane__head"><span class="skill-lane__dot skill-lane__dot--vision"></span><strong>计算机视觉</strong></div>
+                  <div class="skill-lane__chips"><span>OpenCV</span><span>PyTorch</span><span>YOLOv8</span></div>
                 </div>
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--cv">CV</span>
-                  <strong>OpenCV</strong>
-                  <span>图像处理</span>
-                </div>
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--torch">Pt</span>
-                  <strong>PyTorch</strong>
-                  <span>简单模型</span>
-                </div>
-                <div class="skill-card">
-                  <span class="skill-card__icon skill-card__icon--yolo">08</span>
-                  <strong>YOLOv8</strong>
-                  <span>目标检测</span>
+                <div class="skill-lane">
+                  <div class="skill-lane__head"><span class="skill-lane__dot skill-lane__dot--cpp"></span><strong>C++ / Qt</strong></div>
+                  <div class="skill-lane__chips"><span>基础语法</span><span>类与对象</span><span>STL</span><span>文件操作</span><span>Qt 课件</span></div>
                 </div>
               </div>
             </article>
@@ -223,23 +220,14 @@
               <p class="section-label">HOBBIES</p>
               <h3>兴趣爱好</h3>
               <div class="chip-list">
-                <span class="chip">听音乐</span>
-                <span class="chip">玩游戏</span>
-                <span class="chip">运动</span>
-                <span class="chip">健身</span>
+                <span class="chip">听音乐</span><span class="chip">玩游戏</span><span class="chip">运动</span><span class="chip">健身</span>
               </div>
             </article>
 
             <article class="panel glass contact-panel">
               <p class="section-label">CONTACT</p>
               <h3>联系方式</h3>
-              <button class="link-card link-card--email" id="email-card" type="button" aria-expanded="false">
-                <strong>Email</strong>
-                <span class="link-card__meta">
-                  <span class="link-card__hint" id="email-card-hint">点击查看邮箱</span>
-                  <span class="link-card__value" id="email-card-value" hidden>3294850673@qq.com</span>
-                </span>
-              </button>
+              <button class="link-card link-card--email" id="email-card" type="button" aria-expanded="false"><strong>Email</strong><span class="link-card__meta"><span class="link-card__hint" id="email-card-hint">点击查看邮箱</span><span class="link-card__value" id="email-card-value" hidden>3294850673@qq.com</span></span></button>
             </article>
           </div>
         </div>
@@ -344,24 +332,17 @@
 
           <article class="project-card glass" data-category="tools">
             <div class="project-card__shot project-card__shot--3">
-              <div class="project-preview project-preview--3">
-                <div class="project-preview__bar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="project-preview__body">
-                  <div class="project-preview__rail"></div>
-                  <div class="project-preview__canvas">
-                    <div class="project-preview__hero"></div>
-                    <div class="project-preview__grid">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/project-tools-preview.png" data-lightbox-alt="Utilities toolkit preview" aria-label="View utilities toolkit preview">
+                <img
+                  class="project-preview__image"
+                  src="assets/project-tools-preview.png"
+                  alt="Utilities toolkit preview"
+                  width="1549"
+                  height="750"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
             </div>
             <div class="project-card__body">
               <span class="project-type">Utilities</span>

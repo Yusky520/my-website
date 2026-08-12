@@ -373,6 +373,11 @@ function setupProjectFilter() {
     return;
   }
 
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let dragDistance = 0;
+
   const getVisibleCards = () => projectCards.filter((card) => !card.classList.contains("is-filtered-out"));
 
   const updateProjectRail = () => {
@@ -411,6 +416,16 @@ function setupProjectFilter() {
     projectViewport.scrollBy({ left: amount, behavior: "smooth" });
   };
 
+  const stopDrag = () => {
+    if (!projectViewport) {
+      return;
+    }
+
+    isDragging = false;
+    dragDistance = 0;
+    projectViewport.classList.remove("is-dragging");
+  };
+
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const filter = button.dataset.filter || "all";
@@ -430,6 +445,52 @@ function setupProjectFilter() {
   projectPrev?.addEventListener("click", () => scrollProjectsByPage(-1));
   projectNext?.addEventListener("click", () => scrollProjectsByPage(1));
   projectViewport?.addEventListener("scroll", updateProjectRail, { passive: true });
+  projectViewport?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      scrollProjectsByPage(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      scrollProjectsByPage(1);
+    }
+  });
+  projectViewport?.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartScroll = projectViewport.scrollLeft;
+    dragDistance = 0;
+    projectViewport.classList.add("is-dragging");
+    projectViewport.setPointerCapture?.(event.pointerId);
+  });
+  projectViewport?.addEventListener("pointermove", (event) => {
+    if (!isDragging || !projectViewport) {
+      return;
+    }
+
+    const delta = event.clientX - dragStartX;
+    dragDistance = Math.max(dragDistance, Math.abs(delta));
+    projectViewport.scrollLeft = dragStartScroll - delta;
+  });
+  projectViewport?.addEventListener("pointerup", stopDrag);
+  projectViewport?.addEventListener("pointercancel", stopDrag);
+  projectViewport?.addEventListener("pointerleave", (event) => {
+    if (isDragging && event.pointerType === "mouse") {
+      stopDrag();
+    }
+  });
+  projectViewport?.querySelectorAll("a, button").forEach((element) => {
+    element.addEventListener("click", (event) => {
+      if (dragDistance > 8) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+  });
   window.addEventListener("resize", updateProjectRail);
   updateProjectRail();
 }

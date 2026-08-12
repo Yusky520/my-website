@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#060b16" />
-    <meta name="description" content="Yusky521 的技术笔记，整理 Python、OpenCV、PyTorch 和 YOLOv8 的学习实验与实践记录。" />
+    <meta name="description" content="Yusky521 的学习档案，整理 Python、OpenCV、FastAPI、C++ 和 Qt 的学习路线与实践内容。" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://yusky521.onrender.com/blog.html" />
-    <meta property="og:title" content="Yusky521 | 前端与计算机视觉技术笔记" />
-    <meta property="og:description" content="Yusky521 的技术笔记，整理 Python、OpenCV、PyTorch 和 YOLOv8 的学习实验与实践记录。" />
+    <meta property="og:title" content="Yusky521 | Python、视觉、C++ 与 Qt 学习档案" />
+    <meta property="og:description" content="整理 Python、OpenCV、FastAPI、C++ 和 Qt 的学习路线与实践内容。" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://yusky521.onrender.com/blog.html" />
     <meta property="og:image" content="https://yusky521.onrender.com/assets/avatar.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Yusky521 | 前端与计算机视觉技术笔记" />
-    <meta name="twitter:description" content="Yusky521 的技术笔记，整理 Python、OpenCV、PyTorch 和 YOLOv8 的学习实验与实践记录。" />
-    <title>Yusky521 | 前端与计算机视觉技术笔记</title>
+    <meta name="twitter:title" content="Yusky521 | 学习档案" />
+    <meta name="twitter:description" content="Python、OpenCV、FastAPI、C++ 和 Qt 的学习路线与实践内容。" />
+    <title>Yusky521 | 学习档案</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -26,27 +26,26 @@
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
     <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
-    <header class="site-header glass">
-      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
-      <nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav>
-    </header>    <main class="page subpage">
-      <section class="subpage-hero glass reveal"><p class="section-label">BLOG / NOTES</p><h1>把练习留下来，知识才会慢慢变成自己的。</h1><p>这里整理 OpenCV、Python 和目标检测学习过程中的小结，用更容易回看的方式记录每一次实验。</p><a class="ghost-btn page-back" href="index.html">返回首页</a></section>
-      <section class="subpage-grid">
-        <article class="panel glass note-card reveal"><time datetime="2026-08-08">2026.08.08</time><h2>OpenCV 视觉基础：从像素开始</h2><p>先理解图像的尺寸、通道和颜色空间，再进入阈值、轮廓与简单特征提取。</p><pre class="code-block">import cv2
+    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
+    <main class="page subpage">
+      <section class="subpage-hero glass reveal"><p class="section-label">BLOG / LEARNING ARCHIVE</p><h1>把学过的内容整理成自己的路线。</h1><p>这里记录我从 Python 基础、OpenCV 视觉处理，到 FastAPI 后端、C++ 基础和 Qt 课件练习的学习过程。</p><a class="ghost-btn page-back" href="index.html">返回首页</a></section>
+      <section class="learning-sources glass reveal"><div><p class="section-label">LEARNING SOURCES</p><h2>课程与资料来源</h2></div><div class="learning-source-list"><a class="learning-source" href="https://www.bilibili.com/video/BV1c4411e77t/" target="_blank" rel="noreferrer"><span class="learning-source__index">01</span><span><strong>小甲鱼 / Python</strong><small>零基础入门、高阶模块、二维码、OpenCV、上传代码和爬虫</small></span></a><div class="learning-source learning-source--local"><span class="learning-source__index">02</span><span><strong>黑马程序员 / FastAPI</strong><small>路由、依赖注入、Pydantic、异步编程、ORM、项目拆分、部署与接口测试</small></span></div><div class="learning-source learning-source--local"><span class="learning-source__index">03</span><span><strong>黑马程序员 / C++</strong><small>从 0 到 1 入门编程全集，配合本地课件、作业和代码练习</small></span></div><div class="learning-source learning-source--local"><span class="learning-source__index">04</span><span><strong>Qt / QT课件</strong><small>E:/Yter/reinovostudent/Qt/QT课件，以及 Qt 相关作业、QTproject 和 GobangChess 项目</small></span></div></div></section>
+      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">LEARNING ROUTE</p><h2>当前学习方向</h2></div><p class="section-head__note">只整理真实学习内容</p></div><div class="learning-grid"><article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">01</span><span class="project-type">PYTHON</span></div><h3>从基础语法到实用脚本</h3><p>零基础、高阶模块、二维码、文件上传和爬虫，逐步把 Python 语法变成能运行的小工具。</p><div class="tags"><span class="tag">基础</span><span class="tag">模块</span><span class="tag">二维码</span><span class="tag">爬虫</span></div><pre class="code-block">profile = {
+    "language": "Python",
+    "focus": ["modules", "crawler", "tools"]
+}</pre></article><article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">02</span><span class="project-type">OPENCV</span></div><h3>从图像基础进入计算机视觉</h3><p>学习图像读取、颜色空间、像素处理、阈值和轮廓，让每个视觉实验都有清晰的输入与结果。</p><div class="tags"><span class="tag">图像读取</span><span class="tag">颜色空间</span><span class="tag">阈值</span><span class="tag">轮廓</span></div><pre class="code-block">import cv2
 image = cv2.imread("sample.png")
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</pre></article>
-        <article class="panel glass note-card reveal"><time datetime="2026-08-06">2026.08.06</time><h2>PyTorch 简单模型：先跑通训练闭环</h2><p>数据、模型、损失函数和优化器组成了最小训练闭环。先把流程跑通，再增加复杂结构。</p><pre class="code-block">loss = criterion(prediction, target)
-optimizer.zero_grad()
-loss.backward()
-optimizer.step()</pre></article>
-        <article class="panel glass note-card reveal"><time datetime="2026-08-03">2026.08.03</time><h2>YOLOv8 目标检测：先看懂结果</h2><p>训练前确认类别、标注格式和输入尺寸，推理后观察置信度、误检和漏检。</p><pre class="code-block">from ultralytics import YOLO
-model = YOLO("yolov8n.pt")
-results = model("street.jpg")</pre></article>
-        <article class="panel glass note-card reveal"><time datetime="2026-07-30">2026.07.30</time><h2>学习记录的整理方式</h2><p>每次只记录一个问题、一个实验和一个结论，让笔记可以直接帮助下一次排错。</p></article>
-      </section>
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</pre></article><article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">03</span><span class="project-type">FASTAPI</span></div><h3>把 Python 接到真实接口</h3><p>学习路由、依赖注入、Pydantic、异步编程、ORM、项目拆分、模型训练、部署和接口测试。</p><div class="tags"><span class="tag">路由</span><span class="tag">依赖注入</span><span class="tag">Pydantic</span><span class="tag">异步</span><span class="tag">ORM</span></div><pre class="code-block">from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}</pre></article><article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">04</span><span class="project-type">C++ / QT</span></div><h3>从 C++ 基础到 Qt 项目练习</h3><p>整理数据类型、流程控制、函数、数组指针、类对象、继承、STL、异常、线程、文件操作和 Qt 课件。</p><div class="tags"><span class="tag">类与对象</span><span class="tag">指针引用</span><span class="tag">STL</span><span class="tag">线程</span><span class="tag">Qt</span></div><pre class="code-block">std::vector&lt;int&gt; values{4, 6, 1, 9};
+std::sort(values.begin(), values.end());</pre></article></div></section>
+      <section class="learning-detail-grid reveal"><article class="panel glass learning-detail"><p class="section-label">C++ MATERIAL MAP</p><h2>本地 C++ 课件与作业</h2><div class="learning-detail__list"><div><strong>基础阶段</strong><span>绪论、数据类型、运算符、条件判断、循环、函数</span></div><div><strong>底层与数据组织</strong><span>数组、指针、引用、字符串、结构体、共用体、枚举</span></div><div><strong>面向对象</strong><span>类和对象、继承与派生、封装、多态、命名空间</span></div><div><strong>标准库与工程</strong><span>string、模板、STL、异常处理、线程、文件操作、静态库与动态库</span></div></div></article><article class="panel glass learning-detail"><p class="section-label">QT MATERIAL MAP</p><h2>Qt 课件与项目练习</h2><div class="learning-detail__list"><div><strong>QT课件</strong><span>E:/Yter/reinovostudent/Qt/QT课件</span></div><div><strong>项目练习</strong><span>QTproject 和 GobangChess 等 Qt 方向练习</span></div><div><strong>已展示项目</strong><span>五子棋桌面项目已经整理到网站作品区</span></div></div></article></section>
     </main>
-    <footer class="site-footer"><div><p>© 2026 Yusky521</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <footer class="site-footer"><div><p>&#169; 2026 Yusky521</p><p>Built with HTML &#183; CSS &#183; JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
     <script src="app.js" defer></script>
   </body>
 </html>
