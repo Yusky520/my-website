@@ -630,6 +630,32 @@ textarea {
   scroll-snap-align: start;
 }
 
+.project-card {
+  cursor: default;
+}
+
+.project-card__shot {
+  cursor: zoom-in;
+}
+
+.project-card__body {
+  cursor: pointer;
+}
+
+.project-card__body > * {
+  pointer-events: none;
+}
+
+.project-card__links,
+.project-card__links * {
+  pointer-events: auto;
+}
+
+.project-card__links,
+.project-card__links * {
+  cursor: pointer;
+}
+
 .project-card__shot {
   min-height: 190px;
   border-bottom: 1px solid var(--border-soft);
@@ -1601,9 +1627,27 @@ body.theme-light .site-toast {
 }
 
 .skill-lanes {
-  display: grid;
-  gap: 0.8rem;
+  max-height: 26rem;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(157, 214, 255, 0.34) rgba(255, 255, 255, 0.04);
 }
+
+.skill-lanes::-webkit-scrollbar {
+  width: 6px;
+}
+
+.skill-lanes::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.skill-lanes::-webkit-scrollbar-thumb {
+  background: rgba(157, 214, 255, 0.34);
+  border-radius: 999px;
+}
+
 
 .skill-lane {
   display: grid;

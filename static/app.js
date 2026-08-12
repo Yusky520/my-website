@@ -252,7 +252,11 @@ function setupLightbox() {
   };
 
   lightboxTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => openLightbox(trigger));
+    trigger.addEventListener("dblclick", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openLightbox(trigger);
+    });
   });
 
   lightboxClose.addEventListener("click", closeLightbox);
@@ -379,6 +383,44 @@ function setupProjectFilter() {
   let dragDistance = 0;
 
   const getVisibleCards = () => projectCards.filter((card) => !card.classList.contains("is-filtered-out"));
+  const updateProjectHash = (filter) => {
+    const nextHash = filter === "all" ? "#projects" : `#projects-${filter}`;
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", nextHash);
+    }
+  };
+
+  const moveToFirstVisibleCard = (behavior = "smooth") => {
+    const firstCard = getVisibleCards()[0];
+    if (!projectViewport || !firstCard) {
+      return;
+    }
+
+    projectViewport.scrollTo({
+      left: Math.max(firstCard.offsetLeft - 2, 0),
+      behavior
+    });
+  };
+
+  const applyFilter = (filter, behavior = "smooth", shouldUpdateHash = true) => {
+    const targetFilter = filterButtons.some((button) => button.dataset.filter === filter) ? filter : "all";
+    const activeButton = filterButtons.find((button) => button.dataset.filter === targetFilter);
+
+    filterButtons.forEach((button) => button.classList.toggle("is-active", button === activeButton));
+    projectCards.forEach((card) => {
+      const visible = targetFilter === "all" || card.dataset.category === targetFilter;
+      card.classList.toggle("is-filtered-out", !visible);
+    });
+
+    if (shouldUpdateHash) {
+      updateProjectHash(targetFilter);
+    }
+
+    window.requestAnimationFrame(() => {
+      moveToFirstVisibleCard(behavior);
+      updateProjectRail();
+    });
+  };
 
   const updateProjectRail = () => {
     if (!projectViewport) {
@@ -428,17 +470,7 @@ function setupProjectFilter() {
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const filter = button.dataset.filter || "all";
-      filterButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-      projectCards.forEach((card) => {
-        const visible = filter === "all" || card.dataset.category === filter;
-        card.classList.toggle("is-filtered-out", !visible);
-      });
-
-      if (projectViewport) {
-        projectViewport.scrollTo({ left: 0, behavior: "smooth" });
-      }
-      window.setTimeout(updateProjectRail, 180);
+      applyFilter(button.dataset.filter || "all");
     });
   });
 
@@ -491,8 +523,39 @@ function setupProjectFilter() {
       }
     }, true);
   });
+
+  projectCards.forEach((card) => {
+    const detailUrl = card.dataset.detailUrl;
+    const cardBody = card.querySelector(".project-card__body");
+
+    cardBody?.addEventListener("dblclick", (event) => {
+      if (!detailUrl || event.target.closest("a, button, input, select, textarea")) {
+        return;
+      }
+
+      window.location.href = detailUrl;
+    });
+  });
+
   window.addEventListener("resize", updateProjectRail);
   updateProjectRail();
+
+  const hashFilter = window.location.hash.match(/^#projects-(web|vision|tools|qt)$/)?.[1];
+  if (hashFilter) {
+    applyFilter(hashFilter, "auto", false);
+  }
+
+  window.addEventListener("hashchange", () => {
+    const nextFilter = window.location.hash.match(/^#projects-(web|vision|tools|qt)$/)?.[1];
+    if (nextFilter) {
+      applyFilter(nextFilter, "smooth", false);
+      return;
+    }
+
+    if (window.location.hash === "#projects") {
+      applyFilter("all", "smooth", false);
+    }
+  });
 }
 
 function normalizeHex(value) {
