@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Qt 记事本桌面项目，基于 Qt Widgets 和 C++ 实现，支持新建、打开、保存、另存为、最近文件、撤销重做和未保存退出提示。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-notepad.html" />
+    <meta property="og:title" content="Yusky521 | Qt 记事本项目" />
+    <meta property="og:description" content="基于 Qt Widgets 和 C++ 实现的桌面记事本项目。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-notepad.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/avatar.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yusky521 | Qt 记事本项目" />
+    <meta name="twitter:description" content="基于 Qt Widgets 和 C++ 实现的桌面记事本项目。" />
+    <title>Yusky521 | NotePad 记事本</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
+    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
+    <main class="page subpage">
+      <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / QT / C++</p><h1>把常用文本编辑需求做成一个顺手的桌面记事本。</h1><p>NotePad 是一个基于 Qt Widgets 和 C++ 的桌面练习项目，围绕文件读写、编辑操作、状态反馈和本地持久化做了完整整理。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PREVIEW</p>
+          <h2>主界面预览</h2>
+          <div class="project-preview project-preview--notepad detail-preview" aria-hidden="true">
+            <div class="notepad-window notepad-window--detail">
+              <div class="notepad-window__titlebar">
+                <span>无标题 - 记事本</span>
+                <span class="notepad-window__controls"><i></i><i></i><i></i></span>
+              </div>
+              <div class="notepad-window__menu">
+                <span>文件(F)</span><span>编辑(E)</span><span>格式(O)</span><span>最近文件</span>
+              </div>
+              <div class="notepad-window__toolbar">
+                <span>新建</span><span>打开</span><span>保存</span><span>撤销</span><span>重做</span><span>清空</span>
+              </div>
+              <div class="notepad-window__editor">
+                <span class="notepad-window__cursor"></span>
+                <div class="notepad-window__line"></div>
+                <div class="notepad-window__line notepad-window__line--active"></div>
+                <div class="notepad-window__line"></div>
+                <div class="notepad-window__line"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="panel glass detail-card reveal"><p class="section-label">FEATURES</p><h2>核心功能</h2><p>支持新建、打开、保存、另存为、退出，以及剪切、复制、粘贴、全选、字体设置、清空内容、撤销重做等常用编辑操作。</p><div class="tags"><span class="tag">新建 / 打开 / 保存</span><span class="tag">撤销重做</span><span class="tag">字体设置</span><span class="tag">清空内容</span></div></article>
+        <article class="panel glass detail-card reveal"><p class="section-label">DETAILS</p><h2>交互细节</h2><p>未保存内容在新建、打开或关闭窗口前会弹出确认提示；状态栏实时显示行列位置；当前行带高亮；空白文档会根据首行内容动态更新窗口标题。</p><div class="tags"><span class="tag">未保存提示</span><span class="tag">行列状态</span><span class="tag">当前行高亮</span><span class="tag">动态标题</span></div></article>
+        <article class="panel glass detail-card reveal"><p class="section-label">IMPLEMENTATION</p><h2>实现方式</h2><p>项目以 QMainWindow 作为主框架，中心区域使用自定义 QPlainTextEdit，文件操作基于 QFile、QFileDialog 和 QTextDocument 组织，最近文件记录通过 QSettings 做本地持久化。</p><pre class="code-block">1. QMainWindow 搭建菜单栏、工具栏和状态栏
+2. QFile / QFileDialog 处理打开、保存、另存为
+3. QSettings 维护最近文件与清空记录
+4. QTextDocument 联动撤销、重做和修改状态
+5. Ctrl + 滚轮实现编辑区字体缩放</pre></article>
+        <article class="panel glass detail-card reveal"><p class="section-label">HIGHLIGHTS</p><h2>项目亮点</h2><p>打开文本时会先尝试 UTF-8 解码，异常时回退到本地编码；重新打开历史文件前会复用未保存检测逻辑；保存后会同步更新文件名标题和最近文件列表。</p><div class="tags"><span class="tag">UTF-8 / Local8Bit</span><span class="tag">最近文件</span><span class="tag">编码兼容</span><span class="tag">本地持久化</span></div></article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure">
+        <img id="lightbox-image" src="" alt="" />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 Yusky521</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

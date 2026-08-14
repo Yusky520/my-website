@@ -125,10 +125,10 @@
           </div>
 
           <div class="hero-stats" aria-label="网站概览">
-            <div class="hero-stat">
-              <span class="hero-stat__label">精选项目</span>
-              <strong>03</strong>
-            </div>
+              <div class="hero-stat">
+                <span class="hero-stat__label">精选项目</span>
+                <strong>05</strong>
+              </div>
             <div class="hero-stat">
               <span class="hero-stat__label">常用技能</span>
               <strong>06</strong>
@@ -186,7 +186,7 @@
               </div>
             </div>
             <div class="note-list">
-              <div class="note-item">已完成五子棋 Qt 桌面项目的整理与展示。</div>
+              <div class="note-item">已完成五子棋与记事本 Qt 桌面项目的整理与展示。</div>
               <div class="note-item">后续优先沉淀可运行的练习、接口和视觉实验。</div>
             </div>
           </article>
@@ -345,7 +345,45 @@
               </div>
             </div>
           </article>
-        
+
+          <article id="projects-notepad" class="project-card glass" data-category="qt" data-project-anchor="notepad" data-detail-url="project-notepad.html">
+            <div class="project-card__shot project-card__shot--5">
+              <div class="project-preview project-preview--notepad" aria-hidden="true">
+                <div class="notepad-window">
+                  <div class="notepad-window__titlebar">
+                    <span>无标题 - 记事本</span>
+                    <span class="notepad-window__controls"><i></i><i></i><i></i></span>
+                  </div>
+                  <div class="notepad-window__menu">
+                    <span>文件(F)</span><span>编辑(E)</span><span>格式(O)</span><span>最近文件</span>
+                  </div>
+                  <div class="notepad-window__toolbar">
+                    <span>新建</span><span>打开</span><span>保存</span><span>撤销</span><span>重做</span><span>清空</span>
+                  </div>
+                  <div class="notepad-window__editor">
+                    <span class="notepad-window__cursor"></span>
+                    <div class="notepad-window__line"></div>
+                    <div class="notepad-window__line notepad-window__line--active"></div>
+                    <div class="notepad-window__line"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-card__body">
+              <span class="project-type">Qt / C++</span>
+              <h4>NotePad 记事本</h4>
+              <p>基于 Qt Widgets 和 C++ 实现的桌面记事本，支持文件读写、最近文件、撤销重做、字体设置和未保存退出提示。</p>
+              <div class="tags">
+                <span class="tag">Qt Widgets</span>
+                <span class="tag">QSettings</span>
+                <span class="tag">QFile</span>
+              </div>
+              <div class="project-card__links">
+                <a href="project-notepad.html">项目详情</a>
+              </div>
+            </div>
+          </article>
+
           <article id="projects-qt" class="project-card glass" data-category="qt" data-project-anchor="qt" data-detail-url="project-gobang.html">
             <div class="project-card__shot project-card__shot--4">
               <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/project-gobang-board.png" data-lightbox-alt="GobangChess Qt 五子棋棋盘界面截图" aria-label="查看 GobangChess 棋盘截图">

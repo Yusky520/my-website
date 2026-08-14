@@ -2462,3 +2462,99 @@ body.lightbox-open {
     radial-gradient(circle at 24% 22%, rgba(125, 224, 195, 0.18), transparent 34%),
     linear-gradient(135deg, rgba(22, 54, 51, 0.74), rgba(6, 10, 18, 0.08));
 }
+
+.project-card__shot--5 {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 225, 182, 0.18), transparent 34%),
+    linear-gradient(135deg, rgba(67, 49, 28, 0.74), rgba(6, 10, 18, 0.08));
+}
+
+.project-preview--notepad {
+  display: grid;
+  place-items: stretch;
+  padding: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 249, 252, 0.92));
+  overflow: hidden;
+}
+
+.notepad-window {
+  display: grid;
+  grid-template-rows: 42px 34px 42px 1fr;
+  height: 100%;
+  color: #202733;
+  background: linear-gradient(180deg, #ffffff, #f7fafc);
+}
+
+.notepad-window--detail {
+  min-height: 420px;
+}
+
+.notepad-window__titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 0.9rem;
+  background: linear-gradient(180deg, #fff8f2, #f5f5f5);
+  border-bottom: 1px solid rgba(36, 44, 56, 0.08);
+}
+
+.notepad-window__controls {
+  display: flex;
+  gap: 6px;
+}
+
+.notepad-window__controls i {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(72, 82, 96, 0.24);
+}
+
+.notepad-window__menu,
+.notepad-window__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 16px;
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(36, 44, 56, 0.08);
+  color: rgba(32, 39, 51, 0.86);
+}
+
+.notepad-window__toolbar {
+  gap: 14px;
+  color: rgba(32, 39, 51, 0.7);
+}
+
+.notepad-window__editor {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: 16px 12px 12px;
+  background: linear-gradient(180deg, #ffffff, #f9fbfe);
+}
+
+.notepad-window__line {
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 68, 88, 0.04), rgba(56, 68, 88, 0.02));
+}
+
+.notepad-window__line--active {
+  height: 20px;
+  background: linear-gradient(90deg, rgba(208, 230, 255, 0.8), rgba(225, 240, 255, 0.2));
+}
+
+.notepad-window__cursor {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  width: 2px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(58, 100, 173, 0.8);
+  box-shadow: 0 0 18px rgba(58, 100, 173, 0.25);
+}
