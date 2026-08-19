@@ -642,15 +642,6 @@ textarea {
   cursor: pointer;
 }
 
-.project-card__body > * {
-  pointer-events: none;
-}
-
-.project-card__links,
-.project-card__links * {
-  pointer-events: auto;
-}
-
 .project-card__links,
 .project-card__links * {
   cursor: pointer;
@@ -2211,6 +2202,20 @@ body::-webkit-scrollbar {
   text-align: left;
 }
 
+button.project-preview {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+button.project-preview:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .project-preview--image:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -2248,6 +2253,32 @@ body::-webkit-scrollbar {
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.lightbox__custom {
+  width: min(1120px, 100%);
+}
+
+.lightbox__custom[hidden] {
+  display: none;
+}
+
+.lightbox__custom-content {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(7, 12, 22, 0.5);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.lightbox__custom-content .project-preview--notepad,
+.lightbox__custom-content .project-preview--2 {
+  min-height: min(78vh, 760px);
+}
+
+.lightbox__custom-content .notepad-window {
+  min-height: min(78vh, 760px);
 }
 
 .lightbox__figure figcaption {
@@ -2467,6 +2498,13 @@ body.lightbox-open {
   background:
     radial-gradient(circle at 18% 22%, rgba(255, 225, 182, 0.18), transparent 34%),
     linear-gradient(135deg, rgba(67, 49, 28, 0.74), rgba(6, 10, 18, 0.08));
+}
+
+.project-card__shot--6 {
+  background:
+    radial-gradient(circle at 76% 20%, rgba(157, 214, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 18% 82%, rgba(125, 224, 195, 0.14), transparent 24%),
+    linear-gradient(135deg, rgba(28, 45, 68, 0.74), rgba(6, 10, 18, 0.08));
 }
 
 .project-preview--notepad {

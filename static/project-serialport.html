@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta
+      name="description"
+      content="SerialPort 串口调试助手项目，基于 Qt Widgets、QSerialPort 与 C++17 实现，支持 HEX 收发、定时发送、多文本循环发送、历史导入导出与状态日志。"
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-serialport.html" />
+    <meta property="og:title" content="Yusky521 | SerialPort 串口调试助手" />
+    <meta
+      property="og:description"
+      content="基于 Qt Widgets 与 QSerialPort 的本地串口调试工具。"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-serialport.html" />
+    <meta
+      property="og:image"
+      content="https://yusky521.onrender.com/assets/project-serialport-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yusky521 | SerialPort 串口调试助手" />
+    <meta
+      name="twitter:description"
+      content="支持串口自动刷新、HEX 收发、单条定时发送与多文本循环发送的 Qt 桌面工具。"
+    />
+    <title>Yusky521 | SerialPort 串口调试助手</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite">
+      <div class="loading-screen__orb" aria-hidden="true"></div>
+      <p>LOADING</p>
+    </div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+      <div class="grain"></div>
+    </div>
+
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页">
+        <span class="brand__mark"></span>
+        <span class="brand__text">Yusky521</span>
+      </a>
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="切换导航"
+        aria-controls="site-nav"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a>
+        <a href="index.html#about">关于我</a>
+        <a href="index.html#projects">作品</a>
+        <a href="blog.html">笔记</a>
+        <a href="contact.html">联系</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+          <span class="theme-toggle__dot" aria-hidden="true"></span>
+          <span class="theme-toggle__text">浅色</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / QT / SERIAL</p>
+        <h1>把日常串口联调整理成一套更顺手的桌面调试助手。</h1>
+        <p>
+          SerialPort 是一个基于 Qt Widgets、QSerialPort 和 C++17 的本地桌面工具，
+          重点围绕串口连接、收发调试、定时发送、多命令循环发送以及日志留存做了完整整理。
+        </p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PREVIEW</p>
+          <h2>主界面预览</h2>
+          <button
+            class="project-preview project-preview--image lightbox-trigger detail-preview"
+            type="button"
+            data-lightbox-src="assets/project-serialport-preview.png"
+            data-lightbox-alt="SerialPort 串口调试助手主界面截图"
+            aria-label="查看 SerialPort 串口调试助手主界面截图"
+          >
+            <img
+              class="project-preview__image"
+              src="assets/project-serialport-preview.png"
+              alt="SerialPort 串口调试助手主界面截图"
+              width="1494"
+              height="1008"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>
+            支持串口列表自动刷新、波特率与数据位设置、打开与关闭串口、
+            十六进制接收、十六进制发送、发送与接收时间戳显示、单条发送以及接收区保存。
+          </p>
+          <div class="tags">
+            <span class="tag">自动刷新串口</span>
+            <span class="tag">HEX 收发</span>
+            <span class="tag">时间戳显示</span>
+            <span class="tag">保存接收日志</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">WORKFLOW</p>
+          <h2>发送与历史管理</h2>
+          <p>
+            单条发送区域支持 Ctrl + Enter 快捷发送，可选定时发送周期；
+            历史记录区支持导入、导出和清空；状态日志会按时间持续记录串口状态、
+            收发结果和异常信息，方便后续回看联调过程。
+          </p>
+          <div class="tags">
+            <span class="tag">Ctrl + Enter</span>
+            <span class="tag">历史导入导出</span>
+            <span class="tag">状态日志</span>
+            <span class="tag">单条定时发送</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">MULTI SEND</p>
+          <h2>多文本循环发送</h2>
+          <p>
+            多文本发送表格可为每一行分别设置启用状态、HEX 模式、发送间隔、备注和发送内容，
+            程序会自动跳过未启用或空内容项，按顺序循环发送，适合固定指令集联调。
+          </p>
+          <div class="tags">
+            <span class="tag">逐行间隔控制</span>
+            <span class="tag">循环多发</span>
+            <span class="tag">备注管理</span>
+            <span class="tag">异常自动停发</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式</h2>
+          <p>
+            项目以 QMainWindow 组织整体布局，串口通信由 QSerialPort 负责，
+            串口列表通过 QSerialPortInfo 定时刷新；单条定时发送与多文本循环发送分别由 QTimer 驱动，
+            文件导入导出则基于 QFile 与 QFileDialog 完成。
+          </p>
+          <pre class="code-block">1. QSerialPort / QSerialPortInfo 处理串口连接与端口枚举
+2. QTimer 管理单条定时发送与多文本循环发送
+3. QPlainTextEdit / QTextEdit 承载收发区、历史区与状态日志
+4. QTableWidget 组织多文本命令、间隔、HEX 与备注配置
+5. QFileDialog + QFile 完成接收日志保存与历史导入导出</pre>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">HIGHLIGHTS</p>
+          <h2>项目亮点</h2>
+          <p>
+            串口异常发生时会自动停止定时发送与多发流程，并恢复按钮状态；
+            发送内容在 HEX 模式下会先校验格式再写入串口；
+            程序启动后每 500ms 自动刷新串口列表，更贴合真实硬件联调场景。
+          </p>
+          <div class="tags">
+            <span class="tag">异常联动处理</span>
+            <span class="tag">HEX 格式校验</span>
+            <span class="tag">500ms 自动刷新</span>
+            <span class="tag">桌面联调工具</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure">
+        <div class="lightbox__custom" id="lightbox-custom" hidden></div>
+        <img id="lightbox-image" src="" alt="" hidden />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <p>© 2026 Yusky521</p>
+        <p>Built with HTML · CSS · JavaScript</p>
+      </div>
+      <button class="back-to-top" id="back-to-top" type="button">回到顶部</button>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

@@ -127,7 +127,7 @@
           <div class="hero-stats" aria-label="网站概览">
               <div class="hero-stat">
                 <span class="hero-stat__label">精选项目</span>
-                <strong>05</strong>
+                <strong>06</strong>
               </div>
             <div class="hero-stat">
               <span class="hero-stat__label">常用技能</span>
@@ -186,7 +186,7 @@
               </div>
             </div>
             <div class="note-list">
-              <div class="note-item">已完成五子棋与记事本 Qt 桌面项目的整理与展示。</div>
+              <div class="note-item">已完成五子棋、记事本与串口调试助手等 Qt 桌面项目的整理与展示。</div>
               <div class="note-item">后续优先沉淀可运行的练习、接口和视觉实验。</div>
             </div>
           </article>
@@ -281,7 +281,7 @@
 
           <article id="projects-vision" class="project-card glass" data-category="vision" data-project-anchor="vision" data-detail-url="project-vision.html">
             <div class="project-card__shot project-card__shot--2">
-              <div class="project-preview project-preview--2">
+              <button class="project-preview project-preview--2 lightbox-trigger" type="button" data-lightbox-mode="markup" data-lightbox-alt="视觉学习笔记模块预览" aria-label="查看视觉学习笔记模块预览">
                 <div class="project-preview__bar">
                   <span></span>
                   <span></span>
@@ -298,7 +298,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </button>
             </div>
             <div class="project-card__body">
               <span class="project-type">Computer Vision</span>
@@ -348,7 +348,7 @@
 
           <article id="projects-notepad" class="project-card glass" data-category="qt" data-project-anchor="notepad" data-detail-url="project-notepad.html">
             <div class="project-card__shot project-card__shot--5">
-              <div class="project-preview project-preview--notepad" aria-hidden="true">
+              <button class="project-preview project-preview--notepad lightbox-trigger" type="button" data-lightbox-mode="markup" data-lightbox-alt="NotePad 记事本界面预览" aria-label="查看 NotePad 记事本界面预览">
                 <div class="notepad-window">
                   <div class="notepad-window__titlebar">
                     <span>无标题 - 记事本</span>
@@ -367,7 +367,7 @@
                     <div class="notepad-window__line"></div>
                   </div>
                 </div>
-              </div>
+              </button>
             </div>
             <div class="project-card__body">
               <span class="project-type">Qt / C++</span>
@@ -380,6 +380,35 @@
               </div>
               <div class="project-card__links">
                 <a href="project-notepad.html">项目详情</a>
+              </div>
+            </div>
+          </article>
+
+          <article id="projects-serial" class="project-card glass" data-category="qt" data-project-anchor="serial" data-detail-url="project-serialport.html">
+            <div class="project-card__shot project-card__shot--6">
+              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/project-serialport-preview.png" data-lightbox-alt="SerialPort 串口调试助手界面截图" aria-label="查看 SerialPort 串口调试助手界面截图">
+                <img
+                  class="project-preview__image"
+                  src="assets/project-serialport-preview.png"
+                  alt="SerialPort 串口调试助手界面截图"
+                  width="1494"
+                  height="1008"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            </div>
+            <div class="project-card__body">
+              <span class="project-type">Qt / Serial Tool</span>
+              <h4>SerialPort 串口调试助手</h4>
+              <p>基于 Qt Widgets 与 QSerialPort 的桌面串口工具，支持自动刷新串口、HEX 收发、定时发送、多文本循环发送和日志导出。</p>
+              <div class="tags">
+                <span class="tag">QSerialPort</span>
+                <span class="tag">HEX</span>
+                <span class="tag">QTimer</span>
+              </div>
+              <div class="project-card__links">
+                <a href="project-serialport.html">项目详情</a>
               </div>
             </div>
           </article>
@@ -533,7 +562,8 @@
     <div class="lightbox" id="lightbox" hidden>
       <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
       <figure class="lightbox__figure">
-        <img id="lightbox-image" src="" alt="" />
+        <div class="lightbox__custom" id="lightbox-custom" hidden></div>
+        <img id="lightbox-image" src="" alt="" hidden />
         <figcaption id="lightbox-caption"></figcaption>
       </figure>
     </div>

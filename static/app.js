@@ -43,6 +43,7 @@ const beijingClock = document.getElementById("beijing-clock");
 const beijingDate = document.getElementById("beijing-date");
 const timestampNow = document.getElementById("timestamp-now");
 const lightbox = document.getElementById("lightbox");
+const lightboxCustom = document.getElementById("lightbox-custom");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxCaption = document.getElementById("lightbox-caption");
 const lightboxClose = document.getElementById("lightbox-close");
@@ -223,28 +224,58 @@ function setupLightbox() {
 
   let lastTrigger = null;
 
-  const closeLightbox = () => {
-    lightbox.hidden = true;
-    document.body.classList.remove("lightbox-open");
+  const clearLightboxContent = () => {
+    lightboxImage.hidden = false;
     lightboxImage.removeAttribute("src");
     lightboxImage.alt = "";
+    if (lightboxCustom) {
+      lightboxCustom.hidden = true;
+      lightboxCustom.replaceChildren();
+    }
     if (lightboxCaption) {
       lightboxCaption.textContent = "";
     }
+  };
+
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.classList.remove("lightbox-open");
+    clearLightboxContent();
     lastTrigger?.focus();
   };
 
   const openLightbox = (trigger) => {
-    const source = trigger.dataset.lightboxSrc;
-    if (!source) {
-      return;
+    lastTrigger = trigger;
+
+    const mode = trigger.dataset.lightboxMode || (trigger.dataset.lightboxSrc ? "image" : "markup");
+    const captionText = trigger.dataset.lightboxAlt || "";
+
+    if (mode === "markup" && lightboxCustom) {
+      const content = document.createElement("div");
+      content.className = "lightbox__custom-content";
+      content.innerHTML = trigger.innerHTML;
+      lightboxCustom.replaceChildren(content);
+      lightboxCustom.hidden = false;
+      lightboxImage.hidden = true;
+      lightboxImage.removeAttribute("src");
+      lightboxImage.alt = "";
+    } else {
+      const source = trigger.dataset.lightboxSrc;
+      if (!source) {
+        return;
+      }
+
+      lightboxImage.hidden = false;
+      lightboxImage.src = source;
+      lightboxImage.alt = captionText;
+      if (lightboxCustom) {
+        lightboxCustom.hidden = true;
+        lightboxCustom.replaceChildren();
+      }
     }
 
-    lastTrigger = trigger;
-    lightboxImage.src = source;
-    lightboxImage.alt = trigger.dataset.lightboxAlt || "";
     if (lightboxCaption) {
-      lightboxCaption.textContent = trigger.dataset.lightboxAlt || "";
+      lightboxCaption.textContent = captionText;
     }
     lightbox.hidden = false;
     document.body.classList.add("lightbox-open");
@@ -381,6 +412,8 @@ function setupProjectFilter() {
   let dragStartX = 0;
   let dragStartScroll = 0;
   let dragDistance = 0;
+  let suppressClickUntil = 0;
+  const interactiveSelector = "a, button, input, select, textarea, label";
 
   const getVisibleCards = () => projectCards.filter((card) => !card.classList.contains("is-filtered-out"));
   const updateProjectHash = (filter) => {
@@ -463,9 +496,13 @@ function setupProjectFilter() {
       return;
     }
 
+    const shouldSuppressClick = dragDistance > 8;
     isDragging = false;
     dragDistance = 0;
     projectViewport.classList.remove("is-dragging");
+    if (shouldSuppressClick) {
+      suppressClickUntil = performance.now() + 280;
+    }
   };
 
   filterButtons.forEach((button) => {
@@ -489,6 +526,10 @@ function setupProjectFilter() {
   });
   projectViewport?.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    if (event.target.closest(interactiveSelector)) {
       return;
     }
 
@@ -517,7 +558,7 @@ function setupProjectFilter() {
   });
   projectViewport?.querySelectorAll("a, button").forEach((element) => {
     element.addEventListener("click", (event) => {
-      if (dragDistance > 8) {
+      if (performance.now() < suppressClickUntil) {
         event.preventDefault();
         event.stopPropagation();
       }
