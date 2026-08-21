@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta
+      name="description"
+      content="Camera 简易相机与相册项目，基于 Qt Widgets、Qt Multimedia 与 C++17 实现，支持摄像头预览、一键拍照、连续拍照、相册缩略图管理与画质保存。"
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-camera.html" />
+    <meta property="og:title" content="Yusky521 | Camera 简易相机与相册" />
+    <meta
+      property="og:description"
+      content="基于 Qt Multimedia 的桌面拍照与相册管理小工具。"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-camera.html" />
+    <meta
+      property="og:image"
+      content="https://yusky521.onrender.com/assets/project-camera-main.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yusky521 | Camera 简易相机与相册" />
+    <meta
+      name="twitter:description"
+      content="支持摄像头选择、实时预览、一键拍照、连续拍照和相册管理的 Qt 桌面项目。"
+    />
+    <title>Yusky521 | Camera 简易相机与相册</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite">
+      <div class="loading-screen__orb" aria-hidden="true"></div>
+      <p>LOADING</p>
+    </div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+      <div class="grain"></div>
+    </div>
+
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页">
+        <span class="brand__mark"></span>
+        <span class="brand__text">Yusky521</span>
+      </a>
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="切换导航"
+        aria-controls="site-nav"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a>
+        <a href="index.html#about">关于我</a>
+        <a href="index.html#projects">作品</a>
+        <a href="blog.html">笔记</a>
+        <a href="contact.html">联系</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+          <span class="theme-toggle__dot" aria-hidden="true"></span>
+          <span class="theme-toggle__text">浅色</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / QT / MULTIMEDIA</p>
+        <h1>把拍照、预览和相册浏览整理成一套轻量顺手的桌面工具。</h1>
+        <p>
+          Camera 是一个基于 Qt Multimedia 和 C++17 的桌面练习项目，
+          主界面负责摄像头预览与拍照，相册界面负责缩略图浏览、原图切换、
+          删除与按画质保存，整体围绕拍摄到整理的完整流程展开。
+        </p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">CAMERA PAGE</p>
+          <h2>主相机界面</h2>
+          <button
+            class="project-preview project-preview--image lightbox-trigger detail-preview"
+            type="button"
+            data-lightbox-src="assets/project-camera-main.png"
+            data-lightbox-alt="Qt6 简易相机主界面截图"
+            aria-label="查看 Qt6 简易相机主界面截图"
+          >
+            <img
+              class="project-preview__image"
+              src="assets/project-camera-main.png"
+              alt="Qt6 简易相机主界面截图"
+              width="1342"
+              height="931"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        </article>
+
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">ALBUM PAGE</p>
+          <h2>相册管理界面</h2>
+          <button
+            class="project-preview project-preview--image lightbox-trigger detail-preview"
+            type="button"
+            data-lightbox-src="assets/project-camera-album.png"
+            data-lightbox-alt="Camera 相册管理界面截图"
+            aria-label="查看 Camera 相册管理界面截图"
+          >
+            <img
+              class="project-preview__image"
+              src="assets/project-camera-album.png"
+              alt="Camera 相册管理界面截图"
+              width="1346"
+              height="932"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>
+            支持自动加载摄像头设备、选择不同摄像头、开启与关闭预览、一键拍照、
+            连续拍照间隔设置，以及拍照后同步把图像推送到相册页进行浏览。
+          </p>
+          <div class="tags">
+            <span class="tag">QCamera</span>
+            <span class="tag">实时预览</span>
+            <span class="tag">一键拍照</span>
+            <span class="tag">连续拍照</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">ALBUM</p>
+          <h2>相册与浏览体验</h2>
+          <p>
+            相册页会把每次拍摄的图片加入横向缩略图列表，支持点击缩略图查看原图、
+            鼠标滚轮快速切换当前照片、删除选中图片、清空列表，以及自动刷新大图预览。
+          </p>
+          <div class="tags">
+            <span class="tag">缩略图列表</span>
+            <span class="tag">滚轮切换</span>
+            <span class="tag">删除选中</span>
+            <span class="tag">清空列表</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">SAVE FLOW</p>
+          <h2>保存与画质控制</h2>
+          <p>
+            相册页提供保存图片按钮，可通过文件对话框导出 PNG、JPG 或 BMP，
+            同时用滑块调节 JPG 画质参数，适合在保存前按不同需求控制图像质量。
+          </p>
+          <div class="tags">
+            <span class="tag">PNG / JPG / BMP</span>
+            <span class="tag">画质滑块</span>
+            <span class="tag">另存图片</span>
+            <span class="tag">本地相册</span>
+          </div>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式</h2>
+          <p>
+            主窗口通过 QMediaCaptureSession 连接 QCamera、QVideoWidget 和 QImageCapture，
+            负责设备预览与拍照；相册页通过 QListWidget 管理缩略图，通过 QLabel 显示原图，
+            连续拍照则由 QTimer 按输入间隔触发抓拍。
+          </p>
+          <pre class="code-block">1. QMediaDevices 枚举可用摄像头设备
+2. QMediaCaptureSession 统一挂接相机、预览窗口与图像捕获
+3. QImageCapture 把拍摄结果同时发送到主界面和相册页
+4. QTimer 控制连续拍照节奏，默认 33ms 接近 30 帧
+5. QListWidget + QLabel 组织缩略图浏览与原图预览</pre>
+        </article>
+
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">HIGHLIGHTS</p>
+          <h2>项目亮点</h2>
+          <p>
+            预览关闭时会自动断开视频输出并复位连续拍照状态；相册页在窗口显示、
+            尺寸变化和滚轮切换时都会同步刷新原图显示；拍摄完成后新照片会自动滚动到最新项。
+          </p>
+          <div class="tags">
+            <span class="tag">状态联动</span>
+            <span class="tag">自动滚动最新</span>
+            <span class="tag">窗口自适应刷新</span>
+            <span class="tag">Qt Multimedia</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure">
+        <div class="lightbox__custom" id="lightbox-custom" hidden></div>
+        <img id="lightbox-image" src="" alt="" hidden />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <p>© 2026 Yusky521</p>
+        <p>Built with HTML · CSS · JavaScript</p>
+      </div>
+      <button class="back-to-top" id="back-to-top" type="button">回到顶部</button>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

@@ -2507,6 +2507,13 @@ body.lightbox-open {
     linear-gradient(135deg, rgba(28, 45, 68, 0.74), rgba(6, 10, 18, 0.08));
 }
 
+.project-card__shot--7 {
+  background:
+    radial-gradient(circle at 80% 18%, rgba(255, 174, 121, 0.18), transparent 32%),
+    radial-gradient(circle at 20% 82%, rgba(96, 165, 250, 0.16), transparent 28%),
+    linear-gradient(135deg, rgba(45, 55, 78, 0.74), rgba(6, 10, 18, 0.08));
+}
+
 .project-preview--notepad {
   display: grid;
   place-items: stretch;
