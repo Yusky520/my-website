@@ -12,6 +12,7 @@ const bannerSlides = Array.from(document.querySelectorAll(".banner-slide"));
 const bannerDots = Array.from(document.querySelectorAll(".banner-dot"));
 const bannerPrev = document.getElementById("banner-prev");
 const bannerNext = document.getElementById("banner-next");
+const bannerToggle = document.getElementById("banner-toggle");
 const emailCard = document.getElementById("email-card");
 const emailCardHint = document.getElementById("email-card-hint");
 const emailCardValue = document.getElementById("email-card-value");
@@ -52,6 +53,8 @@ const lightboxTriggers = Array.from(document.querySelectorAll(".lightbox-trigger
 let toastTimer = null;
 let activeSlide = 0;
 let carouselTimer = null;
+let isCarouselPaused = false;
+const prefersReducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function showToast(message, type = "success", autoHideMs = 3000) {
   if (!toast) {
@@ -80,6 +83,10 @@ function hideLoading() {
   loadingScreen?.classList.add("is-hidden");
 }
 
+function shouldReduceMotion() {
+  return Boolean(prefersReducedMotionQuery?.matches);
+}
+
 window.addEventListener("load", () => window.setTimeout(hideLoading, 220));
 window.setTimeout(hideLoading, 2600);
 
@@ -88,21 +95,54 @@ function setupBackgroundVideo() {
     return;
   }
 
+  const saveData = navigator.connection?.saveData;
+  if (shouldReduceMotion() || saveData) {
+    backgroundVideo.removeAttribute("autoplay");
+    backgroundVideo.pause();
+    return;
+  }
+
+  let hasLoaded = false;
+
+  const playIfAllowed = () => {
+    if (shouldReduceMotion() || document.hidden) {
+      backgroundVideo.pause();
+      return;
+    }
+
+    const playPromise = backgroundVideo.play();
+    playPromise?.catch(() => {});
+  };
+
   const loadVideo = () => {
+    if (hasLoaded) {
+      playIfAllowed();
+      return;
+    }
+
     const sources = Array.from(backgroundVideo.querySelectorAll("source[data-src]"));
     if (!sources.length) {
       return;
     }
 
+    hasLoaded = true;
     sources.forEach((source) => {
       source.src = source.dataset.src;
       source.removeAttribute("data-src");
     });
 
     backgroundVideo.load();
-    const playPromise = backgroundVideo.play();
-    playPromise?.catch(() => {});
+    playIfAllowed();
   };
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      backgroundVideo.pause();
+      return;
+    }
+
+    playIfAllowed();
+  });
 
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(loadVideo, { timeout: 1000 });
@@ -223,6 +263,11 @@ function setupLightbox() {
   }
 
   let lastTrigger = null;
+  lightbox.setAttribute("aria-hidden", "true");
+
+  const getFocusableLightboxElements = () => Array.from(
+    lightbox.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])")
+  ).filter((element) => !element.hidden && !element.disabled);
 
   const clearLightboxContent = () => {
     lightboxImage.hidden = false;
@@ -239,6 +284,7 @@ function setupLightbox() {
 
   const closeLightbox = () => {
     lightbox.hidden = true;
+    lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lightbox-open");
     clearLightboxContent();
     lastTrigger?.focus();
@@ -277,13 +323,15 @@ function setupLightbox() {
     if (lightboxCaption) {
       lightboxCaption.textContent = captionText;
     }
+
     lightbox.hidden = false;
+    lightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("lightbox-open");
     lightboxClose.focus();
   };
 
   lightboxTriggers.forEach((trigger) => {
-    trigger.addEventListener("dblclick", (event) => {
+    trigger.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
       openLightbox(trigger);
@@ -297,8 +345,34 @@ function setupLightbox() {
     }
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !lightbox.hidden) {
+    if (lightbox.hidden) {
+      return;
+    }
+
+    if (event.key === "Escape") {
       closeLightbox();
+      return;
+    }
+
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusable = getFocusableLightboxElements();
+    if (!focusable.length) {
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const current = document.activeElement;
+
+    if (event.shiftKey && current === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && current === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
 }
@@ -340,6 +414,9 @@ function setupCarousel() {
     return;
   }
 
+  const carousel = document.getElementById("banner");
+  const pauseIcon = bannerToggle?.querySelector(".banner-control__icon");
+
   const showSlide = (index) => {
     activeSlide = (index + bannerSlides.length) % bannerSlides.length;
     bannerSlides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === activeSlide));
@@ -350,8 +427,27 @@ function setupCarousel() {
     });
   };
 
+  const stopTimer = () => window.clearInterval(carouselTimer);
+
+  const updatePauseButton = () => {
+    if (!bannerToggle) {
+      return;
+    }
+
+    const pressed = isCarouselPaused || shouldReduceMotion();
+    bannerToggle.setAttribute("aria-pressed", String(pressed));
+    bannerToggle.setAttribute("aria-label", pressed ? "Resume banner autoplay" : "Pause banner autoplay");
+    if (pauseIcon) {
+      pauseIcon.textContent = pressed ? ">" : "||";
+    }
+  };
+
   const restartTimer = () => {
-    window.clearInterval(carouselTimer);
+    stopTimer();
+    if (isCarouselPaused || shouldReduceMotion()) {
+      return;
+    }
+
     carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), 6200);
   };
 
@@ -372,13 +468,32 @@ function setupCarousel() {
     });
   });
 
-  const carousel = document.getElementById("banner");
-  carousel?.addEventListener("mouseenter", () => window.clearInterval(carouselTimer));
-  carousel?.addEventListener("mouseleave", restartTimer);
-  carousel?.addEventListener("focusin", () => window.clearInterval(carouselTimer));
-  carousel?.addEventListener("focusout", restartTimer);
+  bannerToggle?.addEventListener("click", () => {
+    isCarouselPaused = !isCarouselPaused;
+    updatePauseButton();
+    restartTimer();
+  });
+
+  carousel?.addEventListener("mouseenter", stopTimer);
+  carousel?.addEventListener("mouseleave", () => {
+    if (!isCarouselPaused) {
+      restartTimer();
+    }
+  });
+  carousel?.addEventListener("focusin", stopTimer);
+  carousel?.addEventListener("focusout", (event) => {
+    if (!carousel?.contains(event.relatedTarget) && !isCarouselPaused) {
+      restartTimer();
+    }
+  });
+
+  prefersReducedMotionQuery?.addEventListener?.("change", () => {
+    updatePauseButton();
+    restartTimer();
+  });
 
   showSlide(0);
+  updatePauseButton();
   restartTimer();
 }
 
@@ -569,12 +684,31 @@ function setupProjectFilter() {
     const detailUrl = card.dataset.detailUrl;
     const cardBody = card.querySelector(".project-card__body");
 
-    cardBody?.addEventListener("dblclick", (event) => {
-      if (!detailUrl || event.target.closest("a, button, input, select, textarea")) {
+    if (!detailUrl || !cardBody) {
+      return;
+    }
+
+    const title = card.querySelector("h4")?.textContent?.trim();
+    cardBody.tabIndex = 0;
+    cardBody.setAttribute("role", "link");
+    if (title) {
+      cardBody.setAttribute("aria-label", `${title} details`);
+    }
+
+    const goToDetail = (event) => {
+      if (performance.now() < suppressClickUntil || event.target.closest("a, button, input, select, textarea")) {
         return;
       }
 
       window.location.href = detailUrl;
+    };
+
+    cardBody.addEventListener("click", goToDetail);
+    cardBody.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        goToDetail(event);
+      }
     });
   });
 

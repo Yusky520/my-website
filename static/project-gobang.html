@@ -26,7 +26,7 @@
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
     <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
-    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
+    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
     <main class="page subpage">
       <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / QT / C++</p><h1>把五子棋做成一个完整的本地对战体验。</h1><p>GobangChess 是一个基于 Qt Widgets 和 C++17 的桌面五子棋项目，重点练习界面组织、棋盘绘制、规则判断和简单 AI 对战。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
       <section class="detail-grid">
@@ -51,7 +51,7 @@
 4. 使用候选落子与搜索完成 AI 回合</pre></article>
       </section>
     </main>
-    <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
       <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
       <figure class="lightbox__figure">
         <img id="lightbox-image" src="" alt="" />

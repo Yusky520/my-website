@@ -26,7 +26,7 @@
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
     <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
-    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><a href="contact.html">联系</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
+    <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
     <main class="page subpage">
       <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / QT / C++</p><h1>把常用文本编辑需求做成一个顺手的桌面记事本。</h1><p>NotePad 是一个基于 Qt Widgets 和 C++ 的桌面练习项目，围绕文件读写、编辑操作、状态反馈和本地持久化做了完整整理。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
       <section class="detail-grid">
@@ -65,7 +65,7 @@
         <article class="panel glass detail-card reveal"><p class="section-label">HIGHLIGHTS</p><h2>项目亮点</h2><p>打开文本时会先尝试 UTF-8 解码，异常时回退到本地编码；重新打开历史文件前会复用未保存检测逻辑；保存后会同步更新文件名标题和最近文件列表。</p><div class="tags"><span class="tag">UTF-8 / Local8Bit</span><span class="tag">最近文件</span><span class="tag">编码兼容</span><span class="tag">本地持久化</span></div></article>
       </section>
     </main>
-    <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
       <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
       <figure class="lightbox__figure">
         <img id="lightbox-image" src="" alt="" />
