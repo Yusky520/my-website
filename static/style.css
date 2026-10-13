@@ -2661,10 +2661,6 @@ a.link-card__value:hover {
   transform: translateY(1px);
 }
 
-.link-card--github:hover .link-card__value {
-  text-decoration: underline;
-}
-
 /* 联系方式：邮箱交互提示 + GitHub 胶囊按钮 */
 .link-card__tip {
   display: block;
@@ -2678,29 +2674,7 @@ a.link-card__value:hover {
   cursor: pointer;
 }
 
-.pill-btn {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.32rem 0.78rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--accent);
-  font-size: 0.82rem;
-  font-weight: 600;
-  transition: background 200ms ease, border-color 200ms ease;
-}
-
-.pill-btn__arrow {
-  transition: transform 200ms ease;
-}
-
-.link-card--github:hover .pill-btn {
-  background: rgba(157, 214, 255, 0.12);
-  border-color: rgba(157, 214, 255, 0.34);
-}
-
-.link-card--github:hover .pill-btn__arrow {
-  transform: translateX(2px);
+/* 联系方式里的 GitHub 按钮（沿用侧卡按钮样式） */
+.contact-github {
+  margin-top: 0.85rem;
 }
