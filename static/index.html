@@ -212,18 +212,22 @@
             <article class="panel glass contact-panel">
               <p class="section-label">CONTACT</p>
               <h3>联系方式</h3>
-              <a class="link-card link-card--email is-revealed" href="mailto:3294850673@qq.com" aria-label="给 3294850673@qq.com 发邮件">
+              <div class="link-card link-card--email">
                 <strong>Email</strong>
                 <span class="link-card__meta">
-                  <span class="link-card__hint">点击即可直接发邮件</span>
-                  <span class="link-card__value">3294850673@qq.com</span>
+                  <span class="link-card__row">
+                    <a class="link-card__value" id="email-address" href="mailto:3294850673@qq.com" data-qqmail="https://mail.qq.com/">3294850673@qq.com</a>
+                    <button class="copy-btn" type="button" data-copy="3294850673@qq.com" aria-label="复制邮箱地址">复制</button>
+                  </span>
+                  <span class="link-card__tip">单击写邮件 · 双击打开 QQ 邮箱</span>
                 </span>
-              </a>
-              <a class="link-card" href="https://github.com/Yusky520" target="_blank" rel="noreferrer" aria-label="打开 GitHub 主页">
+              </div>
+              <a class="link-card link-card--github" href="https://github.com/Yusky520" target="_blank" rel="noreferrer" aria-label="打开 GitHub 主页：Yusky520">
                 <strong>GitHub</strong>
                 <span class="link-card__meta">
-                  <span class="link-card__hint">代码与项目源码</span>
-                  <span class="link-card__value">github.com/Yusky520</span>
+                  <span class="link-card__row">
+                    <span class="pill-btn">Yusky520<span class="pill-btn__arrow" aria-hidden="true">→</span></span>
+                  </span>
                 </span>
               </a>
             </article>

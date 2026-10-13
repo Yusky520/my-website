@@ -2604,3 +2604,103 @@ textarea:focus-visible,
 .contact-panel .link-card__hint {
   font-size: 0.82rem;
 }
+
+/* 联系方式：Email 卡（不可整体点击）+ 复制按钮 + GitHub 整卡跳转 */
+.contact-panel .link-card {
+  display: block;
+  margin-top: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-panel .link-card--email {
+  cursor: default;
+}
+
+.contact-panel .link-card--email:hover {
+  transform: none;
+  border-color: var(--border-soft);
+  box-shadow: none;
+}
+
+.link-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+a.link-card__value {
+  text-decoration: none;
+}
+
+a.link-card__value:hover {
+  text-decoration: underline;
+}
+
+.copy-btn {
+  flex: none;
+  padding: 0.32rem 0.78rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.copy-btn:hover {
+  background: rgba(157, 214, 255, 0.12);
+  border-color: rgba(157, 214, 255, 0.34);
+}
+
+.copy-btn:active {
+  transform: translateY(1px);
+}
+
+.link-card--github:hover .link-card__value {
+  text-decoration: underline;
+}
+
+/* 联系方式：邮箱交互提示 + GitHub 胶囊按钮 */
+.link-card__tip {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: var(--soft);
+}
+
+#email-address {
+  cursor: pointer;
+}
+
+.pill-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.78rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.pill-btn__arrow {
+  transition: transform 200ms ease;
+}
+
+.link-card--github:hover .pill-btn {
+  background: rgba(157, 214, 255, 0.12);
+  border-color: rgba(157, 214, 255, 0.34);
+}
+
+.link-card--github:hover .pill-btn__arrow {
+  transform: translateX(2px);
+}

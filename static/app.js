@@ -967,6 +967,71 @@ async function copyText(text, successMessage) {
   }
 }
 
+
+function setupEmailAddress() {
+  const address = document.getElementById("email-address");
+  if (!address) {
+    return;
+  }
+
+  const qqMail = address.dataset.qqmail || "https://mail.qq.com/";
+  let clickTimer = null;
+
+  address.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (clickTimer) {
+      return;
+    }
+    clickTimer = window.setTimeout(() => {
+      clickTimer = null;
+      window.location.href = address.getAttribute("href");
+    }, 400);
+  });
+
+  address.addEventListener("dblclick", (event) => {
+    event.preventDefault();
+    window.clearTimeout(clickTimer);
+    clickTimer = null;
+    window.open(qqMail, "_blank", "noopener");
+  });
+}
+
+function setupCopyButtons() {
+  const buttons = Array.from(document.querySelectorAll("[data-copy]"));
+  if (!buttons.length) {
+    return;
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const text = button.getAttribute("data-copy") || "";
+      if (!text) {
+        return;
+      }
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const temp = document.createElement("textarea");
+          temp.value = text;
+          temp.setAttribute("readonly", "");
+          temp.style.position = "fixed";
+          temp.style.opacity = "0";
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+        }
+        showToast("已复制：" + text, "success", 1800);
+      } catch (error) {
+        showToast("复制失败，请手动选择文本。", "error", 2200);
+      }
+    });
+  });
+}
+
 setupBackgroundVideo();
 setupReveal();
 setupEmailCard();
@@ -979,3 +1044,5 @@ setupCarousel();
 setupProjectFilter();
 setupColorTool();
 setupTimestampTool();
+setupCopyButtons();
+setupEmailAddress();
