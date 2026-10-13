@@ -579,16 +579,24 @@ textarea {
   overflow-y: hidden;
   padding-bottom: 12px;
   scroll-snap-type: x proximity;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(157, 214, 255, 0.42) rgba(255, 255, 255, 0.05);
 }
 
 .project-carousel__viewport::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  height: 10px;
 }
 
+
+.project-carousel__viewport::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+.project-carousel__viewport::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(157, 214, 255, 0.48), rgba(125, 224, 195, 0.45));
+  border-radius: 999px;
+}
 .project-list {
   display: grid;
   grid-auto-flow: column;
