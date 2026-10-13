@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Halcon 尺寸测量：形状模板匹配一次定位多个工件，位姿矫正后把测量 ROI 跟着工件走，用卡尺测量高度、宽度与孔径并换算成毫米输出。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-backplane.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 圆角矩形金属背板尺寸测量" />
+    <meta property="og:description" content="Halcon 尺寸测量：形状模板匹配一次定位多个工件，位姿矫正后把测量 ROI 跟着工件走，用卡尺测量高度、宽度与孔径并换算成毫米输出。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-backplane.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/bp-two.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 圆角矩形金属背板尺寸测量</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / HALCON</p>
+        <h1>一次拍多个工件，长宽和孔径逐个量完并换算成毫米。</h1>
+        <p>
+          圆角矩形金属背板尺寸测量：先用形状模板匹配定位工件，得到位姿后把预先框好的测量 ROI
+          跟着工件一起摆正，再用一维测量卡尺取边缘对，测出高度、宽度与孔径，按像素当量换算成毫米输出；
+          同一画面里有几个工件就量几个，没有工件时输出 0 个，不进入测量。
+        </p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">ONE TARGET</p>
+          <h2>匹配到的目标个数：1 个</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/bp-one.jpg" data-lightbox-alt="单个工件尺寸测量结果截图" aria-label="查看单个工件尺寸测量结果截图">
+            <img class="project-preview__image" src="assets/vision/bp-one.jpg" alt="单个工件尺寸测量结果截图" width="773" height="537" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">高 39.9636 mm、宽 19.9729 mm、孔径 9.2944 mm，红色为高度、蓝色为宽度、绿色为孔径标注。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">NO TARGET</p>
+          <h2>匹配到的目标个数：0 个</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/bp-none.jpg" data-lightbox-alt="无工件时输出 0 个的结果截图" aria-label="查看无工件时输出 0 个的结果截图">
+            <img class="project-preview__image" src="assets/vision/bp-none.jpg" alt="无工件时输出 0 个的结果截图" width="690" height="529" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">视野内没有工件时输出 0，不产生任何测量值，避免用错误数据放行产品。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">MULTI TARGET</p>
+          <h2>匹配到的目标个数：2 个</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/bp-two.jpg" data-lightbox-alt="两个工件同时测量结果截图" aria-label="查看两个工件同时测量结果截图">
+            <img class="project-preview__image" src="assets/vision/bp-two.jpg" alt="两个工件同时测量结果截图" width="683" height="511" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">一次拍摄同时测量两个工件并分别输出：高 39.9995 / 40.1021 mm，宽 19.9047 / 19.9915 mm，孔径 9.08141 / 9.1214 mm。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>多目标匹配与计数、任意角度位姿矫正、高度 / 宽度 / 孔径三个尺寸一次测量、毫米单位输出；工件数量为 0 时直接跳过测量。</p>
+          <div class="tags"><span class="tag">多目标匹配</span><span class="tag">位姿矫正</span><span class="tag">卡尺测量</span><span class="tag">毫米输出</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon 关键链路）</h2>
+          <p>关键点是"测量 ROI 跟着工件走"：先用模板匹配拿到每个工件的位姿，再把预先标好的 ROI 用同一个位姿矩阵摆正，这样工件怎么摆都不影响测量。</p>
+          <pre class="code-block">1.  gen_rectangle* / gen_circle     在模板图上框好 4 个参考 ROI
+                                     （整体、高、宽、孔径）
+2.  area_center                     记录每个 ROI 的中心点作为参考点
+3.  reduce_domain + create_shape_model
+                                    只在 ROI 内训练形状模板
+4.  list_files / read_image         遍历样本图片批处理
+5.  find_shape_model                一次匹配出所有目标：
+                                    返回 Row[] / Column[] / Angle[] 数组
+6.  vector_angle_to_rigid           用参考点 + 匹配位姿生成齐次矩阵
+7.  affine_trans_region             把 4 个 ROI 按位姿摆正
+8.  reduce_domain                   在摆正后的 ROI 内处理
+9.  gen_measure_rectangle2          生成卡尺（矩形/圆弧测量框）
+10. measure_pairs                   取边缘对，得到像素宽度
+11. 像素当量换算                    换算成毫米输出到图像上</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">一维测量</span><span class="tag">卡尺</span><span class="tag">多目标</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

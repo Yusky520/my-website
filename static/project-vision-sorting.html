@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="相机采集彩色圆片图像，Halcon 完成颜色分类与定位，通过串口把目标坐标发送给四轴机械臂完成自动分拣，附实拍视频。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-sorting.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 彩色圆片颜色识别与机械臂分拣" />
+    <meta property="og:description" content="相机采集彩色圆片图像，Halcon 完成颜色分类与定位，通过串口把目标坐标发送给四轴机械臂完成自动分拣，附实拍视频。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-sorting.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/color-classify.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 彩色圆片颜色识别与机械臂分拣</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / UARM</p>
+        <h1>相机认颜色、算坐标，串口发给四轴机械臂把圆片分拣开。</h1>
+        <p>用工业相机采集散落在工作台上的彩色圆片，先分离色度与亮度做颜色分类，再用区域处理锁定每颗圆片的中心点，配合手眼标定矩阵把图像坐标换算成机械臂坐标，通过串口把目标坐标下发，由 UARM 四轴机械臂完成抓取与分拣。</p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DEMO VIDEO</p>
+          <h2>机械臂分拣实拍</h2>
+          <video class="detail-video" controls preload="metadata" playsinline poster="assets/vision/uarm-sorting-poster.jpg" aria-label="四轴机械臂分拣彩色圆片实拍视频">
+            <source src="assets/vision/uarm-sorting.mp4" type="video/mp4" />
+            你的浏览器不支持内嵌视频，可<a href="assets/vision/uarm-sorting.mp4">直接下载观看</a>。
+          </video>
+          <p class="detail-note">视频为分拣过程实拍：相机识别颜色与位置，算法输出坐标后由机械臂抓取并放入对应料区。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">COLOR CLASSIFY</p>
+          <h2>颜色分类与计数</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/color-classify.jpg" data-lightbox-alt="颜色分类与计数结果截图" aria-label="查看颜色分类与计数结果截图">
+            <img class="project-preview__image" src="assets/vision/color-classify.jpg" alt="颜色分类与计数结果截图" width="645" height="354" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">同一套颜色分类逻辑用在瓶盖识别上：按色度区分品牌与颜色，并统计各颜色数量（画面为可口可乐 1 瓶、怡宝 2 瓶、景田 2 瓶）。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心流程</h2>
+          <p>相机实时采集 → HSV 分离色度与亮度 → 阈值分割 + 形态学处理 → 连通域与中心点提取 → 颜色分类 → 手眼标定换算坐标 → 串口下发机械臂 → 抓取分拣。</p>
+          <div class="tags"><span class="tag">相机采集</span><span class="tag">HSV 颜色分类</span><span class="tag">手眼标定</span><span class="tag">串口通讯</span><span class="tag">机械臂联调</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon + 串口）</h2>
+          <p>下面是该项目的主链路，标定矩阵事先离线写入 tup 文件，运行时直接读取复用。</p>
+          <pre class="code-block">1. read_tuple             读取手眼标定矩阵 HandEyeCalibrationMatrix.tup
+2. open_serial            打开串口 COM3
+3. set_serial_param       115200, 8, none, none, 1
+4. write_serial           下发初始化指令与回零指令 cmd_init / cmd_move_home
+5. grab_image_async       通过相机句柄连续取图
+6. trans_from_rgb         R,G,B -> H,S,V，色度与亮度解耦
+7. binary_threshold       在 V 通道用最大类间方差法分割背景
+8. fill_up_shape          填补小面积空洞，去毛刺
+9. erosion_circle(120)    腐蚀断开相邻圆片
+10. connection            打散连通域
+11. dilation_circle(120)  等半径膨胀还原形状
+12. intersection          与填充区域求交，得到每颗圆片
+13. area_center           取面积与中心坐标，用于分类与定位
+14. write_serial          把目标坐标写入串口，驱动机械臂抓取</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">串口通讯</span><span class="tag">手眼标定</span><span class="tag">UARM</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

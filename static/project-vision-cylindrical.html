@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Halcon 圆柱孔配件检测：形状模板匹配判定配件有无，阈值分割与圆形度筛选提取圆孔，最小外接圆拟合圆心，直线拟合计算五孔共线偏差与工件旋转量。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-cylindrical.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 圆柱孔配件有无及共线旋转量检测" />
+    <meta property="og:description" content="Halcon 圆柱孔配件检测：形状模板匹配判定配件有无，阈值分割与圆形度筛选提取圆孔，最小外接圆拟合圆心，直线拟合计算五孔共线偏差与工件旋转量。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-cylindrical.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/cyl-rotate-85.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 圆柱孔配件有无及共线旋转量检测</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / HALCON</p>
+        <h1>判有无、提圆心、算共线与旋转量——把几何关系量出来。</h1>
+        <p>
+          圆柱孔配件检测：先用形状模板匹配定位配件并判定有无，没有工件就直接输出 NG；
+          再对灰度图做阈值分割，用面积与圆形度筛选出各个圆孔，通过最小外接圆拟合圆心；
+          最后把五孔圆心拟合成直线求共线偏差，并用 <code>angle_ll</code> 计算工件绕其中心的旋转量。
+        </p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DETECT OK</p>
+          <h2>检测到配件：旋转量 -85.9882</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/cyl-rotate-85.jpg" data-lightbox-alt="检测到配件并输出旋转量 -85.9882 的结果截图" aria-label="查看检测到配件并输出旋转量 -85.9882 的结果截图">
+            <img class="project-preview__image" src="assets/vision/cyl-rotate-85.jpg" alt="检测到配件并输出旋转量 -85.9882 的结果截图" width="774" height="546" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">蓝色为五孔共线基准线，黄色标注参与计算的孔圆心；判定「检测到配件」，输出旋转量 -85.9882。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DETECT NG</p>
+          <h2>未检测到配件</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/cyl-no-part.jpg" data-lightbox-alt="未检测到配件的 NG 判定截图" aria-label="查看未检测到配件的 NG 判定截图">
+            <img class="project-preview__image" src="assets/vision/cyl-no-part.jpg" alt="未检测到配件的 NG 判定截图" width="680" height="514" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">工件缺失或摆放位置超出搜索范围时，模板匹配无结果，界面直接给出 NG 提示，不进入后续圆心计算。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DETECT OK</p>
+          <h2>另一姿态：旋转量 83.156</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/cyl-rotate-83.jpg" data-lightbox-alt="另一姿态下输出旋转量 83.156 的结果截图" aria-label="查看另一姿态下输出旋转量 83.156 的结果截图">
+            <img class="project-preview__image" src="assets/vision/cyl-rotate-83.jpg" alt="另一姿态下输出旋转量 83.156 的结果截图" width="684" height="510" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">同一算法在不同摆放姿态下的结果，旋转量 83.156，说明圆心提取与角度计算对姿态不敏感。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>配件有无判定（无件直接 NG）、圆孔区域提取与圆形度筛选、最小外接圆圆心拟合、五孔共线偏差计算、工件绕中心旋转量输出，结果全部标注回原图。</p>
+          <div class="tags"><span class="tag">模板匹配</span><span class="tag">Blob 筛选</span><span class="tag">最小外接圆</span><span class="tag">共线度</span><span class="tag">旋转量</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon 关键链路）</h2>
+          <p>难点在于圆孔灰度对比度低、多孔同时提取容易串，以及圆心误差会直接影响角度计算——所以圆心用最小外接圆拟合，共线用直线拟合计算。</p>
+          <pre class="code-block">1.  gen_circle                  在模板图上框出手工 ROI（只做一次）
+2.  reduce_domain               只在 ROI 内建模板，避免背景干扰
+3.  create_shape_model          训练配件形状模板
+4.  find_shape_model            运行时定位；无结果即为「未检测到配件」
+5.  threshold (0 ~ 74)          圆孔偏暗，用低灰度阈值分割
+6.  connection                  连通域打散
+7.  select_shape ['area','circularity']
+                                用面积 + 圆形度筛出各圆孔
+8.  select_shape (area 75000~80000)
+                                单独取出中心大孔
+9.  smallest_circle             最小外接圆拟合，得到圆心 Row / Column
+10. gen_cross_contour_xld       在每个圆心上画十字标注
+11. gen_contour_polygon_xld     把参与共线的圆心连成直线
+12. angle_ll                    计算共线直线夹角 -> 工件绕中心的旋转量</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">亚像素/拟合</span><span class="tag">几何测量</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

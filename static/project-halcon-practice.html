@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Halcon 学习期间的算子练习记录：彩色图像通道、Blob 与特征筛选、模板匹配、OCR 字符识别、条码识别与区域处理等。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-halcon-practice.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 算子练习集" />
+    <meta property="og:description" content="Halcon 学习期间的算子练习记录：彩色图像通道、Blob 与特征筛选、模板匹配、OCR 字符识别、条码识别与区域处理等。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-halcon-practice.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/practice-D7.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 算子练习集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PRACTICE / VISION / HALCON</p>
+        <h1>Halcon 算子练习：从图像通道拆分到模板匹配与字符识别。</h1>
+        <p>按天记录的 Halcon 练习：区域分割与特征筛选、彩色图像通道处理、模板匹配定位、OCR 字符识别与条码识别、形态学与轮廓拟合等。每一组都是先想思路、再动手写算子、最后把结果可视化出来。</p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">OVERVIEW</p>
+          <h2>练习内容</h2>
+          <p>练习覆盖了工业视觉里最常用的几类算子：图像读取与预处理、阈值分割与 Blob 特征筛选、颜色空间转换与颜色分类、形状模板匹配与定位、亚像素轮廓与拟合、OCR 字符识别、一维码与二维码识别、单相机标定与手眼标定。</p>
+          <div class="tags"><span class="tag">Blob</span><span class="tag">模板匹配</span><span class="tag">OCR</span><span class="tag">条码</span><span class="tag">标定</span></div>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D2</p>
+          <h2>8421 / 画图</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D2.jpg" data-lightbox-alt="D2 8421 / 画图 练习结果截图" aria-label="查看D2 8421 / 画图 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D2.jpg" alt="D2 8421 / 画图 练习结果截图" width="1200" height="675" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D3</p>
+          <h2>统计1块钱硬币 / 识别骰子点数 / 图像合成</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D3.jpg" data-lightbox-alt="D3 统计1块钱硬币 / 识别骰子点数 / 图像合成 练习结果截图" aria-label="查看D3 统计1块钱硬币 / 识别骰子点数 / 图像合成 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D3.jpg" alt="D3 统计1块钱硬币 / 识别骰子点数 / 图像合成 练习结果截图" width="1126" height="634" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D4</p>
+          <h2>识别有无工件 / 识别有无（画矩形交集）ps：目前最简单 / 回形针指向</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D4.jpg" data-lightbox-alt="D4 识别有无工件 / 识别有无（画矩形交集）ps：目前最简单 / 回形针指向 练习结果截图" aria-label="查看D4 识别有无工件 / 识别有无（画矩形交集）ps：目前最简单 / 回形针指向 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D4.jpg" alt="D4 识别有无工件 / 识别有无（画矩形交集）ps：目前最简单 / 回形针指向 练习结果截图" width="1143" height="437" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D6</p>
+          <h2>判断电池正反 / 工件 / 提取瓶盖上的字</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D6.jpg" data-lightbox-alt="D6 判断电池正反 / 工件 / 提取瓶盖上的字 练习结果截图" aria-label="查看D6 判断电池正反 / 工件 / 提取瓶盖上的字 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D6.jpg" alt="D6 判断电池正反 / 工件 / 提取瓶盖上的字 练习结果截图" width="651" height="472" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D7</p>
+          <h2>电压表检测_课堂演练 / 电压识别 / 识别酒瓶字符</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D7.jpg" data-lightbox-alt="D7 电压表检测_课堂演练 / 电压识别 / 识别酒瓶字符 练习结果截图" aria-label="查看D7 电压表检测_课堂演练 / 电压识别 / 识别酒瓶字符 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D7.jpg" alt="D7 电压表检测_课堂演练 / 电压识别 / 识别酒瓶字符 练习结果截图" width="592" height="507" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D8</p>
+          <h2>A0116.易拉罐底部点印字符识别——讲解 / 点数字 / 铭牌识别</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D8.jpg" data-lightbox-alt="D8 A0116.易拉罐底部点印字符识别——讲解 / 点数字 / 铭牌识别 练习结果截图" aria-label="查看D8 A0116.易拉罐底部点印字符识别——讲解 / 点数字 / 铭牌识别 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D8.jpg" alt="D8 A0116.易拉罐底部点印字符识别——讲解 / 点数字 / 铭牌识别 练习结果截图" width="642" height="493" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D9</p>
+          <h2>圆片颜色个数 / 保险丝颜色检测</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D9.jpg" data-lightbox-alt="D9 圆片颜色个数 / 保险丝颜色检测 练习结果截图" aria-label="查看D9 圆片颜色个数 / 保险丝颜色检测 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D9.jpg" alt="D9 圆片颜色个数 / 保险丝颜色检测 练习结果截图" width="644" height="362" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D10</p>
+          <h2>刻章缺陷检测 / 螺丝计数 / 牛奶标签识别</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D10.jpg" data-lightbox-alt="D10 刻章缺陷检测 / 螺丝计数 / 牛奶标签识别 练习结果截图" aria-label="查看D10 刻章缺陷检测 / 螺丝计数 / 牛奶标签识别 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D10.jpg" alt="D10 刻章缺陷检测 / 螺丝计数 / 牛奶标签识别 练习结果截图" width="628" height="364" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D11</p>
+          <h2>Aa1.框出运动对象 / Aa2.胶囊缺陷检测</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D11.jpg" data-lightbox-alt="D11 Aa1.框出运动对象 / Aa2.胶囊缺陷检测 练习结果截图" aria-label="查看D11 Aa1.框出运动对象 / Aa2.胶囊缺陷检测 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D11.jpg" alt="D11 Aa1.框出运动对象 / Aa2.胶囊缺陷检测 练习结果截图" width="486" height="413" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D12</p>
+          <h2>布匹污渍框选 / Aa2.铜箔缺陷检测 / 网格状产品缺陷检测</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D12.jpg" data-lightbox-alt="D12 布匹污渍框选 / Aa2.铜箔缺陷检测 / 网格状产品缺陷检测 练习结果截图" aria-label="查看D12 布匹污渍框选 / Aa2.铜箔缺陷检测 / 网格状产品缺陷检测 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D12.jpg" alt="D12 布匹污渍框选 / Aa2.铜箔缺陷检测 / 网格状产品缺陷检测 练习结果截图" width="518" height="488" loading="lazy" decoding="async" />
+          </button>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">D13</p>
+          <h2>瓶盖 / 生产日期 - 讲 / 生产日期</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/practice-D13.jpg" data-lightbox-alt="D13 瓶盖 / 生产日期 - 讲 / 生产日期 练习结果截图" aria-label="查看D13 瓶盖 / 生产日期 - 讲 / 生产日期 练习结果截图">
+            <img class="project-preview__image" src="assets/vision/practice-D13.jpg" alt="D13 瓶盖 / 生产日期 - 讲 / 生产日期 练习结果截图" width="642" height="473" loading="lazy" decoding="async" />
+          </button>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Halcon 尺寸测量练习：形状匹配定位与位姿矫正、亚像素边缘与卡尺测量、拟合直线与圆求交点夹角，以及指针式仪表读数。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-measure.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 尺寸测量与仪表读数" />
+    <meta property="og:description" content="Halcon 尺寸测量练习：形状匹配定位与位姿矫正、亚像素边缘与卡尺测量、拟合直线与圆求交点夹角，以及指针式仪表读数。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-measure.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/meter-reading.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 尺寸测量与仪表读数</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / MEASUREMENT</p>
+        <h1>把像素变成有意义的数值：卡尺测量、圆心拟合与仪表读数。</h1>
+        <p>这一组是尺寸测量方向的练习：先用形状模板匹配把工件摆正，再用亚像素边缘与卡尺工具测量尺寸，或用拟合直线与圆求交点与夹角；另外做了指针式仪表的自动读数，把指针角度换算成刻度值。</p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">NUT MEASURE</p>
+          <h2>六角螺母数量与边长测量</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/nut-measure.jpg" data-lightbox-alt="六角螺母数量与边长测量结果截图" aria-label="查看六角螺母数量与边长测量结果截图">
+            <img class="project-preview__image" src="assets/vision/nut-measure.jpg" alt="六角螺母数量与边长测量结果截图" width="639" height="474" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">自动统计六角螺母数量（4 个），并对每个螺母测量对边/对角尺寸，直接标在图上（如 95.8497 pixel）。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">METER READING</p>
+          <h2>指针式电压表自动读数</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/meter-reading.jpg" data-lightbox-alt="指针式电压表自动读数结果截图" aria-label="查看指针式电压表自动读数结果截图">
+            <img class="project-preview__image" src="assets/vision/meter-reading.jpg" alt="指针式电压表自动读数结果截图" width="607" height="518" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">提取表盘与刻度、拟合指针直线，按刻度换算读数，识别结果 9.74768 V。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">LOCATE</p>
+          <h2>标签定位与十字标注</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/label-locate.jpg" data-lightbox-alt="标签定位与十字标注截图" aria-label="查看标签定位与十字标注截图">
+            <img class="project-preview__image" src="assets/vision/label-locate.jpg" alt="标签定位与十字标注截图" width="1266" height="568" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">对细长标签做定位，输出中心点与姿态，并用十字线标注方向，便于后续抓取或贴合。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（测量链路）</h2>
+          <p>测量类任务的关键是先把工件摆正，再在正确的坐标系里量尺寸——否则数值没有意义。</p>
+          <pre class="code-block">1. create_shape_model     建模板（可按需用 create_scaled_shape_model 支持缩放）
+2. find_shape_model       定位并得到 Row / Column / Angle
+3. vector_angle_to_rigid  由位姿生成齐次矩阵
+4. affine_trans_region    把预先框好的测量 ROI 跟着工件一起摆正
+5. reduce_domain          在摆正后的 ROI 里处理
+6. edges_sub_pix          亚像素边缘提取，精度优于像素级
+7. segment_contours_xld   把轮廓打断成直线段/圆弧段
+8. fit_line_contour_xld   直线拟合
+9. fit_circle_contour_xld 圆拟合
+10. gen_measure_rectangle2 / gen_measure_arc  生成卡尺
+11. measure_pairs         卡尺测量边缘对，得到宽度/间距
+12. angle_ll / distance_pp / intersection_*   求夹角、距离与交点</pre>
+          <div class="tags"><span class="tag">亚像素</span><span class="tag">XLD</span><span class="tag">卡尺测量</span><span class="tag">位姿矫正</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

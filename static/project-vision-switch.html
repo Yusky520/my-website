@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="Halcon 开关引脚测量与缺陷检测：逐根引脚测量宽度、统计平均宽度与引脚间距，引脚数量不足时判 NG 并输出缺失根数。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-switch.html" />
+    <meta property="og:title" content="Yusky521 | Halcon 开关引脚测量与缺陷检测" />
+    <meta property="og:description" content="Halcon 开关引脚测量与缺陷检测：逐根引脚测量宽度、统计平均宽度与引脚间距，引脚数量不足时判 NG 并输出缺失根数。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-switch.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/sw-ng.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon 开关引脚测量与缺陷检测</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / HALCON</p>
+        <h1>逐根量引脚宽度，少一根就判 NG 并说清缺几根。</h1>
+        <p>
+          两档三脚卧式开关的引脚测量与缺陷检测：先定位开关本体，再把测量区域摆正，逐根引脚测量宽度并统计
+          平均宽度与引脚间距；同时统计引脚数量，数量不足时判 NG 并输出缺失根数——测量与缺陷判定在同一套流程里完成。
+        </p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PIN MEASURE · OK</p>
+          <h2>逐根引脚测量（样本一）</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/sw-ok1.jpg" data-lightbox-alt="开关引脚逐根测量结果截图（样本一）" aria-label="查看开关引脚逐根测量结果截图（样本一）">
+            <img class="project-preview__image" src="assets/vision/sw-ok1.jpg" alt="开关引脚逐根测量结果截图（样本一）" width="644" height="353" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">逐根标注引脚宽度（20.7644 / 20.2307 / 20.0577 pixel 等），并输出引脚平均宽度 20.3493 pixel、引脚之间平均间距 71.9762 pixel，判定 OK。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PIN MEASURE · OK</p>
+          <h2>逐根引脚测量（样本二）</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/sw-ok2.jpg" data-lightbox-alt="开关引脚逐根测量结果截图（样本二）" aria-label="查看开关引脚逐根测量结果截图（样本二）">
+            <img class="project-preview__image" src="assets/vision/sw-ok2.jpg" alt="开关引脚逐根测量结果截图（样本二）" width="645" height="359" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">换一个摆放姿态后同样稳定：平均宽度 20.4208 pixel、平均间距 72.5219 pixel，判定 OK。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DEFECT · NG</p>
+          <h2>引脚缺失判定</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/sw-ng.jpg" data-lightbox-alt="引脚缺失判 NG 的结果截图" aria-label="查看引脚缺失判 NG 的结果截图">
+            <img class="project-preview__image" src="assets/vision/sw-ng.jpg" alt="引脚缺失判 NG 的结果截图" width="626" height="373" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">引脚数量不足时直接判 NG 并输出「引脚缺失：2 根」，把缺陷类型与数量一起给出来。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>逐根引脚宽度测量、平均宽度与平均间距统计、引脚数量计数与缺失判定、OK / NG 结果与缺陷明细输出。</p>
+          <div class="tags"><span class="tag">卡尺测量</span><span class="tag">平均/统计</span><span class="tag">引脚计数</span><span class="tag">缺陷判定</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon 关键链路）</h2>
+          <p>下面是该项目 Halcon 侧的真实调用顺序：先定位工件并摆正测量区，再用卡尺逐根量引脚，最后按数量与尺寸判定 OK / NG。</p>
+          <pre class="code-block"> 1. read_image (Image_m, './5.两档三脚卧式开关引脚测量与缺陷检测/images/1')
+ 2. area_center (ROI_0_m, Area1, Row2, Column2)
+ 3. reduce_domain (GrayImage_m, ROI_0_m, ImageReduced_m)   // 在 ROI 内处理
+ 4. create_shape_model (ImageReduced_m, 'auto', \ 0, 6.28, 'auto', 'au   // 训练开关本体的形状模板
+ 5. area_center (ROI_0, Area, Row1, Column1)
+ 6. read_image (Image, ImageFiles[Index])
+ 7. find_shape_model (GrayImage, ModelID, 0, 6.28, \ 0.5, 0, 0.5, 'lea   // 运行时定位开关（row/col/angle）
+ 8. if (|Row|!=0)
+ 9. vector_angle_to_rigid (Row2, Column2, 0, \ Row, Column, Angle, Hom   // 由位姿生成齐次矩阵
+10. affine_trans_region (ROI_0, RegionAffineTrans, \ HomMat2D, 'neares   // 把测量 ROI 跟着工件摆正
+11. affine_trans_region (ROI_0_m, RegionAffineTrans1, HomMat2D, 'neare   // 把测量 ROI 跟着工件摆正
+12. measure_pairs (GrayImage, MeasureHandle,\ 1, 30, 'all', 'all', \ R   // 取边缘对测量引脚宽度
+13. gen_cross_contour_xld (Cross, Row2, Column2, 56, Angle)   // 十字标注
+14. reduce_domain (GrayImage, RegionAffineTrans, ImageReduced)   // 在 ROI 内处理</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">一维测量</span><span class="tag">缺陷检测</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

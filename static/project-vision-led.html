@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="基于 Halcon 的 LED 灯板灯珠检测：形状模板匹配定位灯板型号，HSV 空间分割灯珠，Blob 特征筛选与计数判定 OK/NG，配合 Qt 上位机显示结果。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-vision-led.html" />
+    <meta property="og:title" content="Yusky521 | Halcon LED 灯板灯珠缺陷检测" />
+    <meta property="og:description" content="基于 Halcon 的 LED 灯板灯珠检测：形状模板匹配定位灯板型号，HSV 空间分割灯珠，Blob 特征筛选与计数判定 OK/NG，配合 Qt 上位机显示结果。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-vision-led.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/led-board-result.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | Halcon LED 灯板灯珠缺陷检测</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <video class="background-video" autoplay muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / HALCON + QT</p>
+        <h1>用 Halcon 逐颗判定 LED 灯珠，把 OK / NG 结果画回图像并送进 Qt 上位机。</h1>
+        <p>LED 灯板灯珠检测：先由形状模板匹配识别灯板型号，再在 HSV 空间按饱和度阈值分割灯珠区域，用 Blob 特征筛选与计数判断漏贴、错贴，并把每颗灯珠的判定结果直接标注在图像上；上位机侧使用 Qt 承载 Halcon 窗口与算法调用，实现读图、定位与结果输出。</p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">LED BOARD RESULT</p>
+          <h2>灯板检测结果</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-board-result.jpg" data-lightbox-alt="LED 灯板灯珠检测结果截图" aria-label="查看LED 灯板灯珠检测结果截图">
+            <img class="project-preview__image" src="assets/vision/led-board-result.jpg" alt="LED 灯板灯珠检测结果截图" width="477" height="395" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">画面输出：灯板型号「十灯珠类型」、检查结果 NG、OK 灯珠 8 颗、NG 灯珠 2 颗，并逐颗框出异常灯珠。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">QT HOST</p>
+          <h2>Halcon + Qt 上位机</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/halcon-qt-host.jpg" data-lightbox-alt="Halcon 与 Qt 联合编程上位机界面截图" aria-label="查看Halcon 与 Qt 联合编程上位机界面截图">
+            <img class="project-preview__image" src="assets/vision/halcon-qt-host.jpg" alt="Halcon 与 Qt 联合编程上位机界面截图" width="1600" height="899" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">上位机内嵌 Halcon 窗口，提供「读图」「定位」等按钮，算法在后台调用 Halcon 算子。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">LOCATE RESULT</p>
+          <h2>定位与坐标输出</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/halcon-qt-locate.jpg" data-lightbox-alt="Halcon 定位结果与中心点坐标输出截图" aria-label="查看Halcon 定位结果与中心点坐标输出截图">
+            <img class="project-preview__image" src="assets/vision/halcon-qt-locate.jpg" alt="Halcon 定位结果与中心点坐标输出截图" width="1420" height="1020" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">定位完成后把目标中心点坐标回传到界面文本区（画面中为 1273.26, 1075.2）。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">FEATURES</p>
+          <h2>核心功能</h2>
+          <p>支持两种灯板型号（6 颗 / 10 颗）的模板识别、灯珠区域分割与计数、单颗灯珠 OK / NG 判定与可视化标注，以及 Qt 上位机中的读图与定位交互。</p>
+          <div class="tags"><span class="tag">形状模板匹配</span><span class="tag">HSV 颜色空间</span><span class="tag">Blob 分析</span><span class="tag">OK / NG 判定</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon 关键链路）</h2>
+          <p>下面是该项目 Halcon 侧的主要算子调用顺序，模板只用一次 ROI 裁剪即可复用。</p>
+          <pre class="code-block">1. reduce_domain        裁剪 ROI，只保留模板区域
+2. create_shape_model   为「6 灯珠 / 10 灯珠」各建一个形状模板
+3. find_shape_models    运行时搜索模板，判定当前灯板型号
+4. trans_from_rgb       R,G,B -> H,S,V，把色度与亮度分开
+5. threshold            在 S 通道上做 81 ~ 169 阈值分割灯珠
+6. connection           打散连通域为单颗灯珠
+7. select_shape         按 ['area','height'] 过滤掉噪点与反光
+8. count_obj            统计灯珠数量
+9. disp_message         数量达标输出 OK，否则输出 NG 与数量明细</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">Qt</span><span class="tag">C++</span><span class="tag">模板匹配</span><span class="tag">Blob</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>
