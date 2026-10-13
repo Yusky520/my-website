@@ -579,40 +579,14 @@ textarea {
   overflow-y: hidden;
   padding-bottom: 12px;
   scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(157, 214, 255, 0.42) rgba(255, 255, 255, 0.05);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .project-carousel__viewport::-webkit-scrollbar {
-  height: 10px;
-}
-
-.project-carousel__viewport::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 999px;
-}
-
-.project-carousel__viewport::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, rgba(157, 214, 255, 0.48), rgba(125, 224, 195, 0.45));
-  border-radius: 999px;
-}
-
-.project-carousel__progress {
-  position: relative;
-  height: 2px;
-  width: 100%;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.project-carousel__progress-bar {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 24%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, rgba(157, 214, 255, 0.92), rgba(125, 224, 195, 0.88));
-  box-shadow: 0 0 18px rgba(157, 214, 255, 0.2);
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .project-list {
@@ -1628,7 +1602,6 @@ body.theme-light .site-toast {
 .skill-lanes::-webkit-scrollbar {
   width: 6px;
 }
-
 .skill-lanes::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 999px;
@@ -1638,8 +1611,6 @@ body.theme-light .site-toast {
   background: rgba(157, 214, 255, 0.34);
   border-radius: 999px;
 }
-
-
 .skill-lane {
   display: grid;
   gap: 0.7rem;
@@ -1676,17 +1647,10 @@ body.theme-light .site-toast {
 .skill-lane__chips span {
   padding: 0.42rem 0.72rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
   color: var(--muted);
   background: rgba(255, 255, 255, 0.03);
   font-size: 0.8rem;
-}
-
-.learning-sources {
-  display: grid;
-  gap: 1.2rem;
-  margin-top: 1.25rem;
-  padding: clamp(1.25rem, 3vw, 2rem);
 }
 
 .learning-sources h2,
@@ -1695,53 +1659,7 @@ body.theme-light .site-toast {
   margin: 0;
 }
 
-.learning-source-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.learning-source {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.8rem;
-  align-items: start;
-  min-height: 88px;
-  padding: 1rem;
-  border: 1px solid var(--border-soft);
-  border-radius: 18px;
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.025);
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-a.learning-source:hover {
-  transform: translateY(-2px);
-  border-color: rgba(157, 214, 255, 0.3);
-  background: rgba(157, 214, 255, 0.06);
-}
-
-.learning-source__index {
-  color: var(--accent);
-  font: 0.78rem/1.4 "Manrope", sans-serif;
-  letter-spacing: 0.12em;
-}
-
 .learning-source strong,
-.learning-source small {
-  display: block;
-}
-
-.learning-source strong {
-  margin-bottom: 0.35rem;
-  font-size: 0.95rem;
-}
-
-.learning-source small {
-  color: var(--muted);
-  line-height: 1.65;
-}
-
 .learning-route {
   margin-top: 1.8rem;
 }
@@ -1878,9 +1796,6 @@ a.learning-source:hover {
   .about-summary,
   .learning-grid,
   .learning-detail-grid,
-  .learning-source-list {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 640px) {
@@ -2087,11 +2002,7 @@ a.learning-source:hover {
   .contact-page-grid,
   .learning-grid,
   .learning-detail-grid,
-  .learning-source-list {
-    grid-template-columns: 1fr;
-  }
-
-  .rgb-fields {
+.rgb-fields {
     grid-template-columns: 1fr;
   }
 
@@ -2661,7 +2572,7 @@ textarea:focus-visible,
   display: block;
   border-radius: 16px;
   background: #05080f;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
 }
 
 .detail-note {
@@ -2677,4 +2588,19 @@ textarea:focus-visible,
   letter-spacing: 0.14em;
   color: var(--accent, #7dd3fc);
   opacity: 0.9;
+}
+
+/* 联系方式卡片：改为可点击链接 */
+.contact-panel .link-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-panel .link-card + .link-card {
+  margin-top: 0.75rem;
+}
+
+.contact-panel .link-card__hint {
+  font-size: 0.82rem;
 }

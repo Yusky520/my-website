@@ -20,7 +20,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" /></noscript>
-    <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="style.css" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -176,10 +179,6 @@
             <p>实训项目包括 LED 灯板灯珠检测、圆柱孔配件共线与旋转量检测、金属背板多目标尺寸测量、开关引脚测量与缺陷检测，以及相机 + 机械臂的彩色圆片分拣联调；同时用 Python / OpenCV / YOLOv8 补深度学习方向的基础。</p>
             <div class="about-summary">
               <div class="about-summary__item">
-                <strong>资料来源</strong>
-                <span>B站、C语言中文网、菜鸟编程、开发者导航、其他</span>
-              </div>
-              <div class="about-summary__item">
                 <strong>现在的方向</strong>
                 <span>机器视觉算法（Halcon）、Qt / C++ 上位机、相机与机械臂联调</span>
               </div>
@@ -207,13 +206,26 @@
             <article class="panel glass">
               <p class="section-label">HOBBIES</p>
               <h3>兴趣爱好</h3>
-              <div class="chip-list"><span class="chip">听音乐</span><span class="chip">玩游戏</span><span class="chip">运动</span><span class="chip">健身</span></div>
+              <div class="chip-list"><span class="chip">听音乐</span><span class="chip">运动</span><span class="chip">健身</span><span class="chip">机器视觉</span></div>
             </article>
 
             <article class="panel glass contact-panel">
               <p class="section-label">CONTACT</p>
               <h3>联系方式</h3>
-              <button class="link-card link-card--email" id="email-card" type="button" aria-expanded="false"><strong>Email</strong><span class="link-card__meta"><span class="link-card__hint" id="email-card-hint">点击查看邮箱</span><span class="link-card__value" id="email-card-value" hidden>3294850673@qq.com</span></span></button>
+              <a class="link-card link-card--email is-revealed" href="mailto:3294850673@qq.com" aria-label="给 3294850673@qq.com 发邮件">
+                <strong>Email</strong>
+                <span class="link-card__meta">
+                  <span class="link-card__hint">点击即可直接发邮件</span>
+                  <span class="link-card__value">3294850673@qq.com</span>
+                </span>
+              </a>
+              <a class="link-card" href="https://github.com/Yusky520" target="_blank" rel="noreferrer" aria-label="打开 GitHub 主页">
+                <strong>GitHub</strong>
+                <span class="link-card__meta">
+                  <span class="link-card__hint">代码与项目源码</span>
+                  <span class="link-card__value">github.com/Yusky520</span>
+                </span>
+              </a>
             </article>
           </div>
         </div>
@@ -504,9 +516,6 @@
             </div>
           </article>
             </div>
-          </div>
-          <div class="project-carousel__progress" aria-hidden="true">
-            <span class="project-carousel__progress-bar" id="project-progress"></span>
           </div>
         </div>
       </section>
