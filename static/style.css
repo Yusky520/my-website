@@ -2167,25 +2167,23 @@ body::-webkit-scrollbar {
   line-height: 1;
 }
 
+/* 预览卡改为两列，图片限高，避免大图把页面撑得过长 */
 .detail-card--preview {
+  grid-column: auto;
+}
+
+/* 演示视频保持整行：缩小后看不清动作 */
+.detail-card--preview:has(.detail-video) {
   grid-column: 1 / -1;
 }
 
 .detail-preview {
-  min-height: 260px;
+  min-height: 0;
   margin-top: 0.35rem;
 }
 
-/* 练习集：10 张图排成两列并限制高度，避免整页被大图撑满 */
-.practice-page .detail-card--preview {
-  grid-column: auto;
-}
-
-.practice-page .detail-preview {
-  min-height: 0;
-}
-
-.practice-page .project-preview__image {
+/* 限高但不裁切：截图里的结果标注多在角落，裁掉就看不到了 */
+.detail-preview .project-preview__image {
   height: auto;
   max-height: 320px;
   object-fit: contain;
