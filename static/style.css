@@ -2176,6 +2176,22 @@ body::-webkit-scrollbar {
   margin-top: 0.35rem;
 }
 
+/* 练习集：10 张图排成两列并限制高度，避免整页被大图撑满 */
+.practice-page .detail-card--preview {
+  grid-column: auto;
+}
+
+.practice-page .detail-preview {
+  min-height: 0;
+}
+
+.practice-page .project-preview__image {
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .project-preview--image {
   appearance: none;
   padding: 0;
