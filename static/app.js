@@ -13,9 +13,7 @@ const bannerDots = Array.from(document.querySelectorAll(".banner-dot"));
 const bannerPrev = document.getElementById("banner-prev");
 const bannerNext = document.getElementById("banner-next");
 const bannerToggle = document.getElementById("banner-toggle");
-const emailCard = document.getElementById("email-card");
-const emailCardHint = document.getElementById("email-card-hint");
-const emailCardValue = document.getElementById("email-card-value");
+
 const projectCards = Array.from(document.querySelectorAll(".project-card"));
 const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
 const projectViewport = document.getElementById("project-viewport");
@@ -554,26 +552,6 @@ function setupCarousel() {
   restartTimer();
 }
 
-function setupEmailCard() {
-  if (!emailCard || !emailCardHint || !emailCardValue) {
-    return;
-  }
-
-  emailCard.addEventListener("click", () => {
-    const isHidden = emailCardValue.hasAttribute("hidden");
-    if (isHidden) {
-      emailCardValue.removeAttribute("hidden");
-      emailCard.classList.add("is-revealed");
-      emailCardHint.textContent = "点击收起邮箱";
-      emailCard.setAttribute("aria-expanded", "true");
-    } else {
-      emailCardValue.setAttribute("hidden", "hidden");
-      emailCard.classList.remove("is-revealed");
-      emailCardHint.textContent = "点击查看邮箱";
-      emailCard.setAttribute("aria-expanded", "false");
-    }
-  });
-}
 
 function setupProjectFilter() {
   if (!projectCards.length || !filterButtons.length) {
@@ -1050,13 +1028,15 @@ async function copyText(text, successMessage) {
 
 function setupEmailAddress() {
   const address = document.getElementById("email-address");
-  if (!address) {
+  const card = address?.closest(".link-card--email");
+  if (!address || !card) {
     return;
   }
 
   const qqMail = address.dataset.qqmail || "https://mail.qq.com/";
   let clickTimer = null;
 
+  // 单击邮箱地址：延迟 400ms 再走 mailto，把这段时间留给双击判定
   address.addEventListener("click", (event) => {
     event.preventDefault();
     if (clickTimer) {
@@ -1064,11 +1044,18 @@ function setupEmailAddress() {
     }
     clickTimer = window.setTimeout(() => {
       clickTimer = null;
-      window.location.href = address.getAttribute("href");
+      const href = address.getAttribute("href");
+      if (href) {
+        window.location.href = href;
+      }
     }, 400);
   });
 
-  address.addEventListener("dblclick", (event) => {
+  // 双击整张邮箱卡片都打开 QQ 邮箱网页版（复制按钮除外）
+  card.addEventListener("dblclick", (event) => {
+    if (event.target.closest("button")) {
+      return;
+    }
     event.preventDefault();
     window.clearTimeout(clickTimer);
     clickTimer = null;
@@ -1114,7 +1101,6 @@ function setupCopyButtons() {
 
 setupBackgroundVideo();
 setupReveal();
-setupEmailCard();
 setupNav();
 setupBackToTop();
 setupPageReturn();
