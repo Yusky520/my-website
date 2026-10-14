@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#060b16" />
-    <meta name="description" content="Yusky521 的学习记录：Halcon 机器视觉、C++ 与 Qt 上位机、OpenCV 与 Python 练习。" />
+    <meta name="description" content="Yusky521 的机器视觉技术笔记：Halcon 算子实践、相机标定与九点标定、Qt / C++ 上位机开发、工业相机与打光方案。" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://yusky521.onrender.com/blog.html" />
-    <meta property="og:title" content="Yusky521 | 学习记录" />
-    <meta property="og:description" content="Python、OpenCV、FastAPI、C++ 与 Qt 学习内容。" />
+    <meta property="og:title" content="Yusky521 | 机器视觉技术笔记" />
+    <meta property="og:description" content="Halcon 算子实践、相机标定与九点标定、Qt / C++ 上位机开发、工业相机与打光方案。" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://yusky521.onrender.com/blog.html" />
     <meta property="og:image" content="https://yusky521.onrender.com/assets/avatar.png" />
-    <title>Yusky521 | 学习记录</title>
+    <title>Yusky521 | 机器视觉技术笔记</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -25,18 +25,25 @@
   <body class="page-body">
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
-    <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
+    <div class="background-stack" aria-hidden="true"><img class="background-still" src="assets/bg-poster.webp" alt="" width="1280" height="720" decoding="async" fetchpriority="high" /><video class="background-video" muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
     <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
     <main class="page subpage">
-      <section class="subpage-hero glass reveal"><p class="section-label">BLOG / NOTES</p><h1>把课程、课件和练习留下来。</h1><p>只保留已学习的 Python、OpenCV、FastAPI、C++ 和 Qt 内容，按方向分类整理。</p><a class="ghost-btn page-back" href="index.html">返回首页</a></section>
+      <section class="subpage-hero glass reveal"><p class="section-label">NOTES / MACHINE VISION</p><h1>把 Halcon 算子、标定和上位机的实践记下来。</h1><p>按方向整理的机器视觉笔记：算子用法、标定流程、上位机交互与打光经验。每条都对应一个实际跑通的案例，而不是只抄概念。</p><a class="ghost-btn page-back" href="index.html">返回首页</a></section>
 
-      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">LEARNING ROUTE</p><h2>当前学习方向</h2></div></div><div class="learning-grid">
-        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">01</span><span class="project-type">PYTHON</span></div><h3>基础与实用脚本</h3><p>零基础、高阶模块、二维码、文件上传、爬虫。</p><div class="tags"><span class="tag">语法</span><span class="tag">模块</span><span class="tag">二维码</span><span class="tag">爬虫</span></div></article>
-        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">02</span><span class="project-type">OPENCV</span></div><h3>计算机视觉基础</h3><p>图像读取、颜色空间、像素处理、阈值、轮廓与视觉实验。</p><div class="tags"><span class="tag">图像读取</span><span class="tag">颜色空间</span><span class="tag">阈值</span><span class="tag">轮廓</span></div></article>
-        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">03</span><span class="project-type">FASTAPI</span></div><h3>后端 API 开发</h3><p>路由、依赖注入、Pydantic、异步编程、ORM、项目拆分、部署与接口测试。</p><div class="tags"><span class="tag">路由</span><span class="tag">依赖注入</span><span class="tag">Pydantic</span><span class="tag">异步</span><span class="tag">ORM</span></div></article>
-        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">04</span><span class="project-type">C++</span></div><h3>C++</h3><p>数据类型、运算符、条件与循环、函数、数组、指针、引用、字符串、结构体、共用体、枚举、类与对象、封装、构造析构、继承、多态、模板、STL、异常、文件读写、静态库、动态库与多线程。</p><div class="tags"><span class="tag">指针引用</span><span class="tag">面向对象</span><span class="tag">模板与STL</span><span class="tag">异常处理</span><span class="tag">文件与线程</span></div></article>
-        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">05</span><span class="project-type">QT</span></div><h3>Qt</h3><p>Qt6 环境与项目结构、对象树、QWidget 与 QMainWindow、布局管理、常用控件、信号与槽、Lambda 交互、菜单栏、工具栏、状态栏、对话框、文件读写、编码处理、数据持久化、定时器、日期时间、QPainter 绘图与简易动画。</p><div class="tags"><span class="tag">界面架构</span><span class="tag">布局控件</span><span class="tag">信号与槽</span><span class="tag">文件持久化</span><span class="tag">绘图与动画</span></div></article>
+      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">NOTE TOPICS</p><h2>笔记方向</h2></div></div><div class="learning-grid">
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">01</span><span class="project-type">HALCON</span></div><h3>预处理与区域分析</h3><p>灰度增强、滤波与形态学处理；阈值分割、Blob 分析与连通域计数，再用面积、圆度等特征做筛选。</p><div class="tags"><span class="tag">灰度增强</span><span class="tag">滤波</span><span class="tag">形态学</span><span class="tag">Blob 分析</span><span class="tag">特征筛选</span></div></article>
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">02</span><span class="project-type">HALCON</span></div><h3>定位与模板匹配</h3><p>形状模板匹配与仿射变换位姿矫正；ROI 跟随、多目标一次定位，用于工件摆放角度随机或需要区分型号的场合。</p><div class="tags"><span class="tag">形状模板匹配</span><span class="tag">仿射变换</span><span class="tag">位姿矫正</span><span class="tag">多目标定位</span></div></article>
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">03</span><span class="project-type">HALCON</span></div><h3>测量与识别</h3><p>亚像素边缘提取与圆拟合、XLD 轮廓处理、一维卡尺测量；OCR 字符识别与一维码／二维码识别。</p><div class="tags"><span class="tag">亚像素</span><span class="tag">XLD 轮廓</span><span class="tag">卡尺测量</span><span class="tag">OCR / 条码</span></div></article>
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">04</span><span class="project-type">CALIBRATION</span></div><h3>相机标定</h3><p>单相机标定与九点标定；视觉坐标系到机械臂坐标系的映射、旋转补偿与实际抓取误差验证。</p><div class="tags"><span class="tag">单相机标定</span><span class="tag">九点标定</span><span class="tag">坐标映射</span><span class="tag">误差补偿</span></div></article>
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">05</span><span class="project-type">QT / C++</span></div><h3>上位机开发</h3><p>Qt6 项目结构与信号与槽；把 Halcon 图像窗口嵌入界面，做参数可调面板、缺陷标注与结果输出，并通过串口下发指令。</p><div class="tags"><span class="tag">Qt6</span><span class="tag">信号与槽</span><span class="tag">Halcon 嵌入</span><span class="tag">串口通讯</span></div></article>
+        <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">06</span><span class="project-type">HARDWARE</span></div><h3>相机与打光</h3><p>工业相机与镜头的选型、工作距离与视野估算；条形／环形光源的打光方案对比，以及不同光照下预处理效果差异。</p><div class="tags"><span class="tag">工业相机</span><span class="tag">镜头选型</span><span class="tag">光源选型</span><span class="tag">打光调试</span></div></article>
       </div></section>
+
+      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">MORE</p><h2>继续看</h2></div><p class="section-head__note">练习过程与算子结果整理在练习集里。</p></div>
+        <div class="learning-grid">
+          <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">→</span><span class="project-type">PRACTICE</span></div><h3>Halcon 算子练习集</h3><p>按天记录的算子练习：区域分割与特征筛选、颜色分类与计数、模板匹配定位、字符识别与缺陷检测。</p><a class="ghost-btn" href="project-halcon-practice.html">查看练习集</a></article>
+        </div>
+      </section>
     </main>
     <footer class="site-footer"><div><p>&#169; 2026 LiuTianCi</p><p>Built with HTML &#183; CSS &#183; JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
     <script src="app.js" defer></script>

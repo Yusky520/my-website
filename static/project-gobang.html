@@ -11,7 +11,7 @@
     <meta property="og:description" content="基于 C++17 和 Qt Widgets 的本地五子棋桌面项目。" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://yusky521.onrender.com/project-gobang.html" />
-    <meta property="og:image" content="https://yusky521.onrender.com/assets/project-gobang-board.png" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/project-gobang-board.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Yusky521 | GobangChess Qt 五子棋" />
     <meta name="twitter:description" content="基于 C++17 和 Qt Widgets 的本地五子棋桌面项目。" />
@@ -28,7 +28,7 @@
   <body class="page-body">
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
-    <div class="background-stack" aria-hidden="true"><video class="background-video" autoplay muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
+    <div class="background-stack" aria-hidden="true"><img class="background-still" src="assets/bg-poster.webp" alt="" width="1280" height="720" decoding="async" fetchpriority="high" /><video class="background-video" muted loop playsinline preload="none"><source data-src="assets/bg.webm" type="video/webm" /><source data-src="assets/bg.mp4" type="video/mp4" /></video><div class="overlay"></div><div class="grain"></div></div>
     <header class="site-header glass"><a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a><button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav"><a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button></nav></header>
     <main class="page subpage">
       <section class="subpage-hero glass reveal"><p class="section-label">PROJECT / QT / C++</p><h1>把五子棋做成一个完整的本地对战体验。</h1><p>GobangChess 是一个基于 Qt Widgets 和 C++17 的桌面五子棋项目，重点练习界面组织、棋盘绘制、规则判断和简单 AI 对战。</p><a class="ghost-btn page-back" href="index.html#projects">返回项目区</a></section>
@@ -36,15 +36,15 @@
         <article class="panel glass detail-card detail-card--preview reveal">
           <p class="section-label">START PAGE</p>
           <h2>开始设置界面</h2>
-          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/project-gobang-start.png" data-lightbox-alt="GobangChess 五子棋开始设置界面截图" aria-label="查看 GobangChess 开始设置截图">
-            <img class="project-preview__image" src="assets/project-gobang-start.png" alt="GobangChess 五子棋开始设置界面截图" width="1429" height="1033" loading="lazy" decoding="async" />
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/project-gobang-start.webp" data-lightbox-alt="GobangChess 五子棋开始设置界面截图" aria-label="查看 GobangChess 开始设置截图">
+            <img class="project-preview__image" src="assets/project-gobang-start.webp" alt="GobangChess 五子棋开始设置界面截图" width="1429" height="1033" loading="lazy" decoding="async" />
           </button>
         </article>
         <article class="panel glass detail-card detail-card--preview reveal">
           <p class="section-label">BOARD PAGE</p>
           <h2>棋盘与对局信息</h2>
-          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/project-gobang-board.png" data-lightbox-alt="GobangChess Qt 五子棋棋盘界面截图" aria-label="查看 GobangChess 棋盘截图">
-            <img class="project-preview__image" src="assets/project-gobang-board.png" alt="GobangChess Qt 五子棋棋盘界面截图" width="1467" height="1050" loading="lazy" decoding="async" />
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/project-gobang-board.webp" data-lightbox-alt="GobangChess Qt 五子棋棋盘界面截图" aria-label="查看 GobangChess 棋盘截图">
+            <img class="project-preview__image" src="assets/project-gobang-board.webp" alt="GobangChess Qt 五子棋棋盘界面截图" width="1467" height="1050" loading="lazy" decoding="async" />
           </button>
         </article>
         <article class="panel glass detail-card reveal"><p class="section-label">FEATURES</p><h2>功能概览</h2><p>支持双人对战和人机对战，可选择 AI 难度、执棋颜色与规则模式；对局中提供重新开始、悔棋、退出和回合倒计时。</p><div class="tags"><span class="tag">双人对战</span><span class="tag">人机对战</span><span class="tag">悔棋</span><span class="tag">倒计时</span></div></article>

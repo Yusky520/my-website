@@ -59,6 +59,7 @@ textarea {
   background: #03070f;
 }
 
+.background-still,
 .background-video,
 .overlay,
 .grain {
@@ -68,10 +69,28 @@ textarea {
   height: 100%;
 }
 
+.background-still,
 .background-video {
   object-fit: cover;
-  opacity: 0.8;
   transform: scale(1.04);
+  transition: opacity 600ms ease;
+}
+
+/* 默认显示静态帧，只有用户点击「动态背景」后才加载并播放视频 */
+.background-still {
+  opacity: 0.8;
+}
+
+.background-video {
+  opacity: 0;
+}
+
+.background-stack.is-video .background-still {
+  opacity: 0;
+}
+
+.background-stack.is-video .background-video {
+  opacity: 0.8;
 }
 
 .overlay {
@@ -1304,6 +1323,51 @@ textarea {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(157, 214, 255, 0.08);
+}
+
+.bg-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: transparent;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.bg-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(157, 214, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.bg-toggle__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: transparent;
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.bg-toggle[aria-pressed="true"] .bg-toggle__dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(157, 214, 255, 0.08);
+}
+
+/* 页面里找不到导航时的兜底位置 */
+.bg-toggle--floating {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 30;
+  background: rgba(6, 11, 22, 0.72);
+  backdrop-filter: blur(6px);
 }
 
 .project-card,

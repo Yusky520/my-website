@@ -27,7 +27,8 @@
     <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
     <div class="background-stack" aria-hidden="true">
-      <video class="background-video" autoplay muted loop playsinline preload="none">
+      <img class="background-still" src="assets/bg-poster.webp" alt="" width="1280" height="720" decoding="async" fetchpriority="high" />
+      <video class="background-video" muted loop playsinline preload="none">
         <source data-src="assets/bg.webm" type="video/webm" />
         <source data-src="assets/bg.mp4" type="video/mp4" />
       </video>
@@ -44,7 +45,7 @@
       <section class="subpage-hero glass reveal">
         <p class="section-label">PROJECT / VISION / UARM</p>
         <h1>相机认颜色、算坐标，串口发给四轴机械臂把圆片分拣开。</h1>
-        <p>用工业相机采集散落在工作台上的彩色圆片，先分离色度与亮度做颜色分类，再用区域处理锁定每颗圆片的中心点，配合手眼标定矩阵把图像坐标换算成机械臂坐标，通过串口把目标坐标下发，由 UARM 四轴机械臂完成抓取与分拣。</p>
+        <p>用工业相机采集散落在工作台上的彩色圆片，先分离色度与亮度做颜色分类，再用区域处理锁定每颗圆片的中心点，配合九点标定矩阵把图像坐标换算成机械臂坐标，通过串口把目标坐标下发，由 UARM 四轴机械臂完成抓取与分拣。</p>
         <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
       </section>
       <section class="detail-grid">
@@ -60,14 +61,14 @@
         <article class="panel glass detail-card reveal">
           <p class="section-label">FEATURES</p>
           <h2>核心流程</h2>
-          <p>相机实时采集 → HSV 分离色度与亮度 → 阈值分割 + 形态学处理 → 连通域与中心点提取 → 颜色分类 → 手眼标定换算坐标 → 串口下发机械臂 → 抓取分拣。</p>
-          <div class="tags"><span class="tag">相机采集</span><span class="tag">HSV 颜色分类</span><span class="tag">手眼标定</span><span class="tag">串口通讯</span><span class="tag">机械臂联调</span></div>
+          <p>相机实时采集 → HSV 分离色度与亮度 → 阈值分割 + 形态学处理 → 连通域与中心点提取 → 颜色分类 → 九点标定换算坐标 → 串口下发机械臂 → 抓取分拣。</p>
+          <div class="tags"><span class="tag">相机采集</span><span class="tag">HSV 颜色分类</span><span class="tag">九点标定</span><span class="tag">串口通讯</span><span class="tag">机械臂联调</span></div>
         </article>
         <article class="panel glass detail-card reveal">
           <p class="section-label">IMPLEMENTATION</p>
           <h2>实现方式（Halcon + 串口）</h2>
           <p>下面是该项目的主链路，标定矩阵事先离线写入 tup 文件，运行时直接读取复用。</p>
-          <pre class="code-block">1. read_tuple             读取手眼标定矩阵 HandEyeCalibrationMatrix.tup
+          <pre class="code-block">1. read_tuple             读取标定矩阵 HandEyeCalibrationMatrix.tup
 2. open_serial            打开串口 COM3
 3. set_serial_param       115200, 8, none, none, 1
 4. write_serial           下发初始化指令与回零指令 cmd_init / cmd_move_home
@@ -81,7 +82,7 @@
 12. intersection          与填充区域求交，得到每颗圆片
 13. area_center           取面积与中心坐标，用于分类与定位
 14. write_serial          把目标坐标写入串口，驱动机械臂抓取</pre>
-          <div class="tags"><span class="tag">Halcon</span><span class="tag">串口通讯</span><span class="tag">手眼标定</span><span class="tag">UARM</span></div>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">串口通讯</span><span class="tag">九点标定</span><span class="tag">UARM</span></div>
         </article>
       </section>
     </main>

@@ -91,21 +91,21 @@ window.addEventListener("load", () => window.setTimeout(hideLoading, 220));
 window.setTimeout(hideLoading, 2600);
 
 function setupBackgroundVideo() {
-  if (!backgroundVideo) {
+  const stack = document.querySelector(".background-stack");
+
+  if (!backgroundVideo || !stack) {
     return;
   }
 
+  // 减少动画 / 省流量模式下，直接保持静态背景，不提供开关
+  const reduceMotion = shouldReduceMotion();
   const saveData = navigator.connection?.saveData;
-  if (shouldReduceMotion() || saveData) {
-    backgroundVideo.removeAttribute("autoplay");
-    backgroundVideo.pause();
-    return;
-  }
+  const canPlayVideo = !reduceMotion && !saveData;
 
   let hasLoaded = false;
 
   const playIfAllowed = () => {
-    if (shouldReduceMotion() || document.hidden) {
+    if (reduceMotion || document.hidden || !stack.classList.contains("is-video")) {
       backgroundVideo.pause();
       return;
     }
@@ -125,6 +125,7 @@ function setupBackgroundVideo() {
       return;
     }
 
+    // 只有用户主动切到动态背景时，才真正下载视频
     hasLoaded = true;
     sources.forEach((source) => {
       source.src = source.dataset.src;
@@ -135,6 +136,51 @@ function setupBackgroundVideo() {
     playIfAllowed();
   };
 
+  // 生成切换按钮，优先放进导航，找不到导航则退化为右下角悬浮
+  const toggleButton = document.createElement("button");
+  toggleButton.className = "bg-toggle";
+  toggleButton.type = "button";
+  toggleButton.setAttribute("aria-label", "切换动态 / 静态背景");
+  toggleButton.setAttribute("aria-pressed", "false");
+  toggleButton.innerHTML =
+    '<span class="bg-toggle__dot" aria-hidden="true"></span><span class="bg-toggle__text">动态背景</span>';
+  const toggleText = toggleButton.querySelector(".bg-toggle__text");
+
+  const nav = document.getElementById("site-nav");
+  const themeButton = nav?.querySelector(".theme-toggle");
+  if (nav) {
+    nav.insertBefore(toggleButton, themeButton || null);
+  } else {
+    toggleButton.classList.add("bg-toggle--floating");
+    document.body.appendChild(toggleButton);
+  }
+
+  const applyMode = (isVideo, persist) => {
+    stack.classList.toggle("is-video", isVideo);
+    toggleButton.setAttribute("aria-pressed", String(isVideo));
+    if (toggleText) {
+      toggleText.textContent = isVideo ? "静态背景" : "动态背景";
+    }
+
+    if (isVideo) {
+      loadVideo();
+    } else {
+      backgroundVideo.pause();
+    }
+
+    if (persist) {
+      try {
+        window.localStorage.setItem("yusky-bg", isVideo ? "video" : "static");
+      } catch (error) {
+        // 存储不可用只影响记忆，不影响本次切换
+      }
+    }
+  };
+
+  toggleButton.addEventListener("click", () => {
+    applyMode(!stack.classList.contains("is-video"), true);
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       backgroundVideo.pause();
@@ -144,10 +190,21 @@ function setupBackgroundVideo() {
     playIfAllowed();
   });
 
-  if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(loadVideo, { timeout: 1000 });
-  } else {
-    window.setTimeout(loadVideo, 500);
+  if (!canPlayVideo) {
+    toggleButton.hidden = true;
+    return;
+  }
+
+  // 默认静态背景；只有用户此前主动开启过动态背景才恢复
+  let savedMode = "static";
+  try {
+    savedMode = window.localStorage.getItem("yusky-bg") || "static";
+  } catch (error) {
+    savedMode = "static";
+  }
+
+  if (savedMode === "video") {
+    applyMode(true, false);
   }
 }
 
