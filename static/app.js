@@ -585,6 +585,10 @@ function setupProjectFilter() {
   let dragStartScroll = 0;
   let dragDistance = 0;
   let suppressClickUntil = 0;
+  // 拖动判定用：按下时先记录，位移超过阈值才真正进入拖动
+  let pendingPointerId = null;
+  let pendingStartX = 0;
+  let pendingStartScroll = 0;
   const interactiveSelector = "a, button, input, select, textarea, label";
 
   const getVisibleCards = () => projectCards.filter((card) => !card.classList.contains("is-filtered-out"));
@@ -670,6 +674,7 @@ function setupProjectFilter() {
 
     const shouldSuppressClick = dragDistance > 8;
     isDragging = false;
+    pendingPointerId = null;
     dragDistance = 0;
     projectViewport.classList.remove("is-dragging");
     if (shouldSuppressClick) {
@@ -696,6 +701,9 @@ function setupProjectFilter() {
       scrollProjectsByPage(1);
     }
   });
+  // 按下时只记录起点，等位移超过阈值再进入拖动。
+  // 关键：不能在这里就 setPointerCapture —— 一旦捕获指针，
+  // click 会被重定向到 viewport，卡片文字区的单击/双击就再也收不到事件。
   projectViewport?.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "mouse" && event.button !== 0) {
       return;
@@ -705,16 +713,30 @@ function setupProjectFilter() {
       return;
     }
 
-    isDragging = true;
-    dragStartX = event.clientX;
-    dragStartScroll = projectViewport.scrollLeft;
+    pendingPointerId = event.pointerId;
+    pendingStartX = event.clientX;
+    pendingStartScroll = projectViewport.scrollLeft;
     dragDistance = 0;
-    projectViewport.classList.add("is-dragging");
-    projectViewport.setPointerCapture?.(event.pointerId);
   });
   projectViewport?.addEventListener("pointermove", (event) => {
-    if (!isDragging || !projectViewport) {
+    if (!projectViewport) {
       return;
+    }
+
+    if (!isDragging) {
+      if (pendingPointerId === null || event.pointerId !== pendingPointerId) {
+        return;
+      }
+
+      if (Math.abs(event.clientX - pendingStartX) <= 8) {
+        return;
+      }
+
+      isDragging = true;
+      dragStartX = pendingStartX;
+      dragStartScroll = pendingStartScroll;
+      projectViewport.classList.add("is-dragging");
+      projectViewport.setPointerCapture?.(event.pointerId);
     }
 
     const delta = event.clientX - dragStartX;
@@ -761,6 +783,7 @@ function setupProjectFilter() {
     };
 
     cardBody.addEventListener("click", goToDetail);
+    cardBody.addEventListener("dblclick", goToDetail);
     cardBody.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
