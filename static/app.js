@@ -782,7 +782,7 @@ function setupProjectFilter() {
       window.location.href = detailUrl;
     };
 
-    cardBody.addEventListener("click", goToDetail);
+    // 只保留双击进入详情：轮播里单击容易误触跳转
     cardBody.addEventListener("dblclick", goToDetail);
     cardBody.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {

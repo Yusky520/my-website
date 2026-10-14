@@ -640,7 +640,7 @@ textarea {
 }
 
 .project-card__body {
-  cursor: pointer;
+  cursor: default;
 }
 
 .project-card__links,
