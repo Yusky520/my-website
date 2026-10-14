@@ -93,6 +93,25 @@ textarea {
   opacity: 0.8;
 }
 
+/* 动态背景时关掉毛玻璃与混合模式。
+   backdrop-filter 需要「取背景像素再模糊」：背景静止时浏览器能缓存结果，
+   但背景变成播放中的视频后，每一帧都要对页面上 20+ 个毛玻璃面板重算，
+   帧率会被直接拖垮；mix-blend-mode 覆盖在动画内容上同理。 */
+body.bg-video .glass,
+body.bg-video .glass-lite {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.bg-video .grain {
+  mix-blend-mode: normal;
+}
+
+/* 让视频独立成层，避免每帧重绘整个背景栈 */
+body.bg-video .background-video {
+  will-change: transform;
+}
+
 .overlay {
   background:
     radial-gradient(circle at 15% 20%, rgba(124, 173, 255, 0.1), transparent 28%),

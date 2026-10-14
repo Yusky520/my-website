@@ -155,6 +155,8 @@ function setupBackgroundVideo() {
 
   const applyMode = (isVideo, persist) => {
     stack.classList.toggle("is-video", isVideo);
+    // 给 body 打标记：动态背景时用 CSS 关掉毛玻璃与混合模式，否则每帧都要重算，非常卡
+    document.body.classList.toggle("bg-video", isVideo);
     toggleButton.setAttribute("aria-pressed", String(isVideo));
     if (toggleText) {
       toggleText.textContent = isVideo ? "静态背景" : "动态背景";
