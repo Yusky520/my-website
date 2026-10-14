@@ -11,7 +11,7 @@
     <meta property="og:description" content="基于 Halcon 的 LED 灯板灯珠检测：形状模板匹配定位灯板型号，HSV 空间分割灯珠，Blob 特征筛选与计数判定 OK/NG，配合 Qt 上位机显示结果。" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://yusky521.onrender.com/project-vision-led.html" />
-    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/led-board-result.jpg" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/led-04-result.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>Yusky521 | Halcon LED 灯板灯珠缺陷检测</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,29 +49,38 @@
       </section>
       <section class="detail-grid">
         <article class="panel glass detail-card detail-card--preview reveal">
-          <p class="section-label">LED BOARD RESULT</p>
-          <h2>灯板检测结果</h2>
-          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-board-result.jpg" data-lightbox-alt="LED 灯板灯珠检测结果截图" aria-label="查看LED 灯板灯珠检测结果截图">
-            <img class="project-preview__image" src="assets/vision/led-board-result.jpg" alt="LED 灯板灯珠检测结果截图" width="477" height="395" loading="lazy" decoding="async" />
+          <p class="section-label">LED BOARD</p>
+          <h2>灯板原图（十灯珠型）</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-01-original.jpg" data-lightbox-alt="灯板原图（十灯珠型）" aria-label="查看灯板原图（十灯珠型）">
+            <img class="project-preview__image" src="assets/vision/led-01-original.jpg" alt="LED 灯板灯珠检测结果截图" width="1200" height="1003" loading="lazy" decoding="async" />
           </button>
-          <p class="detail-note">画面输出：灯板型号「十灯珠类型」、检查结果 NG、OK 灯珠 8 颗、NG 灯珠 2 颗，并逐颗框出异常灯珠。</p>
+          <p class="detail-note">采集原图：同一工位下的灯板照片，模板匹配据此判定灯板型号并给出位姿。</p>
         </article>
         <article class="panel glass detail-card detail-card--preview reveal">
-          <p class="section-label">QT HOST</p>
-          <h2>Halcon + Qt 上位机</h2>
-          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/halcon-qt-host.jpg" data-lightbox-alt="Halcon 与 Qt 联合编程上位机界面截图" aria-label="查看Halcon 与 Qt 联合编程上位机界面截图">
-            <img class="project-preview__image" src="assets/vision/halcon-qt-host.jpg" alt="Halcon 与 Qt 联合编程上位机界面截图" width="1600" height="899" loading="lazy" decoding="async" />
+          <p class="section-label">S CHANNEL</p>
+          <h2>HSV 分离出的 S 通道</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-02-channel.jpg" data-lightbox-alt="HSV 分离出的 S 通道" aria-label="查看HSV 分离出的 S 通道">
+            <img class="project-preview__image" src="assets/vision/led-02-channel.jpg" alt="LED 灯板灯珠检测结果截图" width="1200" height="1003" loading="lazy" decoding="async" />
           </button>
-          <p class="detail-note">上位机内嵌 Halcon 窗口，提供「读图」「定位」等按钮，算法在后台调用 Halcon 算子。</p>
+          <p class="detail-note">直接用灰度分割容易被白纸背景带偏，改用饱和度通道后灯珠明显亮于背景。</p>
         </article>
         <article class="panel glass detail-card detail-card--preview reveal">
-          <p class="section-label">LOCATE RESULT</p>
-          <h2>定位与坐标输出</h2>
-          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/halcon-qt-locate.jpg" data-lightbox-alt="Halcon 定位结果与中心点坐标输出截图" aria-label="查看Halcon 定位结果与中心点坐标输出截图">
-            <img class="project-preview__image" src="assets/vision/halcon-qt-locate.jpg" alt="Halcon 定位结果与中心点坐标输出截图" width="1420" height="1020" loading="lazy" decoding="async" />
+          <p class="section-label">SEGMENT</p>
+          <h2>阈值 + 特征筛选后的灯珠</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-03-regions.jpg" data-lightbox-alt="阈值 + 特征筛选后的灯珠" aria-label="查看阈值 + 特征筛选后的灯珠">
+            <img class="project-preview__image" src="assets/vision/led-03-regions.jpg" alt="LED 灯板灯珠检测结果截图" width="1200" height="1003" loading="lazy" decoding="async" />
           </button>
-          <p class="detail-note">定位完成后把目标中心点坐标回传到界面文本区（画面中为 1273.26, 1075.2）。</p>
+          <p class="detail-note">S 通道阈值分割 + 连通域，再按面积（8500–10000）与高度筛选，得到 8 颗灯珠。</p>
         </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">RESULT</p>
+          <h2>最终标注与判定输出</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/led-04-result.jpg" data-lightbox-alt="最终标注与判定输出" aria-label="查看最终标注与判定输出">
+            <img class="project-preview__image" src="assets/vision/led-04-result.jpg" alt="LED 灯板灯珠检测结果截图" width="1200" height="1003" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">每颗灯珠用最小外接矩形框出并计数，输出「十灯珠类型 / NG / OK 8 颗 / NG 2 颗」。</p>
+        </article>
+
         <article class="panel glass detail-card reveal">
           <p class="section-label">FEATURES</p>
           <h2>核心功能</h2>

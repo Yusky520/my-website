@@ -4,3 +4,22 @@ services:
     env: static
     buildCommand: ""
     staticPublishPath: ./static
+    routes:
+      # 早期三个练习项目已删除，这里做永久重定向：
+      # 一是给旧链接/搜索引擎一个去处，二是覆盖托管侧残留的旧文件副本
+      - type: redirect
+        source: /project-tools.html
+        destination: /
+      - type: redirect
+        source: /project-vision.html
+        destination: /
+      - type: redirect
+        source: /project-portfolio.html
+        destination: /
+      # 同批删除的两张旧预览图
+      - type: redirect
+        source: /assets/project-tools-preview.png
+        destination: /
+      - type: redirect
+        source: /assets/project-portfolio-preview.webp
+        destination: /

@@ -121,8 +121,7 @@
       <section class="hero reveal" id="home">
         <div class="hero__copy glass">
           <p class="eyebrow">PERSONAL WEBSITE</p>
-          <h1>Yusky521</h1>
-          <p class="hero__name">LiuTianCi</p>
+          <h1>LiuTianCi</h1>
           <h2>机器视觉 · Halcon / Qt</h2>
           <p class="tagline">在安静的界面里，放进一点技术和一点生活感。</p>
           <div class="hero-actions">
@@ -132,7 +131,7 @@
           <div class="hero-stats" aria-label="网站概览">
               <div class="hero-stat">
                 <span class="hero-stat__label">机器视觉项目</span>
-                <strong>07</strong>
+                <strong>06</strong>
               </div>
             <div class="hero-stat">
               <span class="hero-stat__label">常用技能</span>
@@ -168,17 +167,21 @@
         <div class="about-grid">
           <article class="panel large-panel glass">
             <p class="section-label">PROFILE</p>
-            <h3>从视觉算法到桌面软件：机器视觉方向</h3>
-            <p>我在系统学习机器视觉与桌面软件开发：用 Halcon 做工业视觉算法（模板匹配、Blob 分析、亚像素测量、相机与手眼标定），用 C++ / Qt 做上位机界面，并把实训项目与算子练习整理成可回看的记录。</p>
-            <p>实训项目包括 LED 灯板灯珠检测、圆柱孔配件共线与旋转量检测、金属背板多目标尺寸测量、开关引脚测量与缺陷检测，以及相机 + 机械臂的彩色圆片分拣联调；同时用 Python / OpenCV / YOLOv8 补深度学习方向的基础。</p>
-            <div class="about-summary">
+            <h3>从视觉基础到 Halcon 与桌面开发</h3>
+          <p>我正在学习 Halcon 机器视觉与 C++ / Qt 上位机开发，并把实训项目、算子练习和每天的代码整理成可回看的记录。</p>
+          <p>Halcon 方向包括图像预处理、Blob 分析与特征筛选、形状模板匹配与位姿矫正、亚像素边缘与圆拟合、一维尺寸测量、OCR 与条码识别、单相机与九点标定；Qt 方向在写上位机，把 Halcon 窗口、参数面板与结果展示做进界面；Python 方向用 OpenCV 做一些图像处理练习。</p>
+          <div class="about-summary">
+              <div class="about-summary__item">
+                <strong>最近在整理</strong>
+                <span>Halcon 算子练习笔记 · 实训项目的结果图与代码注释</span>
+              </div>
               <div class="about-summary__item">
                 <strong>现在的方向</strong>
-                <span>机器视觉算法（Halcon）、Qt / C++ 上位机、相机与机械臂联调</span>
+                <span>Halcon 机器视觉算法、C++ / Qt6 上位机、相机与机械臂联调</span>
               </div>
             </div>
             <div class="note-list">
-              <div class="note-item">已完成 7 个机器视觉项目的整理与展示：LED 灯板检测、圆柱孔共线检测、机械臂分拣、尺寸测量、背板多目标测量、开关引脚检测与算子练习集。</div>
+              <div class="note-item">已完成 LED 灯板灯珠检测、圆柱孔共线检测、彩色圆片机械臂分拣等 6 个机器视觉项目，以及五子棋、记事本、串口调试助手、相机相册等 5 个 Qt 桌面项目的整理与展示。</div>
               <div class="note-item">后续优先沉淀可运行的视觉算法、上位机与硬件联调案例。</div>
             </div>
           </article>
@@ -254,8 +257,8 @@
             <div class="project-list">
           <article id="projects-led" class="project-card glass" data-category="vision" data-project-anchor="led" data-detail-url="project-vision-led.html">
             <div class="project-card__shot project-card__shot--1">
-              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/vision/led-board-result.jpg" data-lightbox-alt="LED 灯板灯珠检测结果" aria-label="查看 LED 灯板灯珠检测结果">
-                <img class="project-preview__image" src="assets/vision/led-board-result.jpg" alt="LED 灯板灯珠检测结果" width="477" height="395" loading="lazy" decoding="async" />
+              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/vision/led-04-result.jpg" data-lightbox-alt="LED 灯板灯珠检测结果" aria-label="查看 LED 灯板灯珠检测结果">
+                <img class="project-preview__image" src="assets/vision/led-04-result.jpg" alt="LED 灯板灯珠检测结果" width="1200" height="1003" loading="lazy" decoding="async" />
               </button>
             </div>
             <div class="project-card__body">
@@ -284,8 +287,8 @@
           </article>
 <article id="projects-sorting" class="project-card glass" data-category="vision" data-project-anchor="sorting" data-detail-url="project-vision-sorting.html">
             <div class="project-card__shot project-card__shot--2">
-              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/vision/color-classify.jpg" data-lightbox-alt="颜色分类与计数结果" aria-label="查看颜色分类与计数结果">
-                <img class="project-preview__image" src="assets/vision/color-classify.jpg" alt="颜色分类与计数结果" width="645" height="354" loading="lazy" decoding="async" />
+              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/vision/uarm-sorting-poster.jpg" data-lightbox-alt="四轴机械臂分拣彩色圆片实拍" aria-label="查看四轴机械臂分拣彩色圆片实拍">
+                <img class="project-preview__image" src="assets/vision/uarm-sorting-poster.jpg" alt="颜色分类与计数结果" width="1280" height="720" loading="lazy" decoding="async" />
               </button>
             </div>
             <div class="project-card__body">
@@ -340,20 +343,6 @@
               <p>逐根引脚测宽 + 平均宽度/间距统计，引脚数量不足直接判 NG 并给出缺失根数。</p>
               <div class="tags"><span class="tag">Halcon</span><span class="tag">一维测量</span><span class="tag">缺陷判定</span></div>
               <div class="project-card__links"><a href="project-vision-switch.html">项目详情</a></div>
-            </div>
-          </article>
-<article id="projects-halcon" class="project-card glass" data-category="vision" data-project-anchor="halcon" data-detail-url="project-halcon-practice.html">
-            <div class="project-card__shot project-card__shot--4">
-              <button class="project-preview project-preview--image lightbox-trigger" type="button" data-lightbox-src="assets/vision/practice-D7.jpg" data-lightbox-alt="Halcon 算子练习结果" aria-label="查看 Halcon 算子练习结果">
-                <img class="project-preview__image" src="assets/vision/practice-D7.jpg" alt="Halcon 算子练习结果" width="592" height="507" loading="lazy" decoding="async" />
-              </button>
-            </div>
-            <div class="project-card__body">
-              <span class="project-type">Practice</span>
-              <h4>Halcon 算子练习集</h4>
-              <p>区域分割与特征筛选、颜色分类、模板匹配、OCR 与条码识别、标定等按天记录的练习结果。</p>
-              <div class="tags"><span class="tag">Blob</span><span class="tag">OCR</span><span class="tag">条码</span><span class="tag">标定</span></div>
-              <div class="project-card__links"><a href="project-halcon-practice.html">项目详情</a></div>
             </div>
           </article>
 <article id="projects-notepad" class="project-card glass" data-category="qt" data-project-anchor="notepad" data-detail-url="project-notepad.html">

@@ -2589,15 +2589,6 @@ textarea:focus-visible,
   opacity: 0.72;
 }
 
-.hero__name {
-  margin: 0.45rem 0 0;
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--accent, #7dd3fc);
-  opacity: 0.9;
-}
-
 /* 联系方式卡片：改为可点击链接 */
 .contact-panel .link-card {
   display: block;
