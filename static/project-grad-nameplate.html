@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060b16" />
+    <meta name="description" content="毕业设计：Halcon 形状模板匹配定位电机铭牌、仿射矫正后动态阈值切字，自训练 MLP 识别汉字与数字；Qt 上位机管离线 / 在线 / 批量识别并联动传送带，STM32 采集板经蓝牙回传温湿度、浓度与震动数据。" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://yusky521.onrender.com/project-grad-nameplate.html" />
+    <meta property="og:title" content="Yusky521 | 电机铭牌识别上位机（毕业设计）" />
+    <meta property="og:description" content="Halcon 模板匹配定位铭牌 + 仿射矫正 + 动态阈值切字 + 自训练 MLP 汉字 OCR；Qt 上位机联动传送带，STM32 采集板经蓝牙回传环境数据。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://yusky521.onrender.com/project-grad-nameplate.html" />
+    <meta property="og:image" content="https://yusky521.onrender.com/assets/vision/grad-03-batch.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Yusky521 | 电机铭牌识别上位机（毕业设计）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page-body">
+    <div class="loading-screen" id="loading-screen" aria-live="polite"><div class="loading-screen__orb" aria-hidden="true"></div><p>LOADING</p></div>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+    <div class="background-stack" aria-hidden="true">
+      <img class="background-still" src="assets/bg-poster.webp" alt="" width="1280" height="720" decoding="async" fetchpriority="high" />
+      <video class="background-video" muted loop playsinline preload="none">
+        <source data-src="assets/bg.webm" type="video/webm" />
+        <source data-src="assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div><div class="grain"></div>
+    </div>
+    <header class="site-header glass">
+      <a class="brand" href="index.html#home" aria-label="Yusky521 首页"><span class="brand__mark"></span><span class="brand__text">Yusky521</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="切换导航" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html#home">首页</a><a href="index.html#about">关于我</a><a href="index.html#projects">作品</a><a href="blog.html">笔记</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="theme-toggle__dot" aria-hidden="true"></span><span class="theme-toggle__text">浅色</span></button>
+      </nav>
+    </header>    <main class="page subpage">
+      <section class="subpage-hero glass reveal">
+        <p class="section-label">PROJECT / VISION / GRADUATION</p>
+        <h1>相机读铭牌，串口调度传送带，自绘采集板回传环境数据。</h1>
+        <p>毕业设计。工业相机采集电机铭牌，Halcon 先用形状模板匹配找到铭牌并按其位姿把图像摆正，再在固定 ROI 里做暗字动态阈值分割，汉字送自建样本训练出的 MLP 模型、数字与字母送工业字库，逐字识别后拼回型号、编号、功率、电压等字段；Qt 上位机同时管离线图片、在线相机与批量文件夹三条入口，结果进表格可搜索可导出；串口按 ASCII 协议与传送带通讯，物体到位停带、抓稳定帧、识别完再放行；STM32 采集板（自绘 PCB）把温度、湿度、相对浓度与震动状态经 HC-06 蓝牙回传，屏幕与上位机两头都能看。</p>
+        <a class="ghost-btn page-back" href="index.html#projects">返回项目区</a>
+      </section>
+      <section class="detail-grid">
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">DEMO VIDEO</p>
+          <h2>上位机演示（26 秒）</h2>
+          <video class="detail-video" controls muted preload="none" playsinline poster="assets/vision/grad-demo-poster.jpg" aria-label="电机铭牌识别上位机演示录屏">
+            <source src="assets/vision/grad-demo.mp4" type="video/mp4" />
+            你的浏览器不支持内嵌视频，可<a href="assets/vision/grad-demo.mp4">直接下载观看</a>。
+          </video>
+          <p class="detail-note">从原始录屏里截的 26 秒静音片段：铭牌递到相机前 → 传送带回 CSD_OFF 停带取帧 → 识别结果逐条进表（右侧识别人数从画面左上角的计数能看出来），左下角是传送带的 ASCII 握手日志。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">NAMEPLATE</p>
+          <h2>铭牌原图</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-01-nameplate.jpg" data-lightbox-alt="电机铭牌原图" aria-label="查看电机铭牌原图">
+            <img class="project-preview__image" src="assets/vision/grad-01-nameplate.jpg" alt="电机铭牌原图" width="1200" height="1003" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">型号、编号、功率、电压、电流、频率、转速、出厂日期全挤在一块金属牌上：字距紧、笔画细，表面还有反光，这块牌子本身就是整条链路里最不好对付的一环。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">ONLINE OCR</p>
+          <h2>相机在线识别与置信度着色</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-02-online.jpg" data-lightbox-alt="电机铭牌识别上位机在线识别界面" aria-label="查看电机铭牌识别上位机在线识别界面">
+            <img class="project-preview__image" src="assets/vision/grad-02-online.jpg" alt="电机铭牌识别上位机在线识别界面" width="1400" height="787" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">字符框按识别置信度着色（绿 ≥ 0.90、黄 ≥ 0.70、红 &lt; 0.70），一眼就能看出哪几个字需要人工复核；左侧同时挂着海康 GigE 相机与传送带串口（COM3 已连接，日志里 CSD_ON / CSD_OFF 是停带取帧的握手）。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">BATCH</p>
+          <h2>批量识别：19 / 69，失败 0 张</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-03-batch.jpg" data-lightbox-alt="批量识别界面" aria-label="查看批量识别界面">
+            <img class="project-preview__image" src="assets/vision/grad-03-batch.jpg" alt="批量识别界面" width="1400" height="847" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">批量入口一次选一批图跑完入库：日志「批量识别被中断，已处理 19 / 69」「成功 19 张，失败 0 张」；右侧按品牌 / 型号 / 编号落库，可查看详情、全选、导出、删除，重复样本会连续识别成多条便于对账。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">STM32</p>
+          <h2>采集端实物与屏幕显示</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-04-stm32.jpg" data-lightbox-alt="STM32 采集板实物" aria-label="查看STM32 采集板实物">
+            <img class="project-preview__image" src="assets/vision/grad-04-stm32.jpg" alt="STM32 采集板实物" width="1150" height="1187" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">STM32F103C8T6 最小系统 + MQ-2 可燃气体 / 烟雾传感器 + 蜂鸣器 + 震动检测 + ST7789 SPI 彩屏，屏幕用八脚排针（GND / VCC / SCL / SDA / RST / DC / GND / BL）接在板上；屏上直接显示「ENV MONITOR / 温度 27 ℃ 湿度 37 % / 相对浓度 3 % 状态 正常 TH60 % / 设备震动正常 / 软件 已连接 HC06」，数据经 HC-06 蓝牙串口发给上位机。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">PCB</p>
+          <h2>采集板 PCB</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-05-pcb.jpg" data-lightbox-alt="采集板 PCB 版图（立创 EDA）" aria-label="查看采集板 PCB 版图">
+            <img class="project-preview__image" src="assets/vision/grad-05-pcb.jpg" alt="采集板 PCB 版图（立创 EDA）" width="1100" height="1264" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">采集板是自己画的（立创 EDA）：STM32 双列排针、两路 15 k / 10 k 分压、DHT-11 温湿度与 SW-420 震动接口、MQ-2 烟雾与 HC-06 蓝牙座、ST7789 彩屏八脚排针、蜂鸣器加蜂鸣器 / MQ / 电源三个拨动开关、LED-B / LED-MQ / LED-STM 三颗状态灯和稳压输出端子；顶部标了 15.4 mm 的排针间距用来校核插装，红蓝两色是双面板上下两层走线。</p>
+        </article>
+        <article class="panel glass detail-card detail-card--preview reveal">
+          <p class="section-label">OCR MODEL</p>
+          <h2>自建汉字样本集</h2>
+          <button class="project-preview project-preview--image lightbox-trigger detail-preview" type="button" data-lightbox-src="assets/vision/grad-06-samples.jpg" data-lightbox-alt="用于训练 OCR 模型的 14 类汉字样本" aria-label="查看用于训练 OCR 模型的 14 类汉字样本">
+            <img class="project-preview__image" src="assets/vision/grad-06-samples.jpg" alt="用于训练 OCR 模型的 14 类汉字样本" width="1680" height="540" loading="lazy" decoding="async" />
+          </button>
+          <p class="detail-note">工业字库不认品牌名里的汉字，于是把铭牌上高频出现的 14 类字（中南北大安微晟机江电皖苏驱龙）逐类裁样本，共 112 张、每类 5–13 张，灰度归一化后训练 MLP，导出 dianji.omc 给 do_ocr_multi_class_mlp 调用；数字与字母仍走 Industrial_0-9A-Z_NoRej.omc。</p>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">PIPELINE</p>
+          <h2>核心流程</h2>
+          <p>相机采集 → 形状模板匹配定位铭牌并算出角度 → 仿射矫正把铭牌摆正到画面中心 → 分区 ROI（汉字区 / 型号 / 功率 / 参数行）→ 暗字动态阈值分割 + 高度特征筛选切出单字 → 排序成阅读顺序 → 汉字与数字分别走两个 OCR 模型 → 字段拼装、写表、导出。</p>
+          <p>关键思路是"先摆正、再切字"：模板匹配一旦把位姿校正掉，后面每个 ROI 都是固定坐标，切字只需调阈值，不用再为摆放角度发愁。</p>
+          <div class="tags"><span class="tag">形状模板匹配</span><span class="tag">仿射矫正</span><span class="tag">动态阈值</span><span class="tag">MLP OCR</span><span class="tag">Qt</span><span class="tag">串口</span><span class="tag">STM32</span></div>
+        </article>
+        <article class="panel glass detail-card reveal">
+          <p class="section-label">IMPLEMENTATION</p>
+          <h2>实现方式（Halcon 主链路）</h2>
+          <p>下面是识别主链路，括号里的参数取自项目脚本。</p>
+          <pre class="code-block">1.  read_image                  读入标准铭牌图
+2.  reduce_domain               圈出铭牌区域
+3.  create_shape_model          建形状模板
+4.  find_shape_model            每帧先定位，得到 Row / Column / Angle
+5.  vector_angle_to_rigid       按位姿把铭牌摆正到画面中心
+6.  affine_trans_image          仿射变换后，ROI 位置就固定了
+7.  reduce_domain × N           汉字 / 型号 / 功率 / 参数行各一块 ROI
+8.  dyn_threshold (…, 47~50, 'dark')   暗字分割，抑制反光
+9.  connection + select_shape   按高度 38~43 筛掉噪点与粘连
+10. sort_region                 按 column 或 character + row 排阅读顺序
+11. read_ocr_class_mlp          dianji.omc / Industrial_0-9A-Z_NoRej.omc
+12. do_ocr_multi_class_mlp      逐字输出 Class + Confidence</pre>
+          <div class="tags"><span class="tag">Halcon</span><span class="tag">Qt</span><span class="tag">海康 GigE</span><span class="tag">串口</span><span class="tag">STM32 蓝牙</span><span class="tag">PCB</span></div>
+        </article>
+      </section>
+    </main>
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox__close" id="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure class="lightbox__figure"><div class="lightbox__custom" id="lightbox-custom" hidden></div><img id="lightbox-image" src="" alt="" hidden /><figcaption id="lightbox-caption"></figcaption></figure>
+    </div>
+    <footer class="site-footer"><div><p>© 2026 LiuTianCi</p><p>Built with HTML · CSS · JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

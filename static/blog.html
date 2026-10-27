@@ -39,11 +39,11 @@
         <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">06</span><span class="project-type">HARDWARE</span></div><h3>相机与打光</h3><p>工业相机与镜头的选型、工作距离与视野估算；条形／环形光源的打光方案对比，以及不同光照下预处理效果差异。</p><div class="tags"><span class="tag">工业相机</span><span class="tag">镜头选型</span><span class="tag">光源选型</span><span class="tag">打光调试</span></div></article>
       </div></section>
 
-      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">MORE</p><h2>继续看</h2></div><p class="section-head__note">练习过程与算子结果整理在练习集里。</p></div>
-        <div class="learning-grid">
-          <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">→</span><span class="project-type">PRACTICE</span></div><h3>Halcon 算子练习集</h3><p>按天记录的算子练习：区域分割与特征筛选、颜色分类与计数、模板匹配定位、字符识别与缺陷检测。</p><a class="ghost-btn" href="project-halcon-practice.html">查看练习集</a></article>
-        </div>
-      </section>
+      <section class="learning-route reveal"><div class="section-head"><div><p class="section-label">MORE</p><h2>继续看</h2></div><p class="section-head__note">从课堂练习走到完整项目的链路，整理在详情页里。</p></div><div class="learning-grid">
+          <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">01</span><span class="project-type">PROJECT</span></div><h3>电机铭牌识别上位机</h3><p>模板匹配定位铭牌、仿射矫正后动态阈值切字，自训练 MLP 识别汉字与数字；Qt 上位机管三条识别入口，串口联动传送带，STM32 蓝牙回传环境数据。</p><div class="tags"><span class="tag">Halcon OCR</span><span class="tag">Qt</span><span class="tag">STM32</span></div><a class="ghost-btn" href="project-grad-nameplate.html">查看详情</a></article>
+          <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">02</span><span class="project-type">PROJECT</span></div><h3>LED 灯板灯珠检测</h3><p>形状模板匹配判型号，HSV 饱和度通道分割 + 面积/高度筛选逐颗判定灯珠 OK 与 NG，结果画回图像并输出计数。</p><div class="tags"><span class="tag">Halcon</span><span class="tag">Blob</span><span class="tag">模板匹配</span></div><a class="ghost-btn" href="project-vision-led.html">查看详情</a></article>
+          <article class="panel glass learning-card"><div class="learning-card__top"><span class="learning-card__number">03</span><span class="project-type">PROJECT</span></div><h3>彩色圆片识别与机械臂分拣</h3><p>HSV 颜色分类 + 九点标定换算坐标，串口把目标点下发四轴机械臂，相机认颜色、机械臂执行抓取。</p><div class="tags"><span class="tag">Halcon</span><span class="tag">九点标定</span><span class="tag">UARM</span></div><a class="ghost-btn" href="project-vision-sorting.html">查看详情</a></article>
+        </div></section>
     </main>
     <footer class="site-footer"><div><p>&#169; 2026 LiuTianCi</p><p>Built with HTML &#183; CSS &#183; JavaScript</p></div><button class="back-to-top" id="back-to-top" type="button">回到顶部</button></footer>
     <script src="app.js" defer></script>
