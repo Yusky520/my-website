@@ -16,6 +16,10 @@ services:
       - type: redirect
         source: /project-portfolio.html
         destination: /
+      # Halcon 算子练习集已删除（含 10 张练习图），同样回首页
+      - type: redirect
+        source: /project-halcon-practice.html
+        destination: /
       # 同批删除的两张旧预览图
       - type: redirect
         source: /assets/project-tools-preview.png
